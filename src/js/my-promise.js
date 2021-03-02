@@ -6,8 +6,8 @@ const REJECTED = 'rejected';
 export default class MyPromise {
   static RecursiveCatch(myPromise, err) {
     if (!myPromise) return;
-    if (myPromise.onCatched) myPromise.onCatched(err);
-    else MyPromise.RecursiveCatch(myPromise.next, err);
+    else if (myPromise.onCatched) return myPromise.onCatched(err);
+    else return MyPromise.RecursiveCatch(myPromise.next, err);
   }
 
   constructor(cb) {
@@ -32,10 +32,9 @@ export default class MyPromise {
     this.state = RESOLVED;
 
     if (result instanceof MyPromise)
-      result.then((innerResult) =>
-        this.internalFulfilled.call(this, innerResult)
-      );
-    else setTimeout(() => this.internalFulfilled.call(this, result), 0);
+      result.then((innerResult) => this.internalFulfilled.call(this, innerResult));
+    else
+      this.internalFulfilled.call(this, result);
   }
 
   reject(result) {
@@ -53,28 +52,56 @@ export default class MyPromise {
   }
 
   internalFulfilled(result) {
-    try {
-      this.next
-        ? this.next.resolve(this.onFulfilled(result))
-        : this.onFulfilled(result);
-    } catch (err) {
-      setTimeout(() => MyPromise.RecursiveCatch(this, err), 0);
-    } finally {
-      this.state = FULFILLED;
-    }
+    setTimeout(() => {
+      try {
+        const fulfilledResult = this.onFulfilled(result);
+
+        if (this.next)
+          this.next.resolve(fulfilledResult);
+      } catch (err) {
+        this.internalCatched(err);
+      } finally {
+        this.state = FULFILLED;
+      }
+    }, 0);
   }
 
   internalRejected(result) {
-    try {
-      if (result instanceof Error) throw result;
+    setTimeout(() => {
+      try {
+        if (result instanceof Error)
+          throw result;
 
-      this.next
-        ? this.next.reject(this.onRejected(result))
-        : this.onRejected(result);
-    } catch (err) {
-      setTimeout(() => MyPromise.RecursiveCatch(this, err), 0);
-    } finally {
-      this.state = REJECTED;
-    }
+        const rejectedResult = this.onRejected(result);
+        
+        if (this.next)
+          this.next.reject(rejectedResult);
+      } catch (err) {
+        this.internalCatched(err);
+      } finally {
+        this.state = REJECTED;
+      }
+    }, 0);
+  }
+
+  internalCatched(err) {
+    setTimeout(() => {
+      const onCatchedPromise = this.closestOnCatchedPromise();
+
+      if (!onCatchedPromise)
+        return;
+
+      const handledResult = onCatchedPromise.onCatched(err);
+
+      if (handledResult && onCatchedPromise.next)
+        onCatchedPromise.next.resolve(handledResult);
+    }, 0);
+  }
+
+  closestOnCatchedPromise() {
+    if (this.onCatched) return this;
+    else if (this.next) return this.next.closestOnCatchedPromise();
+
+    return null;
   }
 }

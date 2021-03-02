@@ -1,0 +1,31 @@
+{
+  "name": "fe-w4-martian",
+  "version": "1.0.0",
+  "description": "![](https://images.theconversation.com/files/96726/original/image-20150930-19533-1by0fu3.jpg?ixlib=rb-1.1.0&rect=0%2C0%2C2000%2C970&q=45&auto=format&w=1356&h=668&fit=crop)",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "webpack --watch --mode development",
+    "prod": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cchoongh/fe-w4-martian.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cchoongh/fe-w4-martian/issues"
+  },
+  "homepage": "https://github.com/cchoongh/fe-w4-martian#readme",
+  "devDependencies": {
+    "css-loader": "^5.0.2",
+    "express": "^4.17.1",
+    "sass": "^1.32.8",
+    "sass-loader": "^10.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

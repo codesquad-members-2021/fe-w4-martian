@@ -1,12 +1,6 @@
 import { _ } from './util.js';
-const hexCode = {
-  10: 'A',
-  11: 'B',
-  12: 'C',
-  13: 'D',
-  14: 'E',
-  15: 'F'
-};
+import { hexCode } from './calculate.js';
+
 const canvas = _.$('#canvas');
 const ctx = canvas.getContext('2d');
 
@@ -39,22 +33,26 @@ const text = (value, x, y) => {
   ctx.fillText(value, x, y);
 };
 
-circleFill(250, 250, 200, 'rgb(255, 113, 113)');
-for (let i = 0; i <= 15; i++) {
-  pizzaShape(250, 250, 200, 22.5 * i, 22.5 * (i + 1), 'black');
-}
-circleStroke(250, 250, 200, 'black');
-circleFill(250, 250, 50, 'rgb(255,255,255)');
-circleStroke(250, 250, 45, 'black');
-
 let textX = 270;
 let textY = 100;
 const rightX = [0, 65, 45, 25, 0, -25, -45, -65, -65, -65, -45, -25, 0, 25, 45, 65];
 const rightY = [0, 20, 50, 60, 60, 60, 50, 20, 0, -20, -50, -60, -60, -60, -50, -20];
 
-for (let i = 0; i <= 15; i++) {
-  textX += rightX[i];
-  textY += rightY[i];
-  if (i < 10) text(i, textX, textY);
-  else text(hexCode[i], textX, textY);
-}
+const renderPlate = () => {
+  circleFill(250, 250, 200, 'rgb(255, 113, 113)');
+  for (let i = 0; i <= 15; i++) {
+    pizzaShape(250, 250, 200, 22.5 * i, 22.5 * (i + 1), 'black');
+  }
+  circleStroke(250, 250, 200, 'black');
+  circleFill(250, 250, 50, 'rgb(255,255,255)');
+  circleStroke(250, 250, 45, 'black');
+
+  for (let i = 0; i <= 15; i++) {
+    textX += rightX[i];
+    textY += rightY[i];
+    if (i < 10) text(i, textX, textY);
+    else text(hexCode[i], textX, textY);
+  }
+};
+
+renderPlate();

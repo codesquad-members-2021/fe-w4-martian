@@ -1,0 +1,107 @@
+body {
+  background: #333;
+  margin: 0;
+  padding: 0;
+  font-family: 'Space Mono', monospace;
+}
+
+.body__container {
+  height: 100vh;
+  padding-top: 30px;
+  background-image: url(https://user-images.githubusercontent.com/70361152/107884893-a01d6780-6f3a-11eb-9be0-ccd1fc73d247.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.title__box {
+  color: #fff;
+  font-weight: 600;
+  font-size: 3em;
+  text-align: center;
+  letter-spacing: 10px;
+  padding: 25px;
+}
+
+.planet__box {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 150px 0;
+  position: relative;
+
+  .planet {
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    margin: 10px;
+    padding: 25px;
+
+    .message-box {
+      margin-top: 30px;
+      font-family: 'Space Mono', monospace;
+    }
+    .martian-button {
+      margin-top: 10px;
+      width: 100%;
+      font-family: 'Space Mono', monospace;
+    }
+  }
+
+  input:read-only {
+    background: #e5e5e5;
+  }
+
+  .mars {
+    .title {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    @mixin regular-border {
+      border: 3px solid #fff;
+    }
+
+    .hex-circle {
+      position: absolute;
+      width: 567px;
+      height: 567px;
+      @include regular-border();
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // background: rgba(255, 255, 255, 0.5);
+
+      .arrow-circle {
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 255, 255, 0.2);
+        @include regular-border();
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(22.5deg);
+
+        svg {
+          width: 100px;
+          height: 100px;
+          fill: #fff;
+        }
+      }
+
+      .hex--item {
+        // position: absolute;
+        // top: 0;
+        // width: 0;
+        // height: 0;
+        // border: 0 solid transparent;
+        // transform-origin: 0 100%;
+      }
+    }
+  }
+
+  .earth {
+  }
+}

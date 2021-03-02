@@ -1,13 +1,28 @@
-const raccoon = 'hello';
+const $marsInfo = document.querySelector('#mars--info');
+const $interpretButton = document.querySelector('#interpret-mars--button');
 
-const raccoonArr = raccoon.split('');
+$interpretButton.addEventListener('click', interpret);
 
-const test = raccoon.split('')[0].charCodeAt(0);
-const test2 = raccoon.split('').map((el) => el.charCodeAt(0));
-const dec = raccoon.split('').map((el) => el.charCodeAt(0));
+function interpret() {
+  return ($marsInfo.value = hex2str($marsInfo.value));
+}
 
-const hex = dec.map((el) => el.toString(16));
-const hex2 = dec.map((el) => String.fromCharCode(el));
+function str2hex(str) {
+  return str
+    .split('')
+    .map((el) => el.charCodeAt(0).toString(16))
+    .join(' ');
+}
 
-console.log(hex);
-console.log(hex2);
+function hex2str(hex) {
+  return hex
+    .split(' ')
+    .map((el) => String.fromCharCode(parseInt(el, 16)))
+    .join('');
+}
+
+let helloHex = str2hex('hello');
+
+console.log(helloHex);
+console.log(hex2str(helloHex));
+console.log($marsInfo);

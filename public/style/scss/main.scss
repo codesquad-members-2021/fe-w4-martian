@@ -8,13 +8,20 @@ html, body, button{
 
 #arrow{border:0;margin:0;padding:0;}
 
+
 .title{margin-top:50px;text-align:center;}
+.wrap {
+    position: relative;
+    background-color: red;
+    width: 500px;
+    height: 500px;
+}
 .canvas{
     position:relative;
-
-    margin:50px auto;
-    border:1px solid #ccc;
-    background:red}
+    // margin:50px auto;
+    width: 100%;
+    height: 100%;
+    background:rgb(233, 233, 233)}
 
 // .wrap{
 //     position:relative;

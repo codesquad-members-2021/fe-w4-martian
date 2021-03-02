@@ -7,7 +7,7 @@ const getCanvas=()=>{
 
     canvas.width = 300;
     canvas.height = 300;
-
+    //canvas 중심점
     var center_x = canvas.width / 2;
     var center_y = canvas.height / 2;
     if(canvas.getContext){
@@ -45,25 +45,25 @@ const getCanvas=()=>{
     
     ct.font = 'bold 12px/12px Sans-Serif';
     ct.fillStyle = '#000';
-    ct.fillText('교통비',25,240);
+    ct.fillText('A',25,240);
     
     ct.fillStyle = '#0000ff';
     ct.fillRect(10,245,10,10);
     
     ct.fillStyle = '#000';
-    ct.fillText('식비',25,255);
+    ct.fillText('B',25,255);
     
     ct.fillStyle = '#ff0000';
     ct.fillRect(10,260,10,10);
     
     ct.fillStyle = '#000';
-    ct.fillText('월세',25,270);
+    ct.fillText('C',25,270);
     
     ct.fillStyle = '#ffdd66';
     ct.fillRect(10,275,10,10);
     
     ct.fillStyle = '#000';
-    ct.fillText('지름신',25,285);
+    ct.fillText('D',25,285);
     center_x -= 12;
     center_y += 6;
     ct.fillText('6.94%',center_x + 70 * Math.cos(12.5 * Math.PI/180),center_y + 70 * Math.sin(12.5 * Math.PI/180));

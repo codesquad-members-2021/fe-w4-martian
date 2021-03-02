@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+
+  <canvas class="big_circle" width="1000" height="1000"></canvas>
+  <i class="material-icons" data-action="point">
+    north
+  </i>
+
+  <form class = "transfer_info">
+    <h1>송수신정보</h1>
+    <input placeholder="16진수">
+    <input type="button" value="해석하기">
+  </form>
+
+  <form class = "submit_info">
+    <h1>발신정보입력</h1>
+    <input placeholder="문자열">
+    <input type="button" value="지구로보내기">
+  </form>
+
+  <script type="module" src="/javascripts/mission.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+$width: 1280px;
+$fontFamily: NanumGothic, '나눔고딕', 'Nanum Gothic', 'Malgun Gothic',
+    '맑은 고딕', Dotum, '돋움', Helvetica, AppleSDGothicNeo, Arial, sans-serif;
+$fontSize: 18px;
+$btnBackColor: #b45f06;
+$white: #fff;
+
+body {
+    font-family: $fontFamily;
+}
+
+.all-wrapper {
+    width: $width;
+    margin: 20px auto 0;
+}
+
+.receive__circle {
+    width: 100%;
+    margin: 0 auto;
+
+    text-align: center;
+
+    canvas {
+        border: 1px solid black;
+    }
+}
+
+.receive__input {
+    display: flex;
+    justify-content: space-evenly;
+
+    div {
+        * {
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        input,
+        button {
+            display: block;
+            border: none;
+            background: none;
+            font-size: $fontSize;
+        }
+
+        input {
+            padding: 8px 3px;
+            box-shadow: 0 0 0 1.05px black;
+            border-radius: 3%;
+        }
+        button {
+            cursor: pointer;
+            color: $white;
+            font-weight: 600;
+            font-size: 20px;
+
+            background-color: $btnBackColor;
+        }
+    }
+}

@@ -1,0 +1,51 @@
+@charset "UTF-8";
+body {
+  font-family: NanumGothic, "나눔고딕", "Nanum Gothic", "Malgun Gothic", "맑은 고딕", Dotum, "돋움", Helvetica, AppleSDGothicNeo, Arial, sans-serif;
+}
+
+.all-wrapper {
+  width: 1280px;
+  margin: 20px auto 0;
+}
+
+.receive__circle {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.receive__circle canvas {
+  border: 1px solid black;
+}
+
+.receive__input {
+  display: flex;
+  justify-content: space-evenly;
+}
+.receive__input div * {
+  margin-top: 10px;
+}
+.receive__input div p {
+  font-size: 24px;
+  font-weight: 600;
+}
+.receive__input div input,
+.receive__input div button {
+  display: block;
+  border: none;
+  background: none;
+  font-size: 18px;
+}
+.receive__input div input {
+  padding: 8px 3px;
+  box-shadow: 0 0 0 1.05px black;
+  border-radius: 3%;
+}
+.receive__input div button {
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  background-color: #b45f06;
+}
+
+/*# sourceMappingURL=index.css.map */

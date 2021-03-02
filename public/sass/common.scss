@@ -1,0 +1,11 @@
+@for $i from 1 through 9 {
+    .col-#{$i} {
+        width: 10% * $i;
+    }
+}
+
+@for $i from 1 through 9 {
+    .row-#{$i} {
+        height: 10% * $i;
+    }
+}

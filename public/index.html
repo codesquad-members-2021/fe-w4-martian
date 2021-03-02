@@ -4,10 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Martian</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="src/css/styles.css" />
   </head>
   <body>
-    <canvas id="canvas" width="500px" height="500px"></canvas>
+    <div class="canvas-wrapper">
+      <canvas id="canvas" width="500px" height="500px"> </canvas>
+      <div class="arrow"><i class="fas fa-arrow-up"></i></div>
+    </div>
     <div class="wrapper">
       <div class="receive-info">
         <div class="receive-title">송수신 정보</div>
@@ -20,6 +29,6 @@
         <button>지구로 보내기</button>
       </div>
     </div>
-    <script type="module" src="src/js/util/canvas.js"></script>
+    <script type="module" src="src/js/main.js"></script>
   </body>
 </html>

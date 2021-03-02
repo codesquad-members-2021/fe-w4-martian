@@ -4,6 +4,20 @@
   margin-top: 50px;
   border: 1px solid black;
 }
+.canvas-wrapper {
+  position: relative;
+}
+.arrow {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 320px;
+  top: 220px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 3rem;
+  color: #0b5394;
+}
 .wrapper {
   display: flex;
   margin-left: 100px;

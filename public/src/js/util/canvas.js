@@ -5,7 +5,6 @@ const canvas = _.$('#canvas');
 const ctx = canvas.getContext('2d');
 
 const toRadian = (angle) => (angle * Math.PI) / 180;
-
 const circleFill = (x, y, r, color) => {
   ctx.beginPath();
   ctx.fillStyle = color;
@@ -38,7 +37,7 @@ let textY = 100;
 const rightX = [0, 65, 45, 25, 0, -25, -45, -65, -65, -65, -45, -25, 0, 25, 45, 65];
 const rightY = [0, 20, 50, 60, 60, 60, 50, 20, 0, -20, -50, -60, -60, -60, -50, -20];
 
-const renderPlate = () => {
+export const renderPlate = () => {
   circleFill(250, 250, 200, 'rgb(255, 113, 113)');
   for (let i = 0; i <= 15; i++) {
     pizzaShape(250, 250, 200, 22.5 * i, 22.5 * (i + 1), 'black');
@@ -54,5 +53,3 @@ const renderPlate = () => {
     else text(hexCode[i], textX, textY);
   }
 };
-
-renderPlate();

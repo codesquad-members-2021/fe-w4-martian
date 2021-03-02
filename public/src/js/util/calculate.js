@@ -1,7 +1,7 @@
 import { pipe } from './util.js';
 
 //prettier-ignore
-const hexCode = {
+export const hexCode = {
   10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E',15: 'F',
   A:10, B:11, C:12, D:13, E:14, F:15
 };
@@ -29,5 +29,5 @@ const hexToDec = (hex) => {
   return dec;
 };
 
-const charToHex = pipe(charToDec, decToHex);
-const hexToChar = pipe(hexToDec, decToChar);
+export const charToHex = pipe(charToDec, decToHex);
+export const hexToChar = pipe(hexToDec, decToChar);

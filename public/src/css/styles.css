@@ -1,0 +1,15 @@
+#canvas {
+  display: block;
+  margin-left: 100px;
+  margin-top: 50px;
+  border: 1px solid black;
+}
+.wrapper {
+  display: flex;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+.receive-info {
+  margin-right: 30px;
+}

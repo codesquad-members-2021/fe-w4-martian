@@ -5,12 +5,14 @@ const canvas = _.$('#canvas');
 const ctx = canvas.getContext('2d');
 
 const toRadian = (angle) => (angle * Math.PI) / 180;
+
 const circleFill = (x, y, r, color) => {
   ctx.beginPath();
   ctx.fillStyle = color;
   ctx.arc(x, y, r, 0, toRadian(360));
   ctx.fill();
 };
+
 const circleStroke = (x, y, r, color) => {
   ctx.beginPath();
   ctx.strokeStyle = color;
@@ -18,6 +20,7 @@ const circleStroke = (x, y, r, color) => {
   ctx.arc(x, y, r, 0, toRadian(360));
   ctx.stroke();
 };
+
 const pizzaShape = (x, y, r, angleFrom, anglTo, color, dir = false) => {
   ctx.beginPath();
   ctx.lineWidth = 2;
@@ -32,24 +35,30 @@ const text = (value, x, y) => {
   ctx.fillText(value, x, y);
 };
 
-let textX = 270;
-let textY = 100;
-const rightX = [0, 65, 45, 25, 0, -25, -45, -65, -65, -65, -45, -25, 0, 25, 45, 65];
-const rightY = [0, 20, 50, 60, 60, 60, 50, 20, 0, -20, -50, -60, -60, -60, -50, -20];
+const renderText = () => {
+  let textInitialX = 270;
+  let textInitialY = 100;
+  const textLocationX = [0, 65, 45, 25, 0, -25, -45, -65, -65, -65, -45, -25, 0, 25, 45, 65];
+  const textLocationY = [0, 20, 50, 60, 60, 60, 50, 20, 0, -20, -50, -60, -60, -60, -50, -20];
+  for (let i = 0; i <= 15; i++) {
+    textInitialX += textLocationX[i];
+    textInitialY += textLocationY[i];
+    if (i < 10) text(i, textInitialX, textInitialY);
+    else text(hexCode[i], textInitialX, textInitialY);
+  }
+};
+
+export const oneAngle = 22.5;
 
 export const renderPlate = () => {
-  circleFill(250, 250, 200, 'rgb(255, 113, 113)');
+  const [centerX, centerY] = [250, 250];
+  const [bigRadius, smallRadius, smallBorderRadius] = [200, 50, 45];
+  circleFill(centerX, centerY, bigRadius, '#F67269');
   for (let i = 0; i <= 15; i++) {
-    pizzaShape(250, 250, 200, 22.5 * i, 22.5 * (i + 1), 'black');
+    pizzaShape(centerX, centerY, bigRadius, oneAngle * i, oneAngle * (i + 1), '#000');
   }
-  circleStroke(250, 250, 200, 'black');
-  circleFill(250, 250, 50, 'rgb(255,255,255)');
-  circleStroke(250, 250, 45, 'black');
-
-  for (let i = 0; i <= 15; i++) {
-    textX += rightX[i];
-    textY += rightY[i];
-    if (i < 10) text(i, textX, textY);
-    else text(hexCode[i], textX, textY);
-  }
+  circleStroke(centerX, centerY, bigRadius, '#000');
+  circleFill(centerX, centerY, smallRadius, '#fff');
+  circleStroke(centerX, centerY, smallBorderRadius, '#000');
+  renderText();
 };

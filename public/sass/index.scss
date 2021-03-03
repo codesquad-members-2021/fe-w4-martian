@@ -4,6 +4,7 @@ $fontFamily: NanumGothic, '나눔고딕', 'Nanum Gothic', 'Malgun Gothic',
 $fontSize: 18px;
 $btnBackColor: #b45f06;
 $white: #fff;
+$lightBlack: #333;
 
 body {
     font-family: $fontFamily;
@@ -18,7 +19,20 @@ body {
     width: 100%;
     margin: 0 auto;
     text-align: center;
+    position: relative;
 
+    canvas#circular {
+        z-index: -1;
+    }
+    img {
+        position: absolute;
+        top: calc(50% - 30px);
+        left: calc(50% - 30px);
+        width: 60px;
+        height: 60px;
+        transition-duration: 1s;
+        transition-property: transform;        
+    }
 }
 
 .receive__input {
@@ -45,14 +59,14 @@ body {
 
         input {
             padding: 8px 3px;
-            box-shadow: 0 0 0 1.05px black;
+            box-shadow: 0 0 0 1.05px $lightBlack;
             border-radius: 3%;
         }
         button {
             cursor: pointer;
-            color: $white;
             font-weight: 600;
             font-size: 20px;
+            color: $white;
 
             background-color: $btnBackColor;
         }

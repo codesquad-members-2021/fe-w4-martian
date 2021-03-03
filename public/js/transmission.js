@@ -1,14 +1,32 @@
 const transmission = (senders , receptors) =>{
-    const {sendInp, sendBtn} = senders;
+    const {sendInp, sendBtn, sendTr} = senders;
     const {receptInp, receptBtn} = receptors;
 
     let ans ="";
+    console.log(sendInp);
+    sendInp.addEventListener("keydown",(e)=>{
+        console.log(e);
+        console.log(e.currentTarget);
+        var x =e.key;
 
+        console.log(x);
+        var k = a2Hex(x);
+        console.log(k);
+        ans+=k;
+        console.log("ans",ans);
 
+    });
+    
+
+    sendBtn.addEventListener("click",()=>{
+        const contents = sendInp.value;
+        console.log("버튼눌렀다.",contents);
+        sendTr.innerText += ans;
+    })
 }
 
 
-// export {sendToEarth};
+export {transmission};
 //문자 -> 16진수 (한글자씩)
 // text2Hex("i")
 const a2Hex = (text)=>{

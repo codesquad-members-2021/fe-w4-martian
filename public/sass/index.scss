@@ -15,32 +15,38 @@ body {
 
 .all-wrapper {
     width: $width;
-    margin: 60px auto 0;
+    margin: 10px auto;
+}
+
+section {
+    display: flex;
 }
 
 .transceiver__view {
-    width: 100%;
+    width: 50%;
     margin: 0 auto;
     text-align: center;
     position: relative;
 
-    canvas#circular {
-        z-index: -1;
-    }
     img {
         position: absolute;
-        top: calc(50% - 30px);
-        left: calc(50% - 30px);
-        width: 60px;
-        height: 60px;
+        top: calc(50% - 25px);
+        left: calc(50% - 25px);
+        width: 50px;
+        height: 50px;
         transition-duration: 1s;
         transition-property: transform;        
     }
 }
 
 .transceiver__control {
+    width: 50%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: nowrap;    
+    justify-content: center;
+    align-items: center;
+
 
     div {
         * {

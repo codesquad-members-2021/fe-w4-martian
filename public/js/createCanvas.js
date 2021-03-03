@@ -69,9 +69,8 @@ const piTextDraw = (ctx, textDrawValues, color = '#FFF') => {
 
 // ------------------------------------------------------------------
 
-const createCanvas = (canvas) => {
+const createCanvas = ({canvas, color = "#000"}) => {
     const { w: halfW, h: halfH } = getHalfSize(canvas);
-    const color = '#42023F';
 
     const ctx = canvas.getContext('2d');
 

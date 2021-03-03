@@ -4,12 +4,6 @@ const FULFILLED = 'fulfilled';
 const REJECTED = 'rejected';
 
 export default class MyPromise {
-  static RecursiveCatch(myPromise, err) {
-    if (!myPromise) return;
-    else if (myPromise.onCatched) return myPromise.onCatched(err);
-    else return MyPromise.RecursiveCatch(myPromise.next, err);
-  }
-
   constructor(cb) {
     this.state = PENDING;
     this.next;

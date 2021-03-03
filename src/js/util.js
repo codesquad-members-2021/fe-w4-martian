@@ -8,4 +8,5 @@ export const _ = {
     if (attributes) Object.entries(attributes).forEach(([k, v]) => $el.setAttribute(k, v));
     return $el;
   },
+  pipe: (...fns) => (arg) => fns.reduce((prevResult, fn) => fn(prevResult), arg),
 };

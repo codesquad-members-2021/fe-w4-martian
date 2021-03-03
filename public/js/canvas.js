@@ -12,7 +12,7 @@ const getCanvas=()=>{
     console.log(center_x);
     console.log(center_y);
     if(canvas.getContext){
-        
+        //원형
         ct.clearRect(0,0,500,500);
         ct.strokeStyle = '#bbb5c3';
         ct.lineWidth=10;
@@ -26,15 +26,20 @@ const getCanvas=()=>{
             ct.stroke();
             ct.fill();
         }
-
+        //글자
         for (let i=0;i<=15;i++){
             ct.fillStyle = '#bbb5c3';
             if (i>9) {
-                ct.fillText((i.toString(16)).toUpperCase(),center_x-3 + 150 * Math.cos((22.5*i+11.25) * Math.PI/180),center_y+7 + 150 * Math.sin((22.5*i+11.25) * Math.PI/180));
+                ct.fillText((i.toString(16)).toUpperCase(),
+                center_x-3 + 150 * Math.cos((22.5*i+11.25) * Math.PI/180),
+                center_y+7 + 150 * Math.sin((22.5*i+11.25) * Math.PI/180));
             }
             else{
 
-                ct.fillText(i,center_x-3 + 150 * Math.cos((22.5*i+11.25) * Math.PI/180),center_y+7 + 150 * Math.sin((22.5*i+11.25) * Math.PI/180));
+                ct.fillText(
+                    i, 
+                    center_x-3 + 150 * Math.cos((22.5*i+11.25) * Math.PI/180),
+                    center_y+7 + 150 * Math.sin((22.5*i+11.25) * Math.PI/180));
             }
         }
 

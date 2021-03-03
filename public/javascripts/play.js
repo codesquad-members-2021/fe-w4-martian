@@ -8,7 +8,7 @@ const translateArea = _.$('.translate_area');
 const translateBtn = _.$('.translate_btn');
 const sendBtn = _.$('.send_btn');
 const msgInputArea = _.$('.msg_input');
-const translageSendMsgArea = _.$('.send_message .paste_area');
+const translateSendMsgArea = _.$('.send_message .paste_area');
 console.log("start!")
 
 // 메세지 수신 & 출력 받기
@@ -56,7 +56,7 @@ function controllTranslateBtn(){
 function controllSendBtn(){
    let observer = new MutationObserver(()=>changeClass(sendBtn));
    var config = {childList: true};
-   observer.observe(translageSendMsgArea, config);
+   observer.observe(translateSendMsgArea, config);
 }
 
 function printMsgToSend(){    
@@ -65,10 +65,10 @@ function printMsgToSend(){
       let msgToSend = e.key.toUpperCase();
       if (msgToSend.match(strRange) && msgToSend.length===1) {
          let translatedMsg = aschiMessageToHexa(msgToSend)[0][1];
-         pasteReceivedMsg(translatedMsg, translageSendMsgArea);
+         pasteReceivedMsg(translatedMsg, translateSendMsgArea);
       } else if (msgToSend==="BACKSPACE"){
-         if(translageSendMsgArea.lastElementChild) translageSendMsgArea.removeChild(translageSendMsgArea.lastElementChild)
-         if(!translageSendMsgArea.previousSibling) changeClass(sendBtn);
+         if(translateSendMsgArea.lastElementChild) translateSendMsgArea.removeChild(translateSendMsgArea.lastElementChild)
+         if(!translateSendMsgArea.previousSibling) changeClass(sendBtn);
       }
    })
 }
@@ -83,3 +83,4 @@ function init(){
 }
 
 init();
+

@@ -53,6 +53,10 @@ section{
    background-color: rgb(0,0,0);
 }
 
+.btn:hover{
+   outline: none;
+}
+
 .btn_off{
    color: rgb(138, 148, 137);
    border: 1px solid  rgb(138, 148, 137);

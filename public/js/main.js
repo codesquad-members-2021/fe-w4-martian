@@ -1,3 +1,5 @@
+import { strToHex, hexToStr } from './converter.js';
+
 const sign = document.querySelectorAll('.circular-sign');
 const pathArr = document.querySelectorAll('path');
 console.log(pathArr);

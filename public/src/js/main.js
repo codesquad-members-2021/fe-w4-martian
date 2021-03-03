@@ -50,6 +50,8 @@ const dealHex = async (value, idx, arr) => {
     if (isLastIdx(idx, arr)) setInputValue(BLANK, receiveBox);
   });
 };
+//수신 박스 able로 만들기
+const makeBtnAble = (btn) => (btn.disabled = false);
 
 //인자로문자 -> 실행
 const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));

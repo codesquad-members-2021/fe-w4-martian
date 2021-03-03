@@ -1,7 +1,3 @@
-// const myRoulette = document.querySelector("#myRoulette");
-
-// const length = Math.floor(hexadecimals.length / 2);
-
 const getLineText = (num) => `<span class="line__text">${num}</span>`;
 
 const getRoulette = (length) => {

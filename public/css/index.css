@@ -11,7 +11,70 @@ body {
 .receive__circle {
   width: 100%;
   margin: 0 auto;
+}
+
+.receive__circle__circular {
+  margin: 0 auto;
   text-align: center;
+  position: relative;
+  width: 500px;
+  height: 500px;
+  border: black solid 1px;
+  border-radius: 50%;
+}
+.receive__circle__circular li {
+  position: absolute;
+  overflow: hidden;
+  left: 50%;
+  top: 50%;
+}
+.receive__circle__circular li:nth-child(1) {
+  transform: translate(0px, -250px) rotate(0deg);
+}
+.receive__circle__circular li:nth-child(2) {
+  transform: translate(18px, -250px) rotate(22.5deg);
+}
+.receive__circle__circular li:nth-child(3) {
+  transform: translate(36px, -250px) rotate(45deg);
+}
+.receive__circle__circular li:nth-child(4) {
+  transform: translate(54px, -250px) rotate(67.5deg);
+}
+.receive__circle__circular li:nth-child(5) {
+  transform: translate(72px, -250px) rotate(90deg);
+}
+.receive__circle__circular li:nth-child(6) {
+  transform: translate(90px, -250px) rotate(112.5deg);
+}
+.receive__circle__circular li:nth-child(7) {
+  transform: translate(108px, -250px) rotate(135deg);
+}
+.receive__circle__circular li:nth-child(8) {
+  transform: translate(126px, -250px) rotate(157.5deg);
+}
+.receive__circle__circular li:nth-child(9) {
+  transform: translate(144px, -250px) rotate(180deg);
+}
+.receive__circle__circular li:nth-child(10) {
+  transform: translate(162px, -250px) rotate(202.5deg);
+}
+.receive__circle__circular li:nth-child(11) {
+  transform: translate(180px, -250px) rotate(225deg);
+}
+.receive__circle__circular li:nth-child(12) {
+  transform: translate(198px, -250px) rotate(247.5deg);
+}
+.receive__circle__circular li:nth-child(13) {
+  transform: translate(216px, -250px) rotate(270deg);
+}
+.receive__circle__circular li:nth-child(14) {
+  transform: translate(234px, -250px) rotate(292.5deg);
+}
+.receive__circle__circular li:nth-child(15) {
+  transform: translate(252px, -250px) rotate(315deg);
+}
+.receive__circle__circular li:nth-child(16) {
+  transform: translate(270px, -250px) rotate(337.5deg);
 }
 
 .receive__input {

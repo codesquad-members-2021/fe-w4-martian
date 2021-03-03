@@ -49,7 +49,7 @@ const renderText = () => {
   }
 };
 
-export const renderBlingText = (target) => {
+const renderBlingText = (target) => {
   let textInitialX = 270;
   let textInitialY = 100;
   const textLocationX = [0, 65, 45, 25, 0, -25, -45, -65, -65, -65, -45, -25, 0, 25, 45, 65];
@@ -78,3 +78,20 @@ export const renderPlate = () => {
   circleStroke(centerX, centerY, smallBorderRadius, '#000');
   renderText();
 };
+
+// 글자 반짝이기
+const initBlingText = (renderTimer = null, blingTimer = null) => ({ idx, clear = false }) => {
+  if (blingTimer || renderTimer) clearBling(blingTimer, renderTimer);
+  if (!clear) {
+    blingTimer = setInterval(renderBlingText.bind(this, idx), 200);
+    renderTimer = setInterval(renderPlate, 400);
+  }
+};
+
+const clearBling = (blingTimer, renderTimer) => {
+  clearInterval(blingTimer);
+  clearInterval(renderTimer);
+  renderPlate();
+};
+
+export const blingText = initBlingText();

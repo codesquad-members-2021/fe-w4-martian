@@ -6,6 +6,7 @@ export const hexCode = {
   A:10, B:11, C:12, D:13, E:14, F:15
 };
 export const hexCodeArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+const BLANK = ' ';
 
 const charToDec = (char) => char.charCodeAt();
 const decToChar = (code) => String.fromCharCode(code);

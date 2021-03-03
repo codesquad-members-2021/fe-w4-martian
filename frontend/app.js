@@ -24,26 +24,4 @@ const App = ({ $target }) => {
   })
 }
 
-// class App {
-//   constructor({ $target }) {
-//     this.$target = $target;
-    
-//     // SPA areas
-//     this.status = null;
-//   }
-  
-//   init() {
-//     this.status = MODE_RECEIVER;
-//   }
-  
-//   toggleStatus() {
-//     if (this.status === MODE_RECEIVER) {
-//       this.status = MODE_SENDER;
-//       return this.status;
-//     }
-//     this.status = MODE_RECEIVER;
-//     return this.status;
-//   }
-// }
-
 export default App;

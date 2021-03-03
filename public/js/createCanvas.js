@@ -16,7 +16,7 @@ const circleDraw = (ctx, arc, color = '#FFF') => {
     ctx.closePath();
 };
 
-const piCreate = (ctx, arc, color = '#FFF') => {
+const piCreate = (ctx, arc, color = '#FFF', strokeColor = '#FFF') => {
     const { x, y, radius, startAngle, endAngle } = arc;
     ctx.beginPath();
     ctx.lineTo(x, y);
@@ -24,7 +24,7 @@ const piCreate = (ctx, arc, color = '#FFF') => {
     ctx.lineTo(x, y);
     ctx.fillStyle = color;
     ctx.fill();
-    ctx.strokeStyle = "#FFF";
+    ctx.strokeStyle = strokeColor;
     ctx.stroke();    
     ctx.closePath();
 };

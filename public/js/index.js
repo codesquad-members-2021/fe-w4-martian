@@ -11,8 +11,7 @@ const transceiverSendWrap = _.$(".transceiver__control__send");
 const transceiverParts = {
     receiveContentInput: _.$("input", transceiverReceiveWrap),
     translateBtn: _.$("button", transceiverReceiveWrap),
-    sendContentInput: _.$(".send__text", transceiverSendWrap),
-    sendContentCovert: _.$(".send__text--convert", transceiverSendWrap),
+    sendContentInput: _.$(".send__text", transceiverSendWrap),    
     sendToEarthBtn: _.$("button", transceiverSendWrap),
 };
 

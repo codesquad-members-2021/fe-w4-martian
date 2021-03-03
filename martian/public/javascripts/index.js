@@ -8,20 +8,23 @@ const translasteToHex = (e) => {
   hexText = arrCharText.reduce((acc, cur) => {
     return `${acc}${cur.charCodeAt(0).toString(16)}`;
   }, '');
-  showTranslatedText(hexText);
+  showText(hexText);
 };
 
-const showTranslatedText = (text) => {
+const showText = (text) => {
   $hexText.value = text;
 };
 
-const handleArrowOnWheel = () => {
+const handleArrowOnWheel = (i) => {
   const $chartText = document.querySelectorAll('.chart-text');
+  const hexTyping = '';
   const hexTextByOne = [...hexText];
   for (let i = 0; i < hexTextByOne.length; i++) {
+    $hexText.value = hexTyping;
+    $chartText[hexTextByOne[i]].classList.add('blink');
+    $hexText.value += hexTyping;
     setTimeout(() => {
-      console.log('hi');
-      // $chartText[0].classList.add('foo');
+      $chartText[hexTextByOne[i]].classList.remove('blink');
     }, 2000);
   }
 };

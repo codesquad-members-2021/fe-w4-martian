@@ -65,28 +65,19 @@ table {
   }
 }
 
-.foo {
-  color: #f2f;
-  -webkit-animation: flash linear 1s infinite;
-  animation: flash linear 1s infinite;
+.blink {
+  animation-name: blinker;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
-@-webkit-keyframes flash {
+
+@keyframes blinker {
   0% {
     opacity: 1;
   }
   50% {
-    opacity: 0.1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes flash {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.1;
+    opacity: 0;
   }
   100% {
     opacity: 1;

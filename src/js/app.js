@@ -36,21 +36,5 @@ document.addEventListener('DOMContentLoaded', () => {
         blinkInterval: BLINK_INTERVAL,
         blinkCnt: BLINK_CNT,
       });
-
-      // rotateSimul();
     });
 });
-
-
-const rotateSimul = () => {
-  setTimeout(() => {
-    const rotateTo = rotateArrow(_.$('.arrow'), PIE_CNT);
-    rotateTo(6);
-    setTimeout(() => {
-      rotateTo(0xA);
-      setTimeout(() => {
-        rotateTo(4);
-      }, 500);
-    }, 500);
-  }, 500);
-}

@@ -30,7 +30,7 @@ const piCreate = (ctx, arc, color = '#FFF') => {
 
 const piAllCreate = (ctx, x, y, color = '#FFF') => {
     const onePer = (Math.PI * 2) / 16;
-    let piStart = Math.PI * 1.5;
+    let piStart = Math.PI;
     let piEnd = piStart + onePer;
 
     for (let i = 0; i < 16; i++) {
@@ -42,7 +42,10 @@ const piAllCreate = (ctx, x, y, color = '#FFF') => {
     }
 };
 
-const piTextDraw = (ctx, x, y) => {
+const piTextDraw = (ctx, textDrawValues, color = '#FFF') => {
+    let {x, y} = textDrawValues;
+    const {xCorrect, yCorrect, distanceFromCenter} = textDrawValues
+
     const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
 
     const onePer = Number((2 / arr.length).toFixed(3));
@@ -50,10 +53,13 @@ const piTextDraw = (ctx, x, y) => {
 
     ctx.beginPath();
     ctx.font = '24px NanumGothic';
-    ctx.fillStyle = '#FFF';
+    ctx.fillStyle = color;
+
+    x -= xCorrect;
+    y += yCorrect
     arr.forEach((value) => {
-        const xTmp = Math.floor(x + Math.cos(Math.PI * decimal) * (x * 0.8));
-        const yTmp = Math.floor(y + Math.sin(Math.PI * decimal) * (y * 0.8));
+        const xTmp = Math.floor(x + Math.cos(Math.PI * decimal) * (x * distanceFromCenter));
+        const yTmp = Math.floor(y + Math.sin(Math.PI * decimal) * (y * distanceFromCenter));
         ctx.fillText(value, xTmp, yTmp);
         decimal += onePer;
     });
@@ -71,7 +77,10 @@ const createCanvas = (canvas) => {
     piAllCreate(ctx, halfW, halfH, color);
     const smallCircleArc = arcCreate(halfW, halfH, Math.floor(halfH / 5), 0, Math.PI * 2);
     circleDraw(ctx, smallCircleArc);
-    piTextDraw(ctx, halfW, halfH);
+    
+
+    const textDrawValues = {x: halfW, y: halfH, xCorrect: 5, yCorrect: 8, distanceFromCenter: 0.8};
+    piTextDraw(ctx, textDrawValues);
 };
 
 export default createCanvas;

@@ -1,4 +1,5 @@
 import express from "express";
+import ejs from "ejs";
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv";
@@ -8,8 +9,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 dotenv.config();
 const app = express();
+
+app.engine('html', ejs.renderFile);
+app.set('view engine', 'html');     // ejs -> html 사용
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 app.set('port', process.env.SERVER_PORT || 4000);
 
 app.use(express.json());

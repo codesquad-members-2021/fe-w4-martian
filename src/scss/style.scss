@@ -56,6 +56,10 @@ body {
       background: transparent;
       transform-origin: bottom;
       transform: rotate($this-angle);
+
+      &.blink {
+        color: $white;
+      }
     }
   }
 
@@ -87,7 +91,7 @@ body {
         }
 
         &.rotate-unclock-for-#{$i} {
-          transform: rotate($start-angle - ($pie-angle * $i));
+          transform: rotate($start-angle + ($pie-angle * $i) - 360deg);
         }
       }
     }
@@ -120,6 +124,7 @@ body {
 
   .form {
     width: $form-width;
+    margin-top: 10px;
     font-size: 30px;
   }
 }

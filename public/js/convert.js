@@ -25,8 +25,22 @@ const deleteHangel = (target) => {
 const decToHex = (dec) => Number(dec).toString(16);
 const hexToDec = (hex) => parseInt(hex, 16);
 
-// 텍스트 -> 16진수
-const charToHex = (char, delimiter = "") => `${decToHex(char.charCodeAt(0))}${delimiter}`;
+// 문자1개 -> 16진수, 16진수 -> 문자1개 
+const charToHex = (char) => decToHex(char.charCodeAt(0));
+const hexToChar = (hex) => String.fromCharCode(hexToDec(hex));
+
+// 송수신 정보(button): click event
+const translateBtnClickEvent = (translateBtn, receiveContentInput) => {
+    _.addEvent(translateBtn, 'click', () =>
+        translateBtnClickEventHandler(receiveContentInput)
+    );
+};
+const translateBtnClickEventHandler = (receiveContentInput) => {
+    let receiveContentValue = receiveContentInput.value;
+    if (receiveContentValue.length === 0) return;
+    receiveContentInput.value =  receiveContentValue.split(" ").map((v) => hexToChar(v)).join('');    
+};
+
 
 // 발신정보입력(input):  keydown event
 const sendContentInputKeyDownEvent = (sendContentInput) => {
@@ -45,25 +59,19 @@ const sendContentInputKeyDownEventHandler = (e) => {
 };
 
 // 발신정보입력(btn):  click event
-const sendToEarthBtnClickEvent = (sendToEarthBtn, sendContentInput) => {
+const sendToEarthBtnClickEvent = (sendToEarthBtn, sendContentInput, receiveContentInput) => {
     _.addEvent(sendToEarthBtn, 'click', () =>
-        sendToEarthBtnClickEventHandler(sendContentInput),
+        sendToEarthBtnClickEventHandler(sendContentInput, receiveContentInput),
     );
 };
 
-const sendToEarthBtnClickEventHandler = (sendContentInput) => {
+const sendToEarthBtnClickEventHandler = (sendContentInput, receiveContentInput) => {
     let sendContentValue = sendContentInput.value;
     if (sendContentValue.length === 0) return;
 
-    const arrSendContent = sendContentValue.split('');
-    const convertResult = arrSendContent.reduce((result, curr, idx) => {        
-        const delim = (arrSendContent.length-1 === idx) ? "" : "|";
-        const currToHex = charToHex(curr, delim);
-        result += currToHex;
-        return result;
-    }, '');
+    const arrCovertHex = sendContentValue.split('').map((v) => charToHex(v).toUpperCase() );    
 
-    sendContentInput.value = convertResult;
+    receiveContentInput.value = arrCovertHex.join(" ");
 };
 
 // convertCommunication, 최종 실행용 
@@ -75,8 +83,11 @@ const convertCommunication = (transceiverParts) => {
         sendToEarthBtn,
     } = transceiverParts;
 
+
+    translateBtnClickEvent(translateBtn, receiveContentInput);
     sendContentInputKeyDownEvent(sendContentInput);
-    sendToEarthBtnClickEvent(sendToEarthBtn, sendContentInput);
+    sendToEarthBtnClickEvent(sendToEarthBtn, sendContentInput, receiveContentInput);
+    
 };
 
 export default convertCommunication;

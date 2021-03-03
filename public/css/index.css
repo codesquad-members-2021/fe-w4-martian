@@ -1,7 +1,7 @@
 @charset "UTF-8";
 body {
   font-family: NanumGothic, "나눔고딕", "Nanum Gothic", "Malgun Gothic", "맑은 고딕", Dotum, "돋움", Helvetica, AppleSDGothicNeo, Arial, sans-serif;
-  background-image: url("../img/universe.jfif");
+  background-image: url("../img/galaxy2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }

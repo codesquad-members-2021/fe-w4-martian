@@ -18,10 +18,6 @@ const response = (content, receivers) => {
         })
         .then(() => {
           translatorButton.disabled = false;
-          // const target = find(rouletteTexts, capital);
-          // const rouletteTexts = document.querySelectorAll(".line__text");
-          // const target = Object.entries(rouletteTexts).find((item) => item[1].dataset.id === letter.toUpperCase());
-          lightOut(target);
         })
     // 글자가 다 찍히고 난 후 disabled = false하고 싶다..
   );

@@ -15,16 +15,6 @@ const turn = (diff, currDeg, isClockWise) => {
   return currDeg;
 };
 
-// const find = (nodeList, target) => {
-//   for (const [key, value] of Object.entries(nodeList)) {
-//     if (value.dataset.id === target) {
-//       console.log(value);
-//     }
-//     // console.log(value.dataset["id"]);
-//   }
-//   return undefined;
-// };
-
 const lightOn = (target) => {
   // 글자에 반짝거리는 애니메이션 주기
   target[1].classList.add("light");
@@ -37,11 +27,9 @@ const lightOut = (target) => {
 const rotate = (letter, i) =>
   new MyPromise((resolve, reject) =>
     setTimeout(() => {
-      // console.log(`letter: ${letter.toUpperCase()}`);
       const capital = letter.toUpperCase();
       const index = hexadecimals.findIndex((item) => item.toString() === capital);
       const rouletteTexts = document.querySelectorAll(".line__text");
-      // const target = find(rouletteTexts, capital);
       const target = Object.entries(rouletteTexts).find((item) => item[1].dataset.id === capital);
       lightOn(target);
       const diff = index - rotateState.currPoint;

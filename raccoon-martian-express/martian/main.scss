@@ -87,7 +87,6 @@ body {
         overflow: hidden;
         z-index: 1;
 
-        // background: rgba(255, 255, 255, 0.5);
         @function tanDeg($deg) {
           $rad: ($deg * pi()) / 180;
           @return $marsDiameter / (1 / tan($rad));
@@ -109,6 +108,19 @@ body {
             transform-origin: left bottom;
             border-top-color: rgba(255, 255, 255, 0.5);
             transform: rotate($thisAngle - 1deg);
+          }
+          .hex-code {
+            $thisAngle: $angle + ($i * $peiceAngle);
+
+            position: absolute;
+            top: -250px;
+            left: 38px;
+            color: #333;
+            font-size: 30px;
+            font-weight: 600;
+            font-family: 'Space Mono', monospace;
+            display: block;
+            transform: rotate(-$thisAngle);
           }
         }
       }
@@ -132,15 +144,6 @@ body {
         height: 100px;
         fill: #fff;
       }
-    }
-
-    .hex--item {
-      // position: absolute;
-      // top: 0;
-      // width: 0;
-      // height: 0;
-      // border: 0 solid transparent;
-      // transform-origin: 0 100%;
     }
   }
 

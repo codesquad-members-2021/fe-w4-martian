@@ -75,11 +75,13 @@ html, body, button{
     height:100px;
     font-weight:bold;
     background:#fff;
-    border-radius:50px;
+    border-radius:60px;
     z-index:9999;
     cursor:pointer;
-    font-size: 40px;
+    font-size: 63px;
     text-align: center;
+    transform: rotate(22.5deg);
+
 }
 
 .transmission {

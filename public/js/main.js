@@ -2,7 +2,7 @@
 // getCanvas();
 
 import {transmission} from "./transmission.js"
-
+import {getRecept} from "./reception.js"
 const receptInp = document.querySelector(".recept__inp");
 const receptBtn = document.querySelector(".recept__btn");
 
@@ -14,3 +14,4 @@ const senders = {sendInp, sendBtn, sendTr};
 const receptors = {receptInp, receptBtn};
 
 transmission(senders,receptors);
+getRecept(senders,receptors);

@@ -2,29 +2,37 @@ const transmission = (senders , receptors) =>{
     const {sendInp, sendBtn, sendTr} = senders;
     const {receptInp, receptBtn} = receptors;
 
-    let ans ="";
+    let arr=[];
     console.log(sendInp);
     sendInp.addEventListener("keydown",(e)=>{
         console.log(e);
-        console.log(e.currentTarget);
+        // console.log(e.currentTarget);
         var x =e.key;
-
-        console.log(x);
         var k = a2Hex(x);
         console.log(k);
-        ans+=k;
-        console.log("ans",ans);
-
+        if(k==42){
+            arr.pop();
+        }
+        else{
+            arr.push(k)
+        }
+        console.log(arr);
+        sendTr.innerText = arr;
     });
     
 
     sendBtn.addEventListener("click",()=>{
-        const contents = sendInp.value;
-        console.log("버튼눌렀다.",contents);
-        sendTr.innerText += ans;
-    })
+        return function() {
+            return arr;
+        }
+    });
 }
 
+
+// var a=arr.shift()
+// a.toString();
+// console.log(a[0]);
+// console.log(a[1]);
 
 export {transmission};
 //문자 -> 16진수 (한글자씩)

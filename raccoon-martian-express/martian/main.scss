@@ -68,8 +68,8 @@ body {
     }
 
     $marsDiameter: 567px;
-    $peiceUnits: 16;
-    $peiceAngle: 360 / $peiceUnits;
+    $pieceUnits: 16;
+    $pieceAngle: 360 / $pieceUnits;
 
     .hex-circle {
       position: absolute;
@@ -95,11 +95,11 @@ body {
           $rad: ($deg * pi()) / 180;
           @return $marsDiameter / (1 / tan($rad));
         }
-        @for $i from 0 through ($peiceUnits - 1) {
+        @for $i from 0 through ($pieceUnits - 1) {
           $angle: 0deg;
 
-          .peice-#{$i} {
-            $thisAngle: $angle + ($i * $peiceAngle);
+          .piece-#{$i} {
+            $thisAngle: $angle + ($i * $pieceAngle);
 
             position: absolute;
             width: 0;
@@ -108,13 +108,13 @@ body {
             left: $marsDiameter / 2;
             top: -$marsDiameter / 2;
             border-top-width: $marsDiameter;
-            border-right-width: tanDeg($peiceAngle);
+            border-right-width: tanDeg($pieceAngle);
             transform-origin: left bottom;
             border-top-color: rgba(255, 255, 255, 0.5);
             transform: rotate($thisAngle - 1deg);
           }
           .hex-code {
-            $thisAngle: $angle + ($i * $peiceAngle);
+            $thisAngle: $angle + ($i * $pieceAngle);
 
             position: absolute;
             top: -250px;

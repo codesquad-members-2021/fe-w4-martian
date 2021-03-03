@@ -25,16 +25,16 @@ const PIECE = 16;
 // };
 const hexCode = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
 
-function drawPeice() {
-  let peiceDiv = ``;
+function drawPiece() {
+  let pieceDiv = ``;
   for (let i = 0; i < PIECE; i++) {
-    peiceDiv += `
-    <div class="peice-${i}">
+    pieceDiv += `
+    <div class="piece-${i}">
       <span class="hex-code hex-${hexCode[i]}">${hexCode[i]}</span>
     </div>
     `;
   }
-  return $roulette.insertAdjacentHTML('beforeend', peiceDiv);
+  return $roulette.insertAdjacentHTML('beforeend', pieceDiv);
 }
 
-drawPeice();
+drawPiece();

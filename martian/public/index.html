@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Martian</title>
+    <link rel="stylesheet" type="text/css" href="./stylesheets/reset.css" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
@@ -67,16 +68,17 @@
     </div>
 
     <div class="main--lower">
-      <div class="main--hex-code">
+      <div class="main--hex">
         <p>송수신정보</p>
-        <input type="text" class="fname" />
-        <button>해석하기</button>
+        <input type="text" class="main--hex--text" />
+        <button class="main--hex--button">해석하기</button>
       </div>
-      <div class="main--text">
+      <div class="main--char">
         <p>발신정보입력</p>
-        <input type="text" class="fname" />
-        <button>지구로 보내기</button>
+        <input type="text" class="main--char--text" />
+        <button class="main--char--button">지구로 보내기</button>
       </div>
     </div>
+    <script type="module" src="./javascripts/index.js"></script>
   </body>
 </html>

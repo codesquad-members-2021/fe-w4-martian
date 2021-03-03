@@ -30,8 +30,9 @@ const pizzaShape = (x, y, r, angleFrom, anglTo, color, dir = false) => {
   ctx.stroke();
 };
 
-const text = (value, x, y) => {
+const text = (value, x, y, color = '#fff') => {
   ctx.font = '30px Arial';
+  ctx.fillStyle = color;
   ctx.fillText(value, x, y);
 };
 
@@ -45,6 +46,22 @@ const renderText = () => {
     textInitialY += textLocationY[i];
     if (i < 10) text(i, textInitialX, textInitialY);
     else text(hexCode[i], textInitialX, textInitialY);
+  }
+};
+
+export const renderBlingText = (target) => {
+  let textInitialX = 270;
+  let textInitialY = 100;
+  const textLocationX = [0, 65, 45, 25, 0, -25, -45, -65, -65, -65, -45, -25, 0, 25, 45, 65];
+  const textLocationY = [0, 20, 50, 60, 60, 60, 50, 20, 0, -20, -50, -60, -60, -60, -50, -20];
+  for (let i = 0; i <= 15; i++) {
+    textInitialX += textLocationX[i];
+    textInitialY += textLocationY[i];
+    let color;
+    if (i !== target) continue;
+    else color = i === target ? 'blue' : '#FFF';
+    if (i < 10) text(i, textInitialX, textInitialY, color);
+    else text(hexCode[i], textInitialX, textInitialY, color);
   }
 };
 

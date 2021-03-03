@@ -28,6 +28,7 @@ table {
     left: 205px;
     top: 225px;
     width: 90px;
+    transform: rotate(-78.75deg);
   }
 
   .receiver img {
@@ -59,6 +60,35 @@ table {
       margin: 20px 0;
       border: none;
       border-radius: 10px;
+      cursor: pointer;
     }
+  }
+}
+
+.foo {
+  color: #f2f;
+  -webkit-animation: flash linear 1s infinite;
+  animation: flash linear 1s infinite;
+}
+@-webkit-keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
   }
 }

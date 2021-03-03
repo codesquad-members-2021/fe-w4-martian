@@ -1,6 +1,8 @@
 import { communicate } from "./communication/communicate.js";
-// import Chart from "chart.js";
-import { drawRoulette } from "./chart.js";
+import { hexadecimals } from "./util.js";
+// import { drawRoulette } from "./chart.js";
+import { getRoulette } from "./roulette.js";
+import MyPromise from "./Promise.js";
 
 // const receivedContent = document.querySelector(".receivedContent");
 const translatorButton = document.querySelector(".translate__button");
@@ -15,9 +17,6 @@ const senders = { sentContentHex, sendToEarthButton };
 const receivers = { receivedContentHex, translatorButton, receivedContentText };
 
 communicate(senders, receivers);
-// myChart;
 
-const width = 500;
-const height = 500;
-
-drawRoulette(width, height);
+const myRoulette = document.querySelector("#myRoulette");
+myRoulette.innerHTML = getRoulette(Math.floor(hexadecimals.length / 2));

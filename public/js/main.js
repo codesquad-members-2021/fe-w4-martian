@@ -3,9 +3,9 @@
 
 import {factors} from "./common.js";
 import {transmission} from "./transmission.js"
-import {rotateArrow} from "./reception.js"
+import {rotateArrow,LightOn} from "./reception.js"
 const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
 
 
 transmission(factors);
-rotateArrow(factors);
+// rotateArrow(factors);

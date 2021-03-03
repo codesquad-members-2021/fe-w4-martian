@@ -101,6 +101,8 @@ html, body, button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%); }
+  .line .light {
+    color: red; }
   .line span {
     color: #bbb5c3; }
   .line__1 {

@@ -1,4 +1,5 @@
 import {hex2a,a2Hex} from "./notation.js"
+import {rotateArrow,LightOn} from "./reception.js";
 const transmission = (factors) =>{
 
     const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
@@ -19,15 +20,33 @@ const transmission = (factors) =>{
             arr.push(k)
         }
         console.log(arr);
+        console.log(typeof(arr[0]));
         sendTr.innerText = arr;
     });
     
 
     sendBtn.addEventListener("click",()=>{
-        return function() {
-            return arr;
-        }
+        response(arr,factors)
+
     });
+}
+
+const response = (content, factors) =>{
+    const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
+    var i=0;
+    var listt = [];
+    while(content.length>0){
+        content.shift().split("").forEach((le)=>{
+            rotateArrow(le,i)
+            i++;
+        })
+        // var a,b=content.shift().split("");
+        // console.log(a,b,i);
+        // rotateArrow(a,i);
+        // i++;
+        // rotateArrow(b,i);
+
+    }
 }
 
 

@@ -6,6 +6,10 @@ const $earthInfo = document.querySelector('#earth--info');
 const $marsInfo = document.querySelector('#mars--info');
 const $send2earthButton = document.querySelector('#send-to-earth--button');
 const $send2marsButton = document.querySelector('#send-to-mars--button');
+const $arrow = document.querySelector('.arrow-circle');
+
+const MARS = 'mars';
+const EARTH = 'earth';
 
 $earthInterpretButton.addEventListener('click', interpretor);
 $marsInterpretButton.addEventListener('click', interpretor);
@@ -45,17 +49,28 @@ function hex2str(hex) {
 function sendMessage() {}
 
 function send2mars() {
-  return moveArrow($earthInfo.value);
-}
-function moveArrow(value) {
-  setHexData(value);
+  return moveArrow(EARTH, $earthInfo.value);
 }
 
-function setHexData(value) {
-  $marsInfo.value = value;
+function send2earth() {
+  return moveArrow(MARS, $marsInfo.value);
 }
 
-function send2earth() {}
+function moveArrow(planet, value) {
+  const inputHexOnMars = (value) => ($marsInfo.value += value);
+  const inputHexOnEarth = (value) => ($earthInfo.value += value);
+  let piece = 360 / 16;
+
+  value.split('').forEach((el) => {
+    let rotateDeg = (piece * el * 2) / 2 + 5; // 보정
+
+    $arrow.style.transform = `rotate(${rotateDeg}deg)`;
+    $arrow.style.transition = `1s ease-in-out`;
+  });
+
+  if (planet === EARTH) inputHexOnMars(value);
+  if (planet === MARS) inputHexOnEarth(value);
+}
 
 let helloHex = str2hex('hello');
 

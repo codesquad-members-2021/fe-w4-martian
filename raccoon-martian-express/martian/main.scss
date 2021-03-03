@@ -66,6 +66,10 @@ body {
     @mixin regular-border {
       border: 3px solid #fff;
     }
+    @function tanDeg($deg) {
+      $rad: ($deg * pi()) / 180;
+      @return $marsDiameter / (1 / tan($rad));
+    }
 
     $marsDiameter: 567px;
     $pieceUnits: 16;
@@ -91,10 +95,6 @@ body {
         overflow: hidden;
         z-index: 1;
 
-        @function tanDeg($deg) {
-          $rad: ($deg * pi()) / 180;
-          @return $marsDiameter / (1 / tan($rad));
-        }
         @for $i from 0 through ($pieceUnits - 1) {
           $angle: 0deg;
 
@@ -139,7 +139,7 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      transform: rotate(22.5 / 2 * 1deg);
+      transform: rotate($pieceAngle / 2 * 1deg);
       position: relative;
       z-index: 10;
 

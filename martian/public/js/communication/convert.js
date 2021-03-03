@@ -1,9 +1,5 @@
 const textToHex = ({ key }) => key.charCodeAt(0).toString(16);
-<<<<<<< HEAD
 // const textToHex = (value) => value.split("").reduce((acc, val) => acc + val.charCodeAt(0).toString(16));
-=======
-
->>>>>>> e63811c ([Create] Roulette)
 const hexToText = (hexValue) => {
   let txt = ``;
   for (let i = 0; i + 2 <= hexValue.length; i += 2) {

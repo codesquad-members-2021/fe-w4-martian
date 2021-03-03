@@ -1,4 +1,4 @@
-import { pipe } from './util.js';
+import { go, pipe } from './util.js';
 
 //prettier-ignore
 export const hexCode = {
@@ -29,5 +29,8 @@ const hexToDec = (hex) => {
   return dec;
 };
 
-export const charToHex = pipe(charToDec, decToHex);
-export const hexToChar = pipe(hexToDec, decToChar);
+const charToHex = pipe(charToDec, decToHex);
+const hexToChar = pipe(hexToDec, decToChar);
+
+export const stringToHexArr = (str) => str.split('').map((v) => charToHex(v));
+export const HexArrToString = (arr) => arr.map((v) => hexToChar(v)).join('');

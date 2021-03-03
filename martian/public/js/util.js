@@ -15,7 +15,8 @@ const rotateState = {
 
 const times = {
   send: 2000,
-  receive: 500,
+  receive: 5000,
+  transition: 300,
 };
 
 export { hexadecimals, selectors, rotateState, times };

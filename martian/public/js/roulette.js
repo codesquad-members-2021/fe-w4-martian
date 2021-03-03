@@ -1,4 +1,4 @@
-const getLineText = (num) => `<span class="line__text">${num}</span>`;
+const getLineText = (num) => `<span class="line__text" data-id='${num}'>${num}</span>`;
 
 const getRoulette = (length) => {
   let itemHtml = ``;

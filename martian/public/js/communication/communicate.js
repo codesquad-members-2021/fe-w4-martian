@@ -1,5 +1,5 @@
 import { textToHex, hexToText } from "./convert.js";
-import { rotate } from "./rotate.js";
+import { rotate, lightOut } from "./rotate.js";
 import { times } from "../util.js";
 
 const isString = ({ keyCode }) => keyCode >= 65 && keyCode <= 90;
@@ -11,8 +11,18 @@ const response = (content, receivers) => {
   content.split("").forEach(
     (letter, i) =>
       rotate(letter, i)
-        .then((res) => setTimeout(() => (receivedContentHex.value += res), times.receive))
-        .then(() => (translatorButton.disabled = false))
+        .then((capital) => {
+          setTimeout(() => {
+            receivedContentHex.value += capital;
+          }, times.receive);
+        })
+        .then(() => {
+          translatorButton.disabled = false;
+          // const target = find(rouletteTexts, capital);
+          // const rouletteTexts = document.querySelectorAll(".line__text");
+          // const target = Object.entries(rouletteTexts).find((item) => item[1].dataset.id === letter.toUpperCase());
+          lightOut(target);
+        })
     // 글자가 다 찍히고 난 후 disabled = false하고 싶다..
   );
 };

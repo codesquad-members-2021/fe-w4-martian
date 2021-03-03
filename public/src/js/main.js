@@ -8,12 +8,12 @@ import { _ } from './util/util.js';
 const { log } = console;
 const BLANK = ' ';
 const receiveBox = _.$('.receive>input');
-
+const sendBox = _.$('.send>input');
 const translateBtn = _.$('.receive>button');
 
 //초기 원판 render
 renderPlate();
-translateBtn.addEventListener('click', translate);
+translateBtn.addEventListener('click', translate.bind(null, receiveBox, sendBox));
 
 //초기 전송 단어
 const word = 'hello world';

@@ -16,13 +16,21 @@ class MyPromise {
       console.error("You can not call then() because MyPromise is not fulfilled");
       return false;
     }
-    return onFulfilled(this.state);
+    const hasReturn = onFulfilled(this.state);
+    
+    if (hasReturn) {
+      return new MyPromise((resolve) => {
+        resolve(hasReturn);
+      });
+    } else {
+      console.log("then 끝");
+    }
+
   }
   
   resolve(value) {
     this.changeStatus(IS_FULFILLED);
     this.state = value;
-    // return new MyPromise();
     return this;
   }
   reject() {

@@ -18,6 +18,9 @@ const App = ({ $target }) => {
   console.log(testPromise)
   testPromise.then((value) => {
     console.log(value);
+    return value+"?";
+  }).then((v) => {
+    console.log(v);
   })
 }
 

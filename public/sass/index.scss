@@ -8,11 +8,14 @@ $lightBlack: #333;
 
 body {
     font-family: $fontFamily;
+    background-image: url('../img/universe.jfif');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .all-wrapper {
     width: $width;
-    margin: 20px auto 0;
+    margin: 60px auto 0;
 }
 
 .transceiver__view {
@@ -45,15 +48,16 @@ body {
         }
 
         p {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
+            text-shadow: 5px 5px 5px $lightBlack;
+            color: $white;
         }
 
         input,
         button {
             display: block;
-            border: none;
-            background: none;
+            border: none;            
             font-size: $fontSize;
         }
 
@@ -61,15 +65,15 @@ body {
             padding: 8px 3px;
             box-shadow: 0 0 0 1.05px $lightBlack;
             border-radius: 3%;
+            width: 100%;
         }
         button {
             cursor: pointer;
             font-weight: 600;
             font-size: 15px;
             padding: 10px 5px;
-            border-radius: 10%;
+            border-radius: 10%;            
             color: $white;
-
             background-color: $btnBackColor;
         }
     }

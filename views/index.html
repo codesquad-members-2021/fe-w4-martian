@@ -19,13 +19,14 @@
             <div class="transceiver__control">
                 <div class="transceiver__control__receive">
                     <p>송수신 정보</p>
-                    <input type="text"/>
+                    <input type="text"/>                    
                     <button type="button">해석하기</button>
                 </div>
 
                 <div class="transceiver__control__send">
                     <p>발신정보입력</p>
-                    <input type="text"/>
+                    <input type="text" class="send__text"/>
+                    <textarea class="send__text--convert" cols="25" readonly></textarea>
                     <button type="button">지구로 보내기</button>
                 </div>
             </div>

@@ -1,11 +1,14 @@
 @charset "UTF-8";
 body {
   font-family: NanumGothic, "나눔고딕", "Nanum Gothic", "Malgun Gothic", "맑은 고딕", Dotum, "돋움", Helvetica, AppleSDGothicNeo, Arial, sans-serif;
+  background-image: url("../img/universe.jfif");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .all-wrapper {
   width: 1280px;
-  margin: 20px auto 0;
+  margin: 60px auto 0;
 }
 
 .transceiver__view {
@@ -35,20 +38,22 @@ body {
   margin-top: 10px;
 }
 .transceiver__control div p {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
+  text-shadow: 5px 5px 5px #333;
+  color: #fff;
 }
 .transceiver__control div input,
 .transceiver__control div button {
   display: block;
   border: none;
-  background: none;
   font-size: 18px;
 }
 .transceiver__control div input {
   padding: 8px 3px;
   box-shadow: 0 0 0 1.05px #333;
   border-radius: 3%;
+  width: 100%;
 }
 .transceiver__control div button {
   cursor: pointer;

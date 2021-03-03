@@ -24,7 +24,8 @@ const piCreate = (ctx, arc, color = '#FFF') => {
     ctx.lineTo(x, y);
     ctx.fillStyle = color;
     ctx.fill();
-    ctx.stroke();
+    ctx.strokeStyle = "#FFF";
+    ctx.stroke();    
     ctx.closePath();
 };
 

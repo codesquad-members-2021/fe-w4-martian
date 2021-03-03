@@ -8,16 +8,16 @@ body {
   margin: 20px auto 0;
 }
 
-.receive__circle {
+.transceiver__view {
   width: 100%;
   margin: 0 auto;
   text-align: center;
   position: relative;
 }
-.receive__circle canvas#circular {
+.transceiver__view canvas#circular {
   z-index: -1;
 }
-.receive__circle img {
+.transceiver__view img {
   position: absolute;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
@@ -27,33 +27,35 @@ body {
   transition-property: transform;
 }
 
-.receive__input {
+.transceiver__control {
   display: flex;
   justify-content: space-evenly;
 }
-.receive__input div * {
+.transceiver__control div * {
   margin-top: 10px;
 }
-.receive__input div p {
+.transceiver__control div p {
   font-size: 24px;
   font-weight: 600;
 }
-.receive__input div input,
-.receive__input div button {
+.transceiver__control div input,
+.transceiver__control div button {
   display: block;
   border: none;
   background: none;
   font-size: 18px;
 }
-.receive__input div input {
+.transceiver__control div input {
   padding: 8px 3px;
   box-shadow: 0 0 0 1.05px #333;
   border-radius: 3%;
 }
-.receive__input div button {
+.transceiver__control div button {
   cursor: pointer;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 15px;
+  padding: 10px 5px;
+  border-radius: 10%;
   color: #fff;
   background-color: #b45f06;
 }

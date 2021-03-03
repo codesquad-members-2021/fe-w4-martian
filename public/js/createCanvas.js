@@ -75,7 +75,7 @@ const createCanvas = (canvas) => {
     const ctx = canvas.getContext('2d');
 
     piAllCreate(ctx, halfW, halfH, color);
-    const smallCircleArc = arcCreate(halfW, halfH, Math.floor(halfH / 5), 0, Math.PI * 2);
+    const smallCircleArc = arcCreate(halfW, halfH, Math.floor(halfH / 6), 0, Math.PI * 2);
     circleDraw(ctx, smallCircleArc);
     
 

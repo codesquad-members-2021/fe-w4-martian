@@ -15,7 +15,7 @@ body {
     margin: 20px auto 0;
 }
 
-.receive__circle {
+.transceiver__view {
     width: 100%;
     margin: 0 auto;
     text-align: center;
@@ -35,7 +35,7 @@ body {
     }
 }
 
-.receive__input {
+.transceiver__control {
     display: flex;
     justify-content: space-evenly;
 
@@ -65,7 +65,9 @@ body {
         button {
             cursor: pointer;
             font-weight: 600;
-            font-size: 20px;
+            font-size: 15px;
+            padding: 10px 5px;
+            border-radius: 10%;
             color: $white;
 
             background-color: $btnBackColor;

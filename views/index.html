@@ -11,20 +11,21 @@
     </head>
     <body>
         <div class="all-wrapper">
-            <div class="receive__circle">      
-                <img src="/img/top_arrow.png" alt="arrow">
+            <div class="transceiver__view">      
+                <img src="/img/top_arrow.png" alt="arrow" class="transform__rotate-16">
                 <canvas id="circular" width="600" height="600"></canvas>                                
             </div>
-            <div class="receive__input">
-                <div class="receive__input__send">
+
+            <div class="transceiver__control">
+                <div class="transceiver__control__receive">
                     <p>송수신 정보</p>
-                    <input type="text" name="send" />
+                    <input type="text"/>
                     <button type="button">해석하기</button>
                 </div>
 
-                <div class="receive__input__sent">
+                <div class="transceiver__control__send">
                     <p>발신정보입력</p>
-                    <input type="text" name="sent" />
+                    <input type="text"/>
                     <button type="button">지구로 보내기</button>
                 </div>
             </div>

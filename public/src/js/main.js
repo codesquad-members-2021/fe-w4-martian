@@ -5,3 +5,5 @@ import { _ } from './util/util.js';
 renderPlate();
 
 const arrow = _.$('.arrow');
+
+arrow.style.transition = 'all 1s';

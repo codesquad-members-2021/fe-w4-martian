@@ -1,21 +1,12 @@
 import { textToHex, hexToText } from "./convert.js";
 import { rotate } from "./rotate.js";
 
-const isString = ({ keyCode }) => (keyCode >= 65 && keyCode <= 90) || keyCode === 32;
+const isString = ({ keyCode }) => keyCode >= 65 && keyCode <= 90;
 
 const registerEvent = (type, element, ...fns) => element.addEventListener(type, (e) => fns.forEach((fn) => fn(e)));
 
-// const send = (contents, receivedContent) =>
-//   contents.split("").forEach((letter, idx) => setTimeout(() => (receivedContent.value += letter), 500 * (idx + 1)));
-
-const send = (content) => {
-  console.log(`here!!`);
-  for (let i = 0; i < content.length; i++) {
-    const letter = content[i];
-    rotate(letter, i).then(console.log);
-  }
-  // .then((res) => console.log(`------ res: ${res} ------`));
-};
+const send = (content, receiver) =>
+  content.split("").forEach((letter, i) => rotate(letter, i).then((res) => setTimeout(() => (receiver.value += res), 500)));
 
 const communicate = (senders, receivers) => {
   const { sentContentHex, sendToEarthButton } = senders;
@@ -26,17 +17,7 @@ const communicate = (senders, receivers) => {
   const convertKeyup = (e) => (isString(e) ? (sentContentHex.value = translatedWord) : sentContentHex.value);
   const sendToEarth = () => {
     const content = sentContentHex.value;
-    // send(contents, receivedContentHex);
-    send(content);
-    // sendToEarth -> roulette -> receivedContentHex.value로 gogo
-
-    // 이 부분에서 룰렛 rotate 하는거 해야할 것 같음
-    // 5초 간격으로 문자를 받으면 -> 해당 문자에 룰렛 화살표가 2초간 머묾
-    // 가까운 방향으로 회전 -> 문자별로 시계방향이 더 빠른지, 반시계방향이 더 빠른지 계산하는 알고리즘 짜기
-    // const arrow = document.querySelector(".roulette__arrow");
-    // arrow.style.transition = `300ms`;
-    // arrow.style.transform = `translate3d(-50%, -50%, 0px) rotate(${(initDeg += 15)}deg)`;
-    // promise 사용하기
+    send(content, receivedContentHex);
     sentContentHex.value = ``;
     translatedWord = ``;
   };

@@ -27,7 +27,7 @@ new MyPromise(parsedWord, 5000)
     if (idx !== 0) setReceiveBox(' ', receiveBox); //글자 하나당 receiveBox에 띄어쓰기 추가(맨처음 제외)
     if (idx === parsedWord.length - 1) {
       setTimeout(() => {
-        clearBling(); //글자 깜빡임 interval 제거 (마지막일 때)
+        blingText({ idx: null, clear: true }); //글자 깜빡임 interval 제거 (마지막일 때)
         makeBtnAble(translateBtn);
       }, 5000);
     }
@@ -38,17 +38,18 @@ new MyPromise(parsedWord, 5000)
     new MyPromise(chars, 2000)
       .then(arrowRotate)
       .then((idx) => setReceiveBox(idx, receiveBox))
-      .then(blingText);
+      .then((idx) => blingText.call(null, { idx, clear: false }));
   });
 
 //3. 화살표 회전 -arrow.js
-let beforeIdx = 0;
-const arrowRotate = (hex) => {
+const initArrowRotate = (beforeIdx = 0) => (hex) => {
   const targetIdx = getHexIdx(hex);
   rotateArrow(beforeIdx, targetIdx);
   beforeIdx = targetIdx;
   return targetIdx;
 };
+
+const arrowRotate = initArrowRotate();
 
 //4. 수신 box에 입력하기
 const setReceiveBox = (idx, inputBox) => {
@@ -60,15 +61,18 @@ const setReceiveBox = (idx, inputBox) => {
 const makeBtnAble = (btn) => (btn.disabled = false);
 
 // 5. 글자 반짝이기
-let renderTimer = null;
-let blingTimer = null;
-const blingText = (idx) => {
+const initBlingText = (renderTimer = null, blingTimer = null) => ({ idx, clear = false }) => {
+  console.log(clear);
   if (blingTimer || renderTimer) clearBling(blingTimer, renderTimer);
-  blingTimer = setInterval(renderBlingText.bind(this, idx), 200);
-  renderTimer = setInterval(renderPlate, 400);
+  if (!clear) {
+    blingTimer = setInterval(renderBlingText.bind(this, idx), 200);
+    renderTimer = setInterval(renderPlate, 400);
+  }
 };
 
-const clearBling = () => {
+const blingText = initBlingText();
+
+const clearBling = (blingTimer, renderTimer) => {
   clearInterval(blingTimer);
   clearInterval(renderTimer);
   renderPlate();

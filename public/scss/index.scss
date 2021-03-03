@@ -24,14 +24,6 @@ button:hover {
 button {
   font-size: 16px;
 }
-input {
-  border: 2px solid $light-gray;
-  width: 400px;
-  height: 40px;
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 16px;
-}
 
 .contents-box {
   display: flex;
@@ -53,11 +45,11 @@ input {
 }
 
 .arrow {
-  font-size: 120px;
+  font-size: 100px;
   color: $arrow;
   position: absolute;
-  top: 235px;
-  left: 270px;
+  top: 195px;
+  left: 225px;
   transform: rotate(11.25deg);
 }
 
@@ -84,10 +76,20 @@ input {
     display: flex;
     align-items: center;
     padding: 0px 10px;
+    font-size: 24px;
+  }
+  .mars-send-receive-info {
+    color: $orange;
   }
 
   .send-input {
     margin: 10px 0px;
+    border: 2px solid $light-gray;
+    width: 400px;
+    height: 45px;
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-size: 24px;
   }
 
   .mars-btn {
@@ -118,6 +120,10 @@ input {
   img {
     width: 300px;
   }
+}
+
+.earth-send-receive-info {
+  color: $green;
 }
 
 .earth-btn {

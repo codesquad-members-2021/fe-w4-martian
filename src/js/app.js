@@ -2,6 +2,7 @@ import '../scss/style.scss';
 // import variables from '../scss/_export.scss'; -> not working..
 import { _ } from './util.js';
 import { initPies, initArrowContainer, rotateArrow } from './transceiver.js';
+import { initFormContainer } from './form.js';
 
 const SERVER = 'http://localhost:3000/';
 
@@ -17,7 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
       initPies($transceiver)(PIE_CNT);
       initArrowContainer($transceiver)(json.arrowImg);
 
-      rotateSimul();
+      initFormContainer(_.$('.receive-cont'))({
+        title: '송수신정보', 
+        btnContent: '해석하기',
+        btnClass: 'interpret-btn',
+      });
+      initFormContainer(_.$('.transmit-cont'))({
+        title: '발신정보입력',
+        btnContent: '지구로 보내기',
+        btnClass: 'transmit-btn',
+      });
+
+      // rotateSimul();
     });
 });
 

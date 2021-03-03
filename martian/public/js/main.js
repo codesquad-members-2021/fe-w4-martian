@@ -1,5 +1,6 @@
 import { communicate } from "./communication/communicate.js";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { hexadecimals, selectors } from "./util.js";
 import { getRoulette } from "./roulette.js";
 
@@ -7,6 +8,12 @@ const { sendToEarthButton, sentContentHex, receivedContentHex, translatorButton,
 =======
 // import Chart from "chart.js";
 import { drawRoulette } from "./chart.js";
+=======
+import { hexadecimals } from "./util.js";
+// import { drawRoulette } from "./chart.js";
+import { getRoulette } from "./roulette.js";
+import MyPromise from "./Promise.js";
+>>>>>>> 32c4567 ([Add] Promise)
 
 // const receivedContent = document.querySelector(".receivedContent");
 const translatorButton = document.querySelector(".translate__button");
@@ -21,8 +28,8 @@ const receivedContentText = document.querySelector(".receivedContent__text");
 const senders = { sentContentHex, sendToEarthButton };
 const receivers = { receivedContentHex, translatorButton, receivedContentText };
 communicate(senders, receivers);
-// myChart;
 
+<<<<<<< HEAD
 const width = 500;
 const height = 500;
 
@@ -32,3 +39,7 @@ myRoulette.innerHTML = getRoulette(Math.floor(hexadecimals.length / 2));
 =======
 drawRoulette(width, height);
 >>>>>>> e63811c ([Create] Roulette)
+=======
+const myRoulette = document.querySelector("#myRoulette");
+myRoulette.innerHTML = getRoulette(Math.floor(hexadecimals.length / 2));
+>>>>>>> 32c4567 ([Add] Promise)

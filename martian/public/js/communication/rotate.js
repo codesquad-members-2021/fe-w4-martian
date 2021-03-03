@@ -27,17 +27,22 @@ const lightOut = (target) => {
 const rotate = (letter, i) =>
   new MyPromise((resolve, reject) =>
     setTimeout(() => {
+      if (rotateState.pastTarget) lightOut(rotateState.pastTarget);
       const capital = letter.toUpperCase();
       const index = hexadecimals.findIndex((item) => item.toString() === capital);
       const rouletteTexts = document.querySelectorAll(".line__text");
+
       const target = Object.entries(rouletteTexts).find((item) => item[1].dataset.id === capital);
       lightOn(target);
+      rotateState.pastTarget = target;
       const diff = index - rotateState.currPoint;
+
       const absDiff = Math.abs(diff);
       if (absDiff > 7)
         rotateState.currDeg = diff <= 0 ? turn(16 - absDiff, rotateState.currDeg, true) : turn(16 - absDiff, rotateState.currDeg, false);
       if (absDiff <= 7) rotateState.currDeg = diff <= 0 ? turn(absDiff, rotateState.currDeg, false) : turn(absDiff, rotateState.currDeg, true);
       rotateState.currPoint = index;
+
       resolve(capital);
     }, times.send * (i + 1))
   );

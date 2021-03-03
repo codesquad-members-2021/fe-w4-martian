@@ -104,6 +104,12 @@ button:hover {
   background-color: #b52a3f;
 }
 
+button:disabled {
+  cursor: default;
+  background-color: $light;
+  color: #ddd;
+}
+
 input {
   padding: 3px;
   background-color: #ddd;

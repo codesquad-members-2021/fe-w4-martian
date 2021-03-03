@@ -1,11 +1,11 @@
 // test
 
 .light {
-  -webkit-animation: fadeOut 1s 1s infinite linear alternate;
-  -moz-animation: fadeOut 1s 1s infinite linear alternate;
-  -ms-animation: fadeOut 1s 1s infinite linear alternate;
-  -o-animation: fadeOut 1s 1s infinite linear alternate;
-  animation: fadeOut 1s 1s infinite linear alternate;
+  -webkit-animation: fadeOut 0.5s 0.5s 4 linear alternate;
+  -moz-animation: fadeOut 0.5s 0.5s 4 linear alternate;
+  -ms-animation: fadeOut 0.5s 0.5s 4 linear alternate;
+  -o-animation: fadeOut 0.5s 0.5s 4 linear alternate;
+  animation: fadeOut 0.5s 0.5s 4 linear alternate;
 }
 @keyframes fadeOut {
   0% {

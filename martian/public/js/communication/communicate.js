@@ -8,18 +8,14 @@ const registerEvent = (type, element, ...fns) => element.addEventListener(type, 
 
 const response = (content, receivers) => {
   const { receivedContentHex, translatorButton } = receivers;
-  content.split("").forEach(
-    (letter, i) =>
-      rotate(letter, i)
-        .then((capital) => {
-          setTimeout(() => {
-            receivedContentHex.value += capital;
-          }, times.receive);
-        })
-        .then(() => {
-          translatorButton.disabled = false;
-        })
-    // 글자가 다 찍히고 난 후 disabled = false하고 싶다..
+  let isDone = false;
+  content.split("").forEach((letter, i) =>
+    rotate(letter, i).then((capital) =>
+      setTimeout(() => {
+        receivedContentHex.value += capital;
+        if (i === content.length - 1) translatorButton.disabled = false;
+      }, times.receive)
+    )
   );
 };
 

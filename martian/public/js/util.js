@@ -11,11 +11,12 @@ const selectors = {
 const rotateState = {
   currPoint: 0,
   currDeg: 15,
+  pastTarget: null,
 };
 
 const times = {
   send: 2000,
-  receive: 5000,
+  receive: 500,
   transition: 300,
 };
 

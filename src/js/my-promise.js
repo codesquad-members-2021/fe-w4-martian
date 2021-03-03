@@ -22,6 +22,16 @@ export default class MyPromise {
     return (this.next = new MyPromise());
   }
 
+  catch(onCatched) {
+    this.onCatched = onCatched;
+    return (this.next = new MyPromise());
+  }
+
+  finally(onFinally) {
+    this.onFinally = onFinally;
+    return (this.next = new MyPromise());
+  }
+
   resolve(result) {
     this.state = RESOLVED;
 
@@ -36,22 +46,13 @@ export default class MyPromise {
     this.internalRejected(result);
   }
 
-  catch(onCatched) {
-    this.onCatched = onCatched;
-    return (this.next = new MyPromise());
-  }
-
-  finally(result) {
-    // TODO
-  }
-
   internalFulfilled(result) {
     setTimeout(() => {
       try {
-        const fulfilledResult = this.onFulfilled(result);
+        const fulfilledResult = this?.onFulfilled(result);
 
-        if (this.next)
-          this.next.resolve(fulfilledResult);
+        if (fulfilledResult) this.next?.resolve(fulfilledResult);
+        else this.next?.onFinally?.();
       } catch (err) {
         this.internalCatched(err);
       } finally {
@@ -67,9 +68,7 @@ export default class MyPromise {
           throw result;
 
         const rejectedResult = this.onRejected(result);
-        
-        if (this.next)
-          this.next.reject(rejectedResult);
+        this.next?.reject(rejectedResult);
       } catch (err) {
         this.internalCatched(err);
       } finally {
@@ -89,6 +88,8 @@ export default class MyPromise {
 
       if (handledResult && onCatchedPromise.next)
         onCatchedPromise.next.resolve(handledResult);
+      else
+        this.executeOnFinally();
     }, 0);
   }
 
@@ -97,5 +98,10 @@ export default class MyPromise {
     else if (this.next) return this.next.closestOnCatchedPromise();
 
     return null;
+  }
+
+  executeOnFinally() {
+    if (this.onFinally) return this.onFinally();
+    else this.next.executeOnFinally();
   }
 }

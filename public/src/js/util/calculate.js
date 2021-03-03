@@ -34,7 +34,7 @@ const charToHex = pipe(charToDec, decToHex);
 const hexToChar = pipe(hexToDec, decToChar);
 
 export const stringToHexArr = (str) => str.split('').map((v) => charToHex(v));
-export const HexArrToString = (arr) => arr.map((v) => hexToChar(v)).join('');
+export const hexArrToString = (arr) => arr.map((v) => hexToChar(v)).join('');
 export const getHexIdx = (val) => {
   return hexCodeArr.indexOf(val);
 };

@@ -1,10 +1,15 @@
+import MyPromise from './myPromise.js';
 import { rotateArrow } from './arrow.js';
 import { renderBlingText, renderPlate } from './canvas.js';
-import { HexArrToString, stringToHexArr, getHexIdx, hexCodeArr } from './util/calculate.js';
+import { hexArrToString, stringToHexArr, getHexIdx, hexCodeArr } from './util/calculate.js';
 import { go, _ } from './util/util.js';
 const { log } = console;
 
 const receiveBox = _.$('.receive>input');
+const translateBtn = _.$('.receive>button');
+const sendBox = _.$('.send>input');
+
+translateBtn.addEventListener('click', translate);
 
 //초기 원판 render
 renderPlate();
@@ -14,48 +19,45 @@ const word = 'he';
 
 //1. 문자=>hex Arr
 const parsedWord = stringToHexArr(word); //go(word,stringToHexArr)
+log(parsedWord);
 
-//2. 5초-2초 간격으로 나누기
-for (let i = 0; i < parsedWord.length; i++) {
-  setTimeout(() => {
-    new Promise((res, rej) => {
-      if (i !== 0) receiveText(' ', receiveBox);
-      res(parsedWord[i]);
-    }).then((res) => {
-      const chars = parsedWord[i].split('');
-      for (let j = 0; j < chars.length; j++) {
-        new Promise((res, rej) => {
-          setTimeout(() => {
-            res(chars[j]);
-          }, 2000 * j);
-        })
-          .then(arrowRotate)
-          .then((idx) => {
-            const hexValue = hexCodeArr[idx];
-            receiveText(hexValue, receiveBox);
-            return idx;
-          })
-          .then(blingText);
-      }
-    });
-    clearBling();
-  }, 5000 * i);
-}
+//2. 5초-2초 간격으로 진행
+new MyPromise(parsedWord, 5000)
+  .then((value, idx) => {
+    if (idx !== 0) setReceiveBox(' ', receiveBox); //글자 하나당 receiveBox에 띄어쓰기 추가(맨처음 제외)
+    if (idx === parsedWord.length - 1) {
+      setTimeout(() => {
+        clearBling(); //글자 깜빡임 interval 제거 (마지막일 때)
+        makeBtnAble(translateBtn);
+      }, 5000);
+    }
+    return value;
+  })
+  .then((hex) => {
+    const chars = hex.split('');
+    new MyPromise(chars, 2000)
+      .then(arrowRotate)
+      .then((idx) => setReceiveBox(idx, receiveBox))
+      .then(blingText);
+  });
 
-//3. 화살표 회전
+//3. 화살표 회전 -arrow.js
 let beforeIdx = 0;
-const arrowRotate = (idx) => {
-  const targetIdx = getHexIdx(idx);
+const arrowRotate = (hex) => {
+  const targetIdx = getHexIdx(hex);
   rotateArrow(beforeIdx, targetIdx);
   beforeIdx = targetIdx;
   return targetIdx;
 };
 
 //4. 수신 box에 입력하기
-
-const receiveText = (value, inputBox) => {
-  inputBox.value += value;
+const setReceiveBox = (idx, inputBox) => {
+  if (idx === ' ') inputBox.value += ' ';
+  else inputBox.value += hexCodeArr[idx];
+  return idx;
 };
+//수신 박스 able로 만들기
+const makeBtnAble = (btn) => (btn.disabled = false);
 
 // 5. 글자 반짝이기
 let renderTimer = null;
@@ -66,8 +68,25 @@ const blingText = (idx) => {
   renderTimer = setInterval(renderPlate, 400);
 };
 
-const clearBling = (blingTimer, renderTimer) => {
+const clearBling = () => {
   clearInterval(blingTimer);
   clearInterval(renderTimer);
   renderPlate();
+};
+
+//6. 해석하기
+
+function translate() {
+  const value = receiveBox.value;
+  const translatedStr = translateHex(value);
+  setSenddBox(translatedStr, sendBox);
+}
+
+const translateHex = (value) => {
+  const hexArr = value.split(' ');
+  return hexArrToString(hexArr);
+};
+
+const setSenddBox = (value, sendBox) => {
+  sendBox.value = value;
 };

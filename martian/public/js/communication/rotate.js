@@ -58,6 +58,7 @@ const adela = (f, ...fns) => (...args) =>
 const rotate = (letter, i, isLast) =>
   new MyPromise((resolve, reject) =>
     setTimeout(() => {
+<<<<<<< HEAD
       if (rotateState.pastTarget) lightOut(rotateState.pastTarget);
       const endPoint = getEndPoint(hexadecimals, capital(letter));
       const target = adela(findTextTarget, getHTMLElements, capital)("line__text", letter);
@@ -68,6 +69,18 @@ const rotate = (letter, i, isLast) =>
       rotateState.currDeg = direction();
       rotateState.currPoint = endPoint;
       resolve(capital(letter));
+=======
+      console.log(`letter: ${letter.toUpperCase()}`);
+      const index = hexadecimals.findIndex((item) => item == letter.toUpperCase());
+      console.log(`index: ${index}`);
+      const diff = index - rotateState.currPoint;
+      const absDiff = Math.abs(diff);
+      if (absDiff > 7)
+        rotateState.currDeg = diff <= 0 ? turn(16 - absDiff, rotateState.currDeg, true) : turn(16 - absDiff, rotateState.currDeg, false);
+      if (absDiff <= 7) rotateState.currDeg = diff <= 0 ? turn(absDiff, rotateState.currDeg, false) : turn(absDiff, rotateState.currDeg, true);
+      rotateState.currPoint = index;
+      resolve(letter);
+>>>>>>> cbb48ed ([Add] translatorButton's ability)
     }, times.send * (i + 1))
   );
 

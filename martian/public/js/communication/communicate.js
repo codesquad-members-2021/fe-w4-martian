@@ -53,6 +53,7 @@ const communicate = (senders, receivers) => {
   const translate = () => {
     receivedContentText.innerText += `${hexToText(receivedContentHex.value)}\n`;
     receivedContentHex.value = ``;
+    translatorButton.disabled = true;
   };
 
   registerEvent("keydown", sentContentHex, throttle(convertKeydown, 100));

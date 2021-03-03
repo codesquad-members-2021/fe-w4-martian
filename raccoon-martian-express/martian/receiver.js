@@ -40,12 +40,6 @@ function hex2str(hex) {
 
 function sendMessage() {}
 
-function whichPlanet(e) {
-  const isEarth = () => e.target === $send2earthButton;
-  const isMars = () => e.target === $send2marsButton;
-  return;
-}
-
 let helloHex = str2hex('hello');
 
 console.log(helloHex);
@@ -81,4 +75,20 @@ console.log($marsInfo);
 // 10. 화살표가 메세지를 가리킬때 지구의 INFO에 문자가 바로 출력된다.
 // 11. Interpret하면 해석한다.
 
-function raccoonPromise() {}
+class RaccoonPromise {
+  resolve() {
+    console.log('내가 해냈어!!!');
+  }
+
+  reject() {
+    console.log('미안하지만 이번엔 실패야...');
+  }
+
+  then() {
+    console.log('자! 다음은 뭐지?!');
+  }
+
+  catch() {
+    console.log('너의 실패 이유다!');
+  }
+}

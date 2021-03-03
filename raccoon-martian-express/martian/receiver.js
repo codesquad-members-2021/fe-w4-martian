@@ -2,10 +2,17 @@ const $marsInfo = document.querySelector('#mars--info');
 const $interpretButton = document.querySelector('#interpret-mars--button');
 const $send2earthButton = document.querySelector('#send-to-earth--button');
 const $send2marsButton = document.querySelector('#send-to-mars--button');
+const $earthInput = document.querySelector('#earth--input');
+const $earthInfo = document.querySelector('#earth--info');
 
-$interpretButton.addEventListener('click', interpret);
+$interpretButton.addEventListener('click', interpretor);
+$earthInput.addEventListener('keyup', immiInterpretor);
 
-function interpret() {
+function immiInterpretor(e) {
+  return ($earthInfo.value = str2hex(e.target.value));
+}
+
+function interpretor() {
   return ($marsInfo.value = hex2str($marsInfo.value));
 }
 
@@ -36,3 +43,5 @@ let helloHex = str2hex('hello');
 console.log(helloHex);
 console.log(hex2str(helloHex));
 console.log($marsInfo);
+
+function raccoonPromise() {}

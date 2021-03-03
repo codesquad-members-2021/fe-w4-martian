@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import {getCanvas} from '/js/canvas.js';
 // getCanvas();
 
@@ -9,3 +10,8 @@ const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
 
 transmission(factors);
 // rotateArrow(factors);
+=======
+import {getCanvas} from '/js/canvas.js';
+getCanvas();
+
+>>>>>>> 4deec2e851297e0a52e9a58aa1b486be643973c7

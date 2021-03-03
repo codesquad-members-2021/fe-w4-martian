@@ -1,5 +1,5 @@
-import { _ } from './util.js';
-import { hexCode } from './calculate.js';
+import { _ } from './util/util.js';
+import { hexCode } from './util/calculate.js';
 
 const canvas = _.$('#canvas');
 const ctx = canvas.getContext('2d');
@@ -48,11 +48,10 @@ const renderText = () => {
   }
 };
 
-export const oneAngle = 22.5;
-
 export const renderPlate = () => {
   const [centerX, centerY] = [250, 250];
   const [bigRadius, smallRadius, smallBorderRadius] = [200, 50, 45];
+  const oneAngle = 360 / 16;
   circleFill(centerX, centerY, bigRadius, '#F67269');
   for (let i = 0; i <= 15; i++) {
     pizzaShape(centerX, centerY, bigRadius, oneAngle * i, oneAngle * (i + 1), '#000');

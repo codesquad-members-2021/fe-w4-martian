@@ -17,6 +17,7 @@
   line-height: 60px;
   font-size: 3rem;
   color: #0b5394;
+  transition: all 0.5s;
 }
 .wrapper {
   display: flex;

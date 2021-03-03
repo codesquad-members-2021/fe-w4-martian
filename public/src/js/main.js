@@ -1,9 +1,5 @@
-import { renderPlate } from './util/canvas.js';
+import { renderPlate } from './canvas.js';
 import { _ } from './util/util.js';
 
 //한각도 22.5도 즉
 renderPlate();
-
-const arrow = _.$('.arrow');
-
-arrow.style.transition = 'all 1s';

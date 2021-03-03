@@ -1,3 +1,4 @@
+
 const $earthInterpretButton = document.querySelector('#earth-interpret--button');
 const $marsInterpretButton = document.querySelector('#mars-interpret--button');
 const $earthInput = document.querySelector('#earth--input');

@@ -1,4 +1,4 @@
-import { hexadecimals, selectors, rotateState } from "../util.js";
+import { hexadecimals, selectors, rotateState, times } from "../util.js";
 import MyPromise from "../Promise.js";
 
 const turn = (diff, currDeg, isClockWise) => {
@@ -28,7 +28,7 @@ const rotate = (letter, i) =>
       if (absDiff <= 7) rotateState.currDeg = diff <= 0 ? turn(absDiff, rotateState.currDeg, false) : turn(absDiff, rotateState.currDeg, true);
       rotateState.currPoint = index;
       resolve(letter);
-    }, 2000 * (i + 1))
+    }, times.send * (i + 1))
   );
 
 export { rotate };

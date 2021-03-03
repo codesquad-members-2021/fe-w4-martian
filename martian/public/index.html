@@ -20,20 +20,22 @@
         <div class="roulette__arrow"><i class="fas fa-long-arrow-alt-left"></i></div>
       </div>
     </section>
-    <section class="translation">
-      <ul>
-        <li>
-          <input class="receivedContent__hex" type="text" />
-          <button class="translate__button">해석하기</button>
-        </li>
-        <li>
-          <input class="sentContent__hex" type="text" />
-          <!-- <span class="sentContent__text"></span> -->
-          <!-- 16진수 변환 전 입력한 text도 화면에 보여주는 기능 넣을 때 추가할 예정 -->
-          <button class="sendContent__button">지구로 보내기</button>
-        </li>
-      </ul>
-      <div class="receivedContent__text"></div>
+    <section class="communication">
+      <div class="communication__inputs">
+        <ul>
+          <li>
+            <input class="receivedContent__hex" type="text" />
+            <button class="translate__button" disabled>해석하기</button>
+          </li>
+          <li>
+            <input class="sentContent__hex" type="text" />
+            <!-- <span class="sentContent__text"></span> -->
+            <!-- 16진수 변환 전 입력한 text도 화면에 보여주는 기능 넣을 때 추가할 예정 -->
+            <button class="sendContent__button">지구로 보내기</button>
+          </li>
+        </ul>
+        <div class="receivedContent__text"></div>
+      </div>
     </section>
     <script type="module" src="./js/main.js"></script>
   </body>

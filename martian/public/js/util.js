@@ -13,4 +13,9 @@ const rotateState = {
   currDeg: 15,
 };
 
-export { hexadecimals, selectors, rotateState };
+const times = {
+  send: 2000,
+  receive: 500,
+};
+
+export { hexadecimals, selectors, rotateState, times };

@@ -42,7 +42,7 @@ const translateBtnClickEventHandler = (receiveContentInput) => {
 };
 
 
-// 발신정보입력(input):  keydown event
+// 발신정보입력(input):  keydown event (사용안함) -----------------XX
 const sendContentInputKeyDownEvent = (sendContentInput) => {
     _.addEvent(sendContentInput, 'keydown', (e) =>
         sendContentInputKeyDownEventHandler(e),
@@ -57,15 +57,16 @@ const sendContentInputKeyDownEventHandler = (e) => {
     if (!checkChar(key)) return;
     target.value += key;
 };
+// ------------------------------------------------------------XX
 
 // 발신정보입력(btn):  click event
-const sendToEarthBtnClickEvent = (sendToEarthBtn, sendContentInput, receiveContentInput) => {
-    _.addEvent(sendToEarthBtn, 'click', () =>
-        sendToEarthBtnClickEventHandler(sendContentInput, receiveContentInput),
+const sendBtnClickEvent = (sendBtn, sendContentInput, receiveContentInput) => {
+    _.addEvent(sendBtn, 'click', () =>
+        sendBtnClickEventHandler(sendContentInput, receiveContentInput),
     );
 };
 
-const sendToEarthBtnClickEventHandler = (sendContentInput, receiveContentInput) => {
+const sendBtnClickEventHandler = (sendContentInput, receiveContentInput) => {
     let sendContentValue = sendContentInput.value;
     if (sendContentValue.length === 0) return;
 
@@ -80,14 +81,11 @@ const convertCommunication = (transceiverParts) => {
         receiveContentInput,
         translateBtn,
         sendContentInput,
-        sendToEarthBtn,
+        sendBtn,
     } = transceiverParts;
 
-
-    translateBtnClickEvent(translateBtn, receiveContentInput);
-    sendContentInputKeyDownEvent(sendContentInput);
-    sendToEarthBtnClickEvent(sendToEarthBtn, sendContentInput, receiveContentInput);
-    
+    translateBtnClickEvent(translateBtn, receiveContentInput);    
+    sendBtnClickEvent(sendBtn, sendContentInput, receiveContentInput);  
 };
 
 export default convertCommunication;

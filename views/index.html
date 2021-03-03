@@ -28,18 +28,20 @@
             <section class=<%= type %>>
                 <div class="transceiver__view">      
                     <img src="/img/top_arrow.png" alt="arrow" class="transform__rotate-16">
-                    <canvas width="500" height="500" class=<%= canvasName %> ></canvas>                                
+                    <canvas width="500" height="500" class=<%= canvasName %> ></canvas>
                 </div>
 
                 <div class="transceiver__control">
-                    <div class="transceiver__control__receive">                        
-                        <input type="text"/>                    
-                        <button type="button">해석하기</button>
+                    <div class="transceiver__control__receive">
+                        <p>송수신정보</p>
+                        <input type="text" class="received__text" readonly/>                    
+                        <button type="button" class="translate__btn">해석하기</button>
                     </div>
 
-                    <div class="transceiver__control__send">                        
+                    <div class="transceiver__control__send">
+                        <p>발신정보입력</p>
                         <input type="text" class="send__text"/>                    
-                        <button type="button"><%= btnTxt %></button>
+                        <button type="button" class="send__btn"><%= btnTxt %></button>
                     </div>
                 </div>
             </section>

@@ -1,17 +1,13 @@
 import { _ } from './util.js';
 // import { MyPromise } from './my-promise.js';
 
-const pipe = (...fns) => (arg) => fns.reduce((currArg, fn) => fn(currArg), arg);
-
-const getTransceiver = () => {
-  const $target = _.$('.txrx');
-
+const initPies = ($txrx) => {
   return (pieCnt) => {
     for (let i = 0; i < pieCnt; i++) {
-      $target.appendChild(_.genEl('DIV', {
+      $txrx.appendChild(_.genEl('DIV', {
         classNames: [`divider-${i}`],
       }));
-      $target.appendChild(_.genEl('DIV', {
+      $txrx.appendChild(_.genEl('DIV', {
         classNames: [`hex-${i}`],
         template: `${i.toString(16).toUpperCase()}`,
       }));
@@ -19,6 +15,53 @@ const getTransceiver = () => {
   };
 }
 
+const initArrowContainer = ($txrx) => {
+  return (imgData) => {
+    const $container = _.genEl('DIV', {
+      classNames: [`arrow-cont`],
+      template: `<div class="ring"></div>`
+    });
+    
+    $container.appendChild(_.genEl('IMG', {
+      classNames: [`arrow`],
+      attributes: { 'src': imgData.url, 'data-indicating': 0 },
+    }));
+
+    $txrx.appendChild($container);
+  };
+}
+
+const rotateArrow = ($arrow, totalHex) => {
+  let currHex = $arrow.dataset.indicating;
+  let oldRotateClass;
+  let newRotateClass;
+
+  return (hex) => {
+    const isClock = Math.abs(currHex - hex) < Math.abs(totalHex - hex) + currHex;
+    newRotateClass = `rotate-${isClock ? 'clock' : 'unclock'}-for-${hex}`;
+
+    $arrow.dataset.indicating = currHex = hex;
+    $arrow.classList.remove(oldRotateClass);
+    $arrow.classList.add(newRotateClass);
+
+    oldRotateClass = newRotateClass;
+  }
+}
+
+const blink = ($hex) => {
+  // TODO
+}
+
+const transfer = () => {
+  
+}
+
+const receive = () => {
+  
+}
+
 export {
-  getTransceiver,
+  initPies,
+  initArrowContainer,
+  rotateArrow,
 }

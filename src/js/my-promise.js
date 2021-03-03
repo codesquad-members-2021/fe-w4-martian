@@ -49,7 +49,7 @@ export default class MyPromise {
   internalFulfilled(result) {
     setTimeout(() => {
       try {
-        const fulfilledResult = this?.onFulfilled(result);
+        const fulfilledResult = this.onFulfilled?.(result);
 
         if (fulfilledResult) this.next?.resolve(fulfilledResult);
         else this.next?.onFinally?.();

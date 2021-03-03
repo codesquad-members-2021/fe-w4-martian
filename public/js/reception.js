@@ -1,4 +1,4 @@
-// import {factors} from "./common.js";
+import {factors} from "./common.js";
 const rotateArrow = (factors) =>{
     //일단 요소 다가져와 놓고 나중에 빼기 
     const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;

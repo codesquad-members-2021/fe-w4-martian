@@ -1,5 +1,7 @@
 const $marsInfo = document.querySelector('#mars--info');
 const $interpretButton = document.querySelector('#interpret-mars--button');
+const $send2earthButton = document.querySelector('#send-to-earth--button');
+const $send2marsButton = document.querySelector('#send-to-mars--button');
 
 $interpretButton.addEventListener('click', interpret);
 
@@ -19,6 +21,14 @@ function hex2str(hex) {
     .split(' ')
     .map((el) => String.fromCharCode(parseInt(el, 16)))
     .join('');
+}
+
+function sendMessage() {}
+
+function whichPlanet(e) {
+  const isEarth = () => e.target === $send2earthButton;
+  const isMars = () => e.target === $send2marsButton;
+  return;
 }
 
 let helloHex = str2hex('hello');

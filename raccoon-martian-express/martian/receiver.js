@@ -1,27 +1,31 @@
-const $interpretButton = document.querySelector('#interpret-mars--button');
-const $send2earthButton = document.querySelector('#send-to-earth--button');
-const $send2marsButton = document.querySelector('#send-to-mars--button');
+const $earthInterpretButton = document.querySelector('#earth-interpret--button');
+const $marsInterpretButton = document.querySelector('#mars-interpret--button');
 const $earthInput = document.querySelector('#earth--input');
+const $marsInput = document.querySelector('#mars--input');
 const $earthInfo = document.querySelector('#earth--info');
 const $marsInfo = document.querySelector('#mars--info');
-const $marsInput = document.querySelector('#mars--input');
+const $send2earthButton = document.querySelector('#send-to-earth--button');
+const $send2marsButton = document.querySelector('#send-to-mars--button');
 
-$interpretButton.addEventListener('click', interpretor);
+$earthInterpretButton.addEventListener('click', interpretor);
+$marsInterpretButton.addEventListener('click', interpretor);
 $earthInput.addEventListener('keyup', immiInterpretor);
 $marsInput.addEventListener('keyup', immiInterpretor);
-$send2marsButton.addEventListener();
+$send2marsButton.addEventListener('click', send2mars);
+$send2earthButton.addEventListener('click', send2earth);
 
 function immiInterpretor(e) {
-  if (e.target.id === 'earth--input') {
-    return ($earthInfo.value = str2hex(e.target.value));
-  }
-  if (e.target.id === 'mars--input') {
-    return ($marsInfo.value = str2hex(e.target.value));
-  }
+  const isEarthInput = () => e.target.id === 'earth--input';
+  const isMarsInput = () => e.target.id === 'mars--input';
+  if (isEarthInput()) $earthInfo.value = str2hex(e.target.value);
+  if (isMarsInput()) $marsInfo.value = str2hex(e.target.value);
 }
 
-function interpretor() {
-  return ($marsInfo.value = hex2str($marsInfo.value));
+function interpretor(e) {
+  const isEarthInterpretButton = () => e.target.id === 'earth-interpret--button';
+  const isMarsInterpretButton = () => e.target.id === 'mars-interpret--button';
+  if (isEarthInterpretButton()) $earthInfo.value = hex2str($earthInfo.value);
+  if (isMarsInterpretButton()) $marsInfo.value = hex2str($marsInfo.value);
 }
 
 function str2hex(str) {
@@ -40,11 +44,23 @@ function hex2str(hex) {
 
 function sendMessage() {}
 
+function send2mars() {
+  return moveArrow($earthInfo.value);
+}
+function moveArrow(value) {
+  setHexData(value);
+}
+
+function setHexData(value) {
+  $marsInfo.value = value;
+}
+
+function send2earth() {}
+
 let helloHex = str2hex('hello');
 
-console.log(helloHex);
-console.log(hex2str(helloHex));
-console.log($marsInfo);
+console.log(`test hex: ${helloHex}`);
+console.log(`test str: ${hex2str(helloHex)}`);
 
 // ===== 여기는 지구 =====
 

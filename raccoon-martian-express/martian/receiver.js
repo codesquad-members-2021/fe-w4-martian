@@ -76,6 +76,13 @@ console.log($marsInfo);
 // 11. Interpret하면 해석한다.
 
 class RaccoonPromise {
+  constructor() {
+    this.status = {
+      PENDING: 'pending',
+      FULFILLED: 'fulfilled',
+      REJECTED: 'rejected',
+    };
+  }
   resolve() {
     console.log('내가 해냈어!!!');
   }

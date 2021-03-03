@@ -41,23 +41,18 @@ const translateBtnClickEventHandler = (receiveContentInput) => {
     receiveContentInput.value =  receiveContentValue.split(" ").map((v) => hexToChar(v)).join('');    
 };
 
-
-// 발신정보입력(input):  keydown event (사용안함) -----------------XX
-const sendContentInputKeyDownEvent = (sendContentInput) => {
-    _.addEvent(sendContentInput, 'keydown', (e) =>
-        sendContentInputKeyDownEventHandler(e),
+// 발신정보입력(input):  keyup event
+const sendContentInputKeyUpEvent = (sendContentInput, receiveContentInput) => {
+    _.addEvent(sendContentInput, 'keyup', (e) =>
+        sendContentInputKeyUpEventHandler(e, receiveContentInput),
     );
 };
-const sendContentInputKeyDownEventHandler = (e) => {
-    const { key, target, keyCode } = e;
-    deleteHangel(target);
-    if (checkKeyCode(keyCode)) return;
-
-    e.preventDefault();
-    if (!checkChar(key)) return;
-    target.value += key;
+const sendContentInputKeyUpEventHandler = ({target}, receiveContentInput) => { 
+    const sendContentValue = target.value;       
+    const arrCovertHex = sendContentValue.split('').map((v) => charToHex(v).toUpperCase() );    
+    receiveContentInput.value = arrCovertHex.join(' ');
 };
-// ------------------------------------------------------------XX
+
 
 // 발신정보입력(btn):  click event
 const sendBtnClickEvent = (sendBtn, sendContentInput, receiveContentInput) => {
@@ -85,6 +80,7 @@ const convertCommunication = (transceiverParts) => {
     } = transceiverParts;
 
     translateBtnClickEvent(translateBtn, receiveContentInput);    
+    sendContentInputKeyUpEvent(sendContentInput, receiveContentInput);
     sendBtnClickEvent(sendBtn, sendContentInput, receiveContentInput);  
 };
 

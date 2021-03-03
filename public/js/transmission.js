@@ -1,6 +1,7 @@
-const transmission = (senders , receptors) =>{
-    const {sendInp, sendBtn, sendTr} = senders;
-    const {receptInp, receptBtn} = receptors;
+const transmission = (factors) =>{
+
+    const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
+
 
     let arr=[];
     console.log(sendInp);

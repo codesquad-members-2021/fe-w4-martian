@@ -54,8 +54,9 @@ function draw() {
     //그리기 종료
     ctx.closePath();
 }
-draw();
 
 function toRadians(degrees) {
     return degrees * (Math.PI / 180);
 }
+
+export { draw }

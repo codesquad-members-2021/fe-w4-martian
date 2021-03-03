@@ -1,8 +1,12 @@
 import { MyPromise } from "./myPromise";
+import { draw } from "./canvas";
 import { str2hex, hex2str } from "./send";
 const { log } = console;
 
-const init = () => hex2str();
+const init = () => {
+    draw();
+    hex2str()
+};
 init();
 
 

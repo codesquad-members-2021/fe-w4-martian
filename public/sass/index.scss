@@ -17,31 +17,8 @@ body {
 .receive__circle {
     width: 100%;
     margin: 0 auto;
-}
-
-.receive__circle__circular {
-    margin: 0 auto;
     text-align: center;
 
-    position: relative;
-    width: 500px;
-    height: 500px;
-
-    border:black solid 1px;
-    border-radius: 50%;
-    
-    li {
-        position: absolute;
-        overflow: hidden;
-        left: 50%;
-        top: 50%;
-    }
-
-    @for $i from 1 through  16 {
-        li:nth-child(#{$i}) {
-            transform: translate((18px * ($i - 1) ), -250px) rotate((360deg / 16) * ($i - 1) ) ;
-        }
-    }
 }
 
 .receive__input {

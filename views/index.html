@@ -11,12 +11,8 @@
     </head>
     <body>
         <div class="all-wrapper">
-            <div class="receive__circle">                
-                <ul class="receive__circle__circular">
-                    <% for(let i = 0; i < 16; i++) { %>
-                    <li><%= i+1 %></li>        
-                    <% } %>
-                </ul>            
+            <div class="receive__circle">      
+                <canvas id="circular" width="600" height="600"></canvas>
             </div>
             <div class="receive__input">
                 <div class="receive__input__send">

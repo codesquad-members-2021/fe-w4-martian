@@ -1,3 +1,5 @@
+// martian-step1 때 작업한 convert.js
+
 import _ from './util.js';
 
 // 영문자, 숫자 체크 (한글자씩)
@@ -41,27 +43,31 @@ const translateBtnClickEventHandler = (receiveContentInput) => {
     receiveContentInput.value =  receiveContentValue.split(" ").map((v) => hexToChar(v)).join('');    
 };
 
-// 발신정보입력(input):  keyup event
-const sendContentInputKeyUpEvent = (sendContentInput, receiveContentInput) => {
-    _.addEvent(sendContentInput, 'keyup', (e) =>
-        sendContentInputKeyUpEventHandler(e, receiveContentInput),
+
+// 발신정보입력(input):  keydown event
+const sendContentInputKeyDownEvent = (sendContentInput) => {
+    _.addEvent(sendContentInput, 'keydown', (e) =>
+        sendContentInputKeyDownEventHandler(e),
     );
 };
-const sendContentInputKeyUpEventHandler = ({target}, receiveContentInput) => { 
-    const sendContentValue = target.value;       
-    const arrCovertHex = sendContentValue.split('').map((v) => charToHex(v).toUpperCase() );    
-    receiveContentInput.value = arrCovertHex.join(' ');
-};
+const sendContentInputKeyDownEventHandler = (e) => {
+    const { key, target, keyCode } = e;
+    deleteHangel(target);
+    if (checkKeyCode(keyCode)) return;
 
+    e.preventDefault();
+    if (!checkChar(key)) return;
+    target.value += key;
+};
 
 // 발신정보입력(btn):  click event
-const sendBtnClickEvent = (sendBtn, sendContentInput, receiveContentInput) => {
-    _.addEvent(sendBtn, 'click', () =>
-        sendBtnClickEventHandler(sendContentInput, receiveContentInput),
+const sendToEarthBtnClickEvent = (sendToEarthBtn, sendContentInput, receiveContentInput) => {
+    _.addEvent(sendToEarthBtn, 'click', () =>
+        sendToEarthBtnClickEventHandler(sendContentInput, receiveContentInput),
     );
 };
 
-const sendBtnClickEventHandler = (sendContentInput, receiveContentInput) => {
+const sendToEarthBtnClickEventHandler = (sendContentInput, receiveContentInput) => {
     let sendContentValue = sendContentInput.value;
     if (sendContentValue.length === 0) return;
 
@@ -76,12 +82,14 @@ const convertCommunication = (transceiverParts) => {
         receiveContentInput,
         translateBtn,
         sendContentInput,
-        sendBtn,
+        sendToEarthBtn,
     } = transceiverParts;
 
-    translateBtnClickEvent(translateBtn, receiveContentInput);    
-    sendContentInputKeyUpEvent(sendContentInput, receiveContentInput);
-    sendBtnClickEvent(sendBtn, sendContentInput, receiveContentInput);  
+
+    translateBtnClickEvent(translateBtn, receiveContentInput);
+    sendContentInputKeyDownEvent(sendContentInput);
+    sendToEarthBtnClickEvent(sendToEarthBtn, sendContentInput, receiveContentInput);
+    
 };
 
 export default convertCommunication;

@@ -1,3 +1,4 @@
+// 추후 리팩토링!!
 const arcCreate = (x, y, radius, startAngle, endAngle) => ({ x, y, radius, startAngle, endAngle });
 const getHalfSize = (canvas) => {
     return {
@@ -47,7 +48,7 @@ const piTextDraw = (ctx, textDrawValues, color = '#FFF') => {
     let {x, y} = textDrawValues;
     const {xCorrect, yCorrect, distanceFromCenter} = textDrawValues
 
-    const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
+    const arr = [ ...Array.from({length: 10}, (_, i) => i), 'A', 'B', 'C', 'D', 'E', 'F'];
 
     const onePer = Number((2 / arr.length).toFixed(3));
     let decimal = 1.56;

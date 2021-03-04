@@ -1,7 +1,6 @@
-import _ from './util.js';
-import { setCanvasAndColor, createTransceiverParts } from "./indexUtil.js";
+import _, { setCanvasAndColor, createTransceiverParts } from './util.js';
 import createCanvas from "./createCanvas.js";
-import convertCommunication from "./convert.js";
+import setCommunicate from "./communication/eventRegister.js";
 
 const marsCanvas = setCanvasAndColor(_.$('.mars-transceiver'), '#42023F');
 const earthCanvas = setCanvasAndColor(_.$('.earth-transceiver'), '#1693DC');
@@ -15,5 +14,5 @@ const earthTransceiverSendWrap = _.$(".earth .transceiver__control__send");
 
 const marsTransceiverParts = createTransceiverParts(marsTransceiverReceiveWrap, marsTransceiverSendWrap);
 const earthTransceiverParts = createTransceiverParts(earthTransceiverReceiveWrap, earthTransceiverSendWrap);
-convertCommunication(marsTransceiverParts);
-convertCommunication(earthTransceiverParts);
+setCommunicate(marsTransceiverParts, earthTransceiverParts);
+setCommunicate(earthTransceiverParts, marsTransceiverParts);

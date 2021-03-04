@@ -2,7 +2,7 @@ import MyPromise from './myPromise.js';
 import { arrowRotate } from './arrow.js';
 import { renderPlate, blingText } from './canvas.js';
 import { setReceiveBox, makeBtnAble, translateForSend } from './domControl.js';
-import { stringToHexArr } from './util/calculate.js';
+import { getHexIdx, stringToHexArr } from './util/calculate.js';
 import { _ } from './util/util.js';
 const { log } = console;
 const BLANK = ' ';
@@ -16,13 +16,17 @@ const sendBtn = _.$('.send>button');
 const init = () => {
   renderPlate();
   translateBtn.addEventListener('click', translateForSend.bind(null, receiveBox, sendBox));
-  sendBtn.addEventListener('click', marsToEarth);
+  sendBtn.addEventListener('click', sendMessageToEarth);
 };
 
 const isFirstIdx = (idx) => idx === 0;
 const isLastIdx = (idx, arr) => idx === arr.length - 1;
+const getSendBoxValue = () => sendBox.value;
+const initReceiveBox = () => {
+  receiveBox.value = '';
+};
 
-const earthToMars = (word) => {
+const sendMessage = (word) => {
   const parsedWord = stringToHexArr(word);
   parsedWord.forEach((value, idx) => {
     new MyPromise((res, rej) => {
@@ -51,23 +55,24 @@ const earthToMars = (word) => {
               res(value);
             }, 2000 * idx);
           })
-            .then(arrowRotate)
-            .then((idx) => setReceiveBox(idx, receiveBox))
-            .then((idx) => blingText.call(null, { idx, clear: false }));
+            .then((value) => {
+              arrowRotate(value);
+              setReceiveBox(value, receiveBox);
+              return getHexIdx(value);
+            })
+            .then((idx) => {
+              blingText({ idx, clear: false });
+            });
         });
       });
   });
 };
 
-const marsToEarth = () => {
+const sendMessageToEarth = () => {
   initReceiveBox();
-};
-
-const getSendBoxValue = () => {};
-
-const initReceiveBox = () => {
-  receiveBox.value = '';
+  const word = getSendBoxValue();
+  sendMessage(word);
 };
 
 init();
-earthToMars('h');
+sendMessage('h');

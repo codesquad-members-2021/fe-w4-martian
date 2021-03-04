@@ -18,8 +18,6 @@ const lightOn = (target, className) => target[1].classList.add(className);
 
 const lightOut = (target) => target[1].classList.remove("light");
 
-const lastLight = (target) => target[1].classList.add("last");
-
 const findTextTarget = (elements, capital) => {
   // console.log(elements);
   return Object.entries(elements).find((item) => item[1].dataset.id === capital);

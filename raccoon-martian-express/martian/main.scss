@@ -68,7 +68,7 @@ body {
     }
     @function tanDeg($deg) {
       $rad: ($deg * pi()) / 180;
-      @return $marsDiameter / (1 / tan($rad));
+      @return $marsDiameter * tan($rad);
     }
 
     $marsDiameter: 567px;

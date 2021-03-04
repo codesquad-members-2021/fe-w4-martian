@@ -1,5 +1,5 @@
 const $roulette = document.querySelector('#roulette');
-const PIECE = 16;
+
 // const colorSet = {
 //   blue: '#0d6efd',
 //   indigo: '#6610f2',
@@ -27,7 +27,7 @@ const hexCode = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
 
 function drawPiece() {
   let pieceDiv = ``;
-  for (let i = 0; i < PIECE; i++) {
+  for (let i = 0; i < hexCode.length; i++) {
     pieceDiv += `
     <div class="piece-${i}">
       <span class="hex-code hex-${hexCode[i]}">${hexCode[i]}</span>

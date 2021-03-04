@@ -3,6 +3,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7e6b7ac... 된건가
 =======
 >>>>>>> 7e6b7ac... 된건가
 =======
@@ -20,6 +23,7 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -35,6 +39,8 @@ router.get('/', function(req, res, next) {
 
 module.exports = router;
 >>>>>>> raccoon1
+=======
+>>>>>>> 7e6b7ac... 된건가
 =======
 >>>>>>> 7e6b7ac... 된건가
 =======

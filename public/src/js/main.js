@@ -1,7 +1,5 @@
-import MyPromise from './myPromise.js';
-import { arrowRotate } from './arrow.js';
 import { renderPlate, blingText } from './canvas.js';
-import { setInputValue, makeBtnAble, translateForSend } from './domControl.js';
+import { arrowRotate, setInputValue, makeBtnAble, translateForSend } from './domControl.js';
 import { stringToHexArr } from './util/calculate.js';
 import { _, pipe, asyncForEach, promiseDelay } from './util/util.js';
 const { log } = console;
@@ -26,6 +24,10 @@ const finishSetting = () => {
 };
 
 // 한단어의 16진수를 처리하는 forEach 콜백함수 / 이름이 마땅히..생각이 안나네요
+/*
+질문:
+현재 부모? Promise에서의 idx(index) 값을 37번줄의 비동기 프로미스콜백함수에서 사용하게 하는 방법은 뭐가 있을지...?
+*/
 const dealChar = async (value, idx, arr) => {
   await promiseDelay({ value, idx }, idx === 0 ? 0 : 5000)
     .then(({ value, idx }) => {

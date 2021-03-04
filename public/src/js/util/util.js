@@ -4,6 +4,8 @@ export const go = (arg, ...fns) => fns.reduce((res, fn) => fn(res), arg);
 
 export const pipe = (fn, ...fns) => (...args) => go(fn(...args), ...fns);
 
+const curry = (fn) => (arg, ...args) => (args.length ? fn(arg, ...args) : (...args) => fn(arg, ...args));
+
 export const _ = {
   $: function (selector, base = document) {
     return base.querySelector(selector);
@@ -13,10 +15,10 @@ export const _ = {
   },
 };
 
-export async function asyncForEach(array, callback) {
+export const asyncForEach = curry(async (callback, array) => {
   for (let index = 0; index < array.length; index++) {
-    const result = await callback(array[index], index, array);
+    await callback(array[index], index, array);
   }
-}
+});
 
 export const promiseDelay = (value, delay) => new MyPromise((resolve, rej) => setTimeout(() => resolve(value), delay));

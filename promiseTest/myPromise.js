@@ -48,7 +48,7 @@ async function test() {
   });
 }
 
-async function asyncForEach(array, callback) {
+async function asyncForEach(callback, array) {
   for (let index = 0; index < array.length; index++) {
     const result = await callback(array[index], index, array);
   }

@@ -111,7 +111,7 @@ function moveArrow(planet, value) {
         pieceAnamation(idx);
       }
 
-      // 여긴 못빼고있다...
+      // 여긴 못빼고있다.....
       setTimeout(() => {
         if (planet === EARTH) inputHexOnMars(el);
         if (planet === MARS) inputHexOnEarth(el);

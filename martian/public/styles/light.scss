@@ -25,6 +25,10 @@
 }
 
 .light {
+  @include animation(fadeOut, 0.5s, 0.5s, infinite, linear, alternate);
+}
+
+.last {
   @include animation(fadeOut, 0.5s, 0.5s, 4, linear, alternate);
 }
 @keyframes fadeOut {

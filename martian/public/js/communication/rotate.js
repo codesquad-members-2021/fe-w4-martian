@@ -14,9 +14,11 @@ const turn = (diff, currDeg, element, isClockWise) => {
   return currDeg;
 };
 
-const lightOn = (target) => target[1].classList.add("light");
+const lightOn = (target, className) => target[1].classList.add(className);
 
 const lightOut = (target) => target[1].classList.remove("light");
+
+const lastLight = (target) => target[1].classList.add("last");
 
 const findTextTarget = (elements, capital) => {
   // console.log(elements);
@@ -45,8 +47,8 @@ const getEndPoint = (array, target) => array.findIndex((item) => item.toString()
 
 const capital = (letter) => letter.toUpperCase();
 
-const adela = (f, ...fns) => (...arg) => {
-  return arg.length
+const adela = (f, ...fns) => (...arg) =>
+  arg.length
     ? f(
         ...fns.reduce((acc, fn, i) => {
           acc.push(fn(arg[i]));
@@ -54,15 +56,14 @@ const adela = (f, ...fns) => (...arg) => {
         }, [])
       )
     : f(...fns);
-};
 
-const rotate = (letter, i) =>
+const rotate = (letter, i, isLast) =>
   new MyPromise((resolve, reject) =>
     setTimeout(() => {
       if (rotateState.pastTarget) lightOut(rotateState.pastTarget);
       const endPoint = getEndPoint(hexadecimals, capital(letter));
       const target = adela(findTextTarget, getHTMLElements, capital)("line__text", letter);
-      lightOn(target);
+      !isLast ? lightOn(target, "light") : lightOn(target, "last");
       rotateState.pastTarget = target;
       const diff = adela(getDiff, { state: rotateState, key: "currPoint" }, endPoint);
       const direction = adela(turnAsDirection, { state: rotateState, key: "currDeg" }, selectors.arrow, diff());

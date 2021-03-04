@@ -31,7 +31,6 @@ const colorSet = {
   info: '#0dcaf0',
   warning: '#ffc107',
   danger: '#dc3545',
-  light: '#f8f9fa',
   dark: '#212529',
 };
 
@@ -39,8 +38,14 @@ $earthInterpretButton.addEventListener('click', interpretor);
 $marsInterpretButton.addEventListener('click', interpretor);
 $earthInput.addEventListener('keyup', immiInterpretor);
 $marsInput.addEventListener('keyup', immiInterpretor);
+$earthInput.addEventListener('click', initInput);
+$marsInput.addEventListener('click', initInput);
 $send2marsButton.addEventListener('click', send2mars);
 $send2earthButton.addEventListener('click', send2earth);
+
+function initInput(e) {
+  if (e.currentTarget.value.length > 0) e.currentTarget.value = '';
+}
 
 function immiInterpretor(e) {
   const isEarthInput = () => e.target.id === 'earth--input';
@@ -72,11 +77,17 @@ function hex2str(hex) {
 
 function sendMessage() {}
 
+function initDom(dom) {
+  if (dom.value.length > 0) dom.value = '';
+}
+
 function send2mars() {
+  initDom($marsInfo);
   return moveArrow(EARTH, $earthInfo.value);
 }
 
 function send2earth() {
+  initDom($earthInfo);
   return moveArrow(MARS, $marsInfo.value);
 }
 
@@ -105,11 +116,12 @@ function moveArrow(planet, value) {
         // arror ani 로 분리
         $arrow.style.transform = `rotate(${rotateDeg}deg)`;
         $arrow.style.transition = `1s ease-in-out`;
-
-        // piece ani 로 분리
-        $roulette.querySelector(`.piece-${idx}`).style.borderTopColor = `${Object.values(colorSet)[idx]}`;
-        $roulette.querySelector(`.piece-${idx}`).style.opacity = `50%`;
-        $roulette.querySelector(`.piece-${idx}`).style.transition = `1s ease-in-out`;
+        setTimeout(() => {
+          // piece ani 로 분리
+          $roulette.querySelector(`.piece-${idx}`).style.borderTopColor = `${Object.values(colorSet)[idx]}`;
+          $roulette.querySelector(`.piece-${idx}`).style.opacity = `50%`;
+          $roulette.querySelector(`.piece-${idx}`).style.transition = `1s ease-in-out`;
+        }, 500);
         setTimeout(() => {
           $roulette.querySelector(`.piece-${idx}`).removeAttribute('style');
           $roulette.querySelector(`.piece-${idx}`).style.transition = `1s ease-in-out`;

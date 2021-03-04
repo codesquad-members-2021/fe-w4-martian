@@ -68,10 +68,10 @@ const init = () => {
   translateBtn.addEventListener('click', translateForSend.bind(null, receiveBox, sendBox));
   sendBtn.addEventListener('click', sendMessageToEarth);
 };
-//문자 -> 실행
+//인자로문자 -> 실행
 const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
 //input박스 문자 가져오기 -> sendMessage
-const sendMessageToMars = pipe(getSendBoxValue, sendMessage);
+const sendMessageToMars = pipe(getInputValue, sendMessage);
 
 const sendMessageToEarth = () => {
   initInputValue(receiveBox);

@@ -45,11 +45,11 @@ const getEndPoint = (array, target) => array.findIndex((item) => item.toString()
 
 const capital = (letter) => letter.toUpperCase();
 
-const adela = (f, ...fns) => (...arg) =>
-  arg.length
+const adela = (f, ...fns) => (...args) =>
+  args.length
     ? f(
         ...fns.reduce((acc, fn, i) => {
-          acc.push(fn(arg[i]));
+          acc.push(fn(args[i]));
           return acc;
         }, [])
       )

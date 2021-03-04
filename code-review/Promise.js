@@ -4,7 +4,7 @@ export default class MyPromise {
         this.queue = [];
     }
     resolve(input) {
-        this.execute(input);
+        setTimeout(()=>this.execute(input),0);
     }
     reject(input) {}
     then(cb) {

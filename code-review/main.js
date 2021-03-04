@@ -9,14 +9,3 @@ const wheelData = {
     smallerCircleRadius: 50
 }
 drawWheel(wheelData)
-
-
-const selector = {
-    receiverInput : _.$('.receiver--input'),
-    receiverButton : _.$('.receiver--button'),
-    resultInput : _.$('.result--input'),
-    resultButton : _.$('.result--button'),
-    senderInput : _.$('.sender--button'),
-    senderButton : _.$('.sender--button'),
-    letters : _.$A('.letter')
-}

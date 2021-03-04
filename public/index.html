@@ -36,21 +36,30 @@
       <div class="transceiver">
         <ul class="transceiver__send&receive">
           <li class="headText">송수신 정보</li>
-          <li><div class="info" id="sendReceive"></div></li>
-          <li><button id="interpret">해석하기</button></li>
+          <li><div class="info" id="sendReceiveMessage"></div></li>
+          <li><button id="interpretButton" disabled="">해석하기</button></li>
         </ul>
+
         <ul class="transceiver__send&receive__interpret">
           <li class="headText">송수신 해석본</li>
           <li><div class="info" id="interpretedText"></div></li>
         </ul>
+
         <ul class="transceiver__martianSend">
           <li class="headText">발신 정보 입력</li>
-          <li><input type="text" placeholder="> hello world" /></li>
-          <li><button>지구로 보내기</button></li>
+          <li>
+            <input
+              id="sendMessage"
+              type="text"
+              placeholder="> message to earth"
+            />
+          </li>
+          <li><button id="sendMessageButton">지구로 보내기</button></li>
         </ul>
+
         <ul class="transceiver__martianSend__interpret">
           <li class="headText">발신 해석본</li>
-          <li><div class="info"></div></li>
+          <li><div id="interpretedSendMessage" class="info"></div></li>
         </ul>
       </div>
     </div>

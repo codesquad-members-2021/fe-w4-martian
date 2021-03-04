@@ -6,6 +6,7 @@ const getCanvas=()=>{
 
     canvas.width = 500;
     canvas.height = 500;
+
     //canvas 중심점
     var center_x = canvas.width / 2+3;
     var center_y = canvas.height / 2-7;
@@ -77,11 +78,10 @@ const getCanvas=()=>{
     }
 }
 
+
 function getRadian (degrees) {
     return degrees * Math.PI / 180;
 };
-
-
 
 
 export{getCanvas}

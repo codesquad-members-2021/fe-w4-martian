@@ -9,3 +9,5 @@ const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
 
 transmission(factors);
 // rotateArrow(factors);
+
+

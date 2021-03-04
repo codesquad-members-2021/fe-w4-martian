@@ -8,7 +8,6 @@ const registerEvent = (type, element, ...fns) => element.addEventListener(type, 
 
 const response = (content, receivers) => {
   const { receivedContentHex, translatorButton } = receivers;
-  let isDone = false;
   content.split("").forEach((letter, i) =>
     rotate(letter, i).then((capital) =>
       setTimeout(() => {

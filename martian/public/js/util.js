@@ -6,6 +6,7 @@ const selectors = {
   sendToEarthButton: document.querySelector(".sendContent__button"),
   receivedContentHex: document.querySelector(".receivedContent__hex"),
   receivedContentText: document.querySelector(".receivedContent__text"),
+  lineText: document.querySelectorAll(".line__text"),
 };
 
 const rotateState = {

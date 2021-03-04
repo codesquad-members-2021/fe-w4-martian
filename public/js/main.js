@@ -3,11 +3,11 @@
 
 import {factors} from "./common.js";
 import {transmission} from "./transmission.js"
-// import {signalToReception} from "./reception.js"
+import {rotateArrow,LightOn} from "./reception.js"
 const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
 
 
 transmission(factors);
-// signalToReception(factors);
+// rotateArrow(factors);
 
 

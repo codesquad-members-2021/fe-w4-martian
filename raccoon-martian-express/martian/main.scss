@@ -1,7 +1,4 @@
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2ff62f7... 이상하게 됐따... 큰일이군..
 @import '../node_modules/sass-math/math';
 
 body {
@@ -70,7 +67,6 @@ body {
     @mixin regular-border {
       border: 3px solid #fff;
     }
-<<<<<<< HEAD
     @function tanDeg($deg) {
       $rad: ($deg * pi()) / 180;
       @return $marsDiameter * tan($rad);
@@ -79,12 +75,6 @@ body {
     $marsDiameter: 567px;
     $pieceUnits: 16;
     $pieceAngle: 360 / $pieceUnits;
-=======
-
-    $marsDiameter: 567px;
-    $peiceUnits: 16;
-    $peiceAngle: 360 / $peiceUnits;
->>>>>>> 2ff62f7... 이상하게 됐따... 큰일이군..
 
     .hex-circle {
       position: absolute;
@@ -106,23 +96,11 @@ body {
         overflow: hidden;
         z-index: 1;
 
-<<<<<<< HEAD
         @for $i from 0 through ($pieceUnits - 1) {
           $angle: 0deg;
 
           .piece-#{$i} {
             $thisAngle: $angle + ($i * $pieceAngle);
-=======
-        @function tanDeg($deg) {
-          $rad: ($deg * pi()) / 180;
-          @return $marsDiameter / (1 / tan($rad));
-        }
-        @for $i from 0 through ($peiceUnits - 1) {
-          $angle: 0deg;
-
-          .peice-#{$i} {
-            $thisAngle: $angle + ($i * $peiceAngle);
->>>>>>> 2ff62f7... 이상하게 됐따... 큰일이군..
 
             position: absolute;
             width: 0;
@@ -131,21 +109,13 @@ body {
             left: $marsDiameter / 2;
             top: -$marsDiameter / 2;
             border-top-width: $marsDiameter;
-<<<<<<< HEAD
             border-right-width: tanDeg($pieceAngle);
-=======
-            border-right-width: tanDeg($peiceAngle);
->>>>>>> 2ff62f7... 이상하게 됐따... 큰일이군..
             transform-origin: left bottom;
             border-top-color: rgba(255, 255, 255, 0.5);
             transform: rotate($thisAngle - 1deg);
           }
           .hex-code {
-<<<<<<< HEAD
             $thisAngle: $angle + ($i * $pieceAngle);
-=======
-            $thisAngle: $angle + ($i * $peiceAngle);
->>>>>>> 2ff62f7... 이상하게 됐따... 큰일이군..
 
             position: absolute;
             top: -250px;
@@ -170,11 +140,7 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-<<<<<<< HEAD
       transform: rotate($pieceAngle / 2 * 1deg);
-=======
-      transform: rotate(22.5 / 2 * 1deg);
->>>>>>> 2ff62f7... 이상하게 됐따... 큰일이군..
       position: relative;
       z-index: 10;
 
@@ -189,7 +155,6 @@ body {
   .earth {
   }
 }
-<<<<<<< HEAD
 =======
 @import '../node_modules/sass-math/math';
 
@@ -348,5 +313,3 @@ body {
   }
 }
 >>>>>>> raccoon1
-=======
->>>>>>> 2ff62f7... 이상하게 됐따... 큰일이군..

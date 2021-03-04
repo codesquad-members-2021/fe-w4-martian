@@ -1,19 +1,4 @@
 <<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 7e6b7ac... 된건가
-=======
->>>>>>> 7e6b7ac... 된건가
-=======
->>>>>>> 7e6b7ac... 된건가
-=======
->>>>>>> 7e6b7ac... 된건가
-=======
->>>>>>> 7e6b7ac... 된건가
 var express = require('express');
 var router = express.Router();
 
@@ -23,11 +8,6 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 =======
 var express = require('express');
 var router = express.Router();
@@ -39,13 +19,3 @@ router.get('/', function(req, res, next) {
 
 module.exports = router;
 >>>>>>> raccoon1
-=======
->>>>>>> 7e6b7ac... 된건가
-=======
->>>>>>> 7e6b7ac... 된건가
-=======
->>>>>>> 7e6b7ac... 된건가
-=======
->>>>>>> 7e6b7ac... 된건가
-=======
->>>>>>> 7e6b7ac... 된건가

@@ -7,7 +7,7 @@ const BLANK = ' ';
 //input box
 export const setInputValue = (value, inputBox) => (inputBox.value += value);
 export const getInputValue = (inputBox) => inputBox.value;
-export const initInput = (inputBox) => setInputValue('', inputBox);
+export const initInputValue = (inputBox) => setInputValue('', inputBox);
 
 //수신 박스 able로 만들기
 export const makeBtnAble = (btn) => (btn.disabled = false);
@@ -21,11 +21,6 @@ export const translateForSend = (receiveBox, sendBox) => {
   const value = receiveBox.value;
   const translatedStr = translateHex(value);
   setInputValue(translatedStr, sendBox);
-};
-
-export const getinputValue = (input) => input.value;
-export const initInput = (input) => {
-  input.value = '';
 };
 
 const isRightDir = (idx, targetIdx) => {

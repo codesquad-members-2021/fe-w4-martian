@@ -1,6 +1,7 @@
 import { textToHex, hexToText } from "./convert.js";
-import { rotate, lightOut } from "./rotate.js";
+import { rotate } from "./rotate.js";
 import { times } from "../util.js";
+import MyPromise from "../Promise.js";
 
 const isString = ({ keyCode }) => (keyCode >= 65 && keyCode <= 90) || keyCode === 32;
 
@@ -10,10 +11,12 @@ const response = (content, receivers) => {
   const { receivedContentHex, translatorButton } = receivers;
   content.split("").forEach((letter, i) =>
     rotate(letter, i, i === content.length - 1).then((capital) =>
-      setTimeout(() => {
-        receivedContentHex.value += capital;
-        if (i === content.length - 1) translatorButton.disabled = false;
-      }, times.receive)
+      new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+          receivedContentHex.value += capital;
+          resolve(i === content.length - 1);
+        }, times.receive);
+      }).then((res) => (translatorButton.disabled = res ? false : true))
     )
   );
 };
@@ -51,7 +54,7 @@ const communicate = (senders, receivers) => {
     receivedContentHex.value = ``;
     translatorButton.disabled = true;
   };
-  // registerEvent("keydown", sentContentHex, convertKeydown);
+
   registerEvent("keydown", sentContentHex, throttle(convertKeydown, 100));
   registerEvent("keyup", sentContentHex, throttle(convertKeyup, 100));
   registerEvent("click", sendToEarthButton, sendToEarth);

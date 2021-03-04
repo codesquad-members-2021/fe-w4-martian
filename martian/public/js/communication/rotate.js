@@ -18,8 +18,6 @@ const lightOn = (target, className) => target[1].classList.add(className);
 
 const lightOut = (target) => target[1].classList.remove("light");
 
-const lastLight = (target) => target[1].classList.add("last");
-
 const findTextTarget = (elements, capital) => {
   // console.log(elements);
   return Object.entries(elements).find((item) => item[1].dataset.id === capital);
@@ -63,10 +61,10 @@ const rotate = (letter, i, isLast) =>
       if (rotateState.pastTarget) lightOut(rotateState.pastTarget);
       const endPoint = getEndPoint(hexadecimals, capital(letter));
       const target = adela(findTextTarget, getHTMLElements, capital)("line__text", letter);
-      !isLast ? lightOn(target, "light") : lightOn(target, "last");
-      rotateState.pastTarget = target;
       const diff = adela(getDiff, { state: rotateState, key: "currPoint" }, endPoint);
       const direction = adela(turnAsDirection, { state: rotateState, key: "currDeg" }, selectors.arrow, diff());
+      !isLast ? lightOn(target, "light") : lightOn(target, "last");
+      rotateState.pastTarget = target;
       rotateState.currDeg = direction();
       rotateState.currPoint = endPoint;
       resolve(capital(letter));

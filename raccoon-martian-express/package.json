@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2ff62f7... 이상하게 됐따... 큰일이군..
 {
   "name": "raccoon-martian-express",
   "version": "0.0.0",
@@ -17,6 +20,7 @@
   "devDependencies": {
     "parcel-bundler": "1.12.3",
     "sass": "^1.32.8"
+<<<<<<< HEAD
   },
   "browserslist": [
     "last 3 and_chr versions",
@@ -48,3 +52,7 @@
   }
 }
 >>>>>>> raccoon1
+=======
+  }
+}
+>>>>>>> 2ff62f7... 이상하게 됐따... 큰일이군..

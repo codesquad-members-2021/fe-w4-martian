@@ -12,19 +12,29 @@ $arrow_position : 285px;
     top: $arrow_position;
     font-weight: bold;
     font-size: 300%;
-    transform: rotate(0.0625turn*16);   // 여기에 값을줘야 화살표회전
+    transition: transform 1s;
+    transform: rotate(0.03turn); 
 }
 
-.submit_info {
+.str_info {
     position: absolute;
     left:400px;
     top:600px;
 }
-.transfer_info {
+
+.hex_info {
     position: absolute;
     left:50px;
     top:600px;
 }
+
+.mode_info {
+    position: absolute;
+    left: 600px;
+    top: 300px;
+}
+
+
 
 .num_wrapper {
     

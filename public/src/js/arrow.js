@@ -24,8 +24,8 @@ const rotateArrow = (idx, targetIdx) => {
   arrow.style.transform = `rotate(${arrowAngle}deg)`;
 };
 
-const initArrowRotate = (beforeIdx = 0) => (hex) => {
-  const targetIdx = getHexIdx(hex);
+const initArrowRotate = (beforeIdx = 0) => (value) => {
+  const targetIdx = getHexIdx(value);
   rotateArrow(beforeIdx, targetIdx);
   beforeIdx = targetIdx;
   return targetIdx;

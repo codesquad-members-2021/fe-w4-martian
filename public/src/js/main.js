@@ -58,6 +58,8 @@ const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
 //input박스 문자 가져오기 -> sendMessage
 const sendMessageToMars = pipe(getInputValue, sendMessage);
 
+const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
+
 const sendMessageToEarth = () => {
   initInputValue(receiveBox);
   sendMessageToMars(sendBox);

@@ -1,7 +1,38 @@
-body{
+$radius: 155px;
+$origin: 245px;
+$sumPizza: 16; // 원이 몇개의 피자조각;;으로 나눠지는지
+
+$pi: 3.14159265359;
+// 이하의 삼각함수 코드는 https://codepen.io/NyX/pen/dYvymM 에서 가져옴
+@import "triangle.scss";
+
+body {
   padding: 50px;
 }
-.main__wrapper{
+.wheel__arrow {
+  position: absolute;
+  display: flex;
+  height: 60px;
+  object-fit: cover;
+  top: $origin - 25px;
+  left: $origin - 25px;
+}
+.wheel__letter {
+  span {
+    position: absolute;
+    font-size: 20px;
+    color: white;
+  }
+  @for $i from 1 through $sumPizza {
+    .letter:nth-of-type(#{$i}) {
+      $modifier: 11; // 각도 조절
+      $degree: 2 * $pi * (($i * 360 / $sumPizza + $modifier)/360);
+      top: $origin + $radius * sin($degree);
+      left: $origin + $radius * cos($degree);
+    }
+  }
+}
+.main__wrapper {
   display: inline-flex;
   justify-content: space-between;
   width: 100%;

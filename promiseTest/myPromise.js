@@ -4,42 +4,47 @@ const pipe = (fn, ...fns) => (...args) => go(fn(...args), ...fns);
 
 class MyPromise {
   constructor(fn) {
-    this.value;
-    this.state = 'pending';
     this.cbList = [];
+    this.errCbList = [];
+    this.status;
     fn(this.resolve.bind(this), this.reject.bind(this));
   }
   then(cb) {
     this.cbList.push(cb);
     return this;
   }
+  catch(cb) {
+    this.errCbList.push(cb);
+  }
   resolve(value) {
-    this.value = value;
-    this.state = 'fulfilled';
-    if (this.state === 'fulfilled') {
-      setTimeout(() => {
-        this.value = pipe(...this.cbList)(this.value);
-      }, 0);
+    if (this.status !== 'rejected') {
+      this.status = 'fulfilled';
+      pipe(...this.cbList)(value);
     }
     return this;
   }
   reject() {
-    this.state = 'rejected';
-    setTimeout(() => {
-      throw Error();
-      console.error('rejected');
-    }, 0);
+    if (this.status !== 'fulfilled') {
+      this.status = 'rejected';
+      if (this.errCbList.length) pipe(...this.errCbList)();
+      else console.error('rejected');
+    }
+    return this;
   }
 }
 
 new MyPromise((res, rej) => {
   setTimeout(() => {
     res(1);
+    rej();
   }, 1000);
 })
   .then((v) => v + 1)
   .then((v) => v + 2)
-  .then(log);
+  .then(log)
+  .catch(() => {
+    log('error');
+  });
 
 // console.log('start');
 // new MyPromise((res, rej) => res('hello'))

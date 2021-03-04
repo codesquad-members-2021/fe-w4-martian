@@ -2,41 +2,33 @@ import { go, pipe } from './util/util.js';
 
 class MyPromise {
   constructor(fn) {
-    this.value;
     this.cbList = [];
-    this.fn = fn(this.resolve, this.reject);
-    setTimeout(() => {
-      if (this.fn()) this.value = pipe(...this.cbList)(this.value);
-    }, 0);
+    this.errCbList = [];
+    this.status;
+    fn(this.resolve.bind(this), this.reject.bind(this));
   }
   then(cb) {
     this.cbList.push(cb);
     return this;
   }
+  catch(cb) {
+    this.errCbList.push(cb);
+  }
   resolve(value) {
-    this.value = value;
-    return true;
+    if (this.status !== 'rejected') {
+      this.status = 'fulfilled';
+      pipe(...this.cbList)(value);
+    }
+    return this;
   }
   reject() {
-    console.error('rejected');
-    return false;
+    if (this.status !== 'fulfilled') {
+      this.status = 'rejected';
+      if (this.errCbList.length) pipe(...this.errCbList)();
+      else console.error('rejected');
+    }
+    return this;
   }
 }
-// class MyPromise {
-//   constructor(initValue, delay) {
-//     this.initValue = initValue;
-//     this.cbList = [];
-//     this.initValue.forEach((v, idx) => {
-//       setTimeout(() => {
-//         const fns = pipe(...this.cbList);
-//         fns(v, idx);
-//       }, delay * idx);
-//     });
-//   }
-//   then(cb) {
-//     this.cbList.push(cb);
-//     return this;
-//   }
-// }
 
-// export default MyPromise;
+export default MyPromise;

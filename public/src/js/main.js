@@ -58,7 +58,16 @@ const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
 //input박스 문자 가져오기 -> sendMessage
 const sendMessageToMars = pipe(getInputValue, sendMessage);
 
+//원판 렌더링 및 이벤트
+const init = () => {
+  renderPlate();
+  translateBtn.addEventListener('click', translateForSend.bind(null, receiveBox, sendBox));
+  sendBtn.addEventListener('click', sendMessageToEarth);
+};
+//문자 -> 실행
 const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
+//input박스 문자 가져오기 -> sendMessage
+const sendMessageToMars = pipe(getSendBoxValue, sendMessage);
 
 const sendMessageToEarth = () => {
   initInputValue(receiveBox);

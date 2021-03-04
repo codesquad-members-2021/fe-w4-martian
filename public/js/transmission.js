@@ -38,6 +38,7 @@ const response = (content, factors) =>{
         content.shift().split("").forEach((ele)=>{
             signalToReception(ele,i)
             i++;
+            
         })
     }
 }

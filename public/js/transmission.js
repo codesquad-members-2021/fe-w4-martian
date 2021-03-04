@@ -1,26 +1,26 @@
 import {hex2a,a2Hex} from "./notation.js"
 import {rotateArrow,LightOn} from "./reception.js";
+
+//입력받은 발신정보 16진수로 변환 
 const transmission = (factors) =>{
 
     const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
 
 
     let arr=[];
-    console.log(sendInp);
     sendInp.addEventListener("keydown",(e)=>{
-        console.log(e);
+        // console.log(e);
         // console.log(e.currentTarget);
-        var x =e.key;
-        var k = a2Hex(x);
-        console.log(k);
-        if(k==42){
+        var inpChar =e.key;
+        var tranChar = a2Hex(inpChar);
+        console.log("변환된 16진수:",tranChar);
+        if(tranChar==42){
             arr.pop();
         }
         else{
-            arr.push(k)
+            arr.push(tranChar)
         }
-        console.log(arr);
-        console.log(typeof(arr[0]));
+        console.log("input값 array",arr);
         sendTr.innerText = arr;
     });
     
@@ -30,29 +30,17 @@ const transmission = (factors) =>{
 
     });
 }
-
+// 수신기에 전달
 const response = (content, factors) =>{
     const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
     var i=0;
-    var listt = [];
     while(content.length>0){
-        content.shift().split("").forEach((le)=>{
-            rotateArrow(le,i)
+        content.shift().split("").forEach((el)=>{
+            rotateArrow(el,i)
             i++;
         })
-        // var a,b=content.shift().split("");
-        // console.log(a,b,i);
-        // rotateArrow(a,i);
-        // i++;
-        // rotateArrow(b,i);
-
     }
 }
 
-
-// var a=arr.shift()
-// a.toString();
-// console.log(a[0]);
-// console.log(a[1]);
 
 export {transmission};

@@ -59,17 +59,23 @@ function send2earth() {
 function moveArrow(planet, value) {
   const inputHexOnMars = (value) => ($marsInfo.value += value);
   const inputHexOnEarth = (value) => ($earthInfo.value += value);
+  const delay = () => new Promise((resolve) => setTimeout(resolve, 2000));
   let piece = 360 / 16;
 
-  value.split('').forEach((el) => {
-    let rotateDeg = (piece * el * 2) / 2 + 5; // 보정
-
-    $arrow.style.transform = `rotate(${rotateDeg}deg)`;
-    $arrow.style.transition = `1s ease-in-out`;
-  });
-
-  if (planet === EARTH) inputHexOnMars(value);
-  if (planet === MARS) inputHexOnEarth(value);
+  let arr = value.split('');
+  (async () => {
+    for (let el of arr) {
+      const hexCode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+      await delay();
+      let idx = hexCode.indexOf(el);
+      let rotateDeg = (piece * idx * 2) / 2 + 10; // 보정
+      console.log(el, idx, rotateDeg);
+      $arrow.style.transform = `rotate(${rotateDeg}deg)`;
+      $arrow.style.transition = `1s ease-in-out`;
+      if (planet === EARTH) inputHexOnMars(el);
+      if (planet === MARS) inputHexOnEarth(el);
+    }
+  })();
 }
 
 let helloHex = str2hex('hello');

@@ -1,3 +1,5 @@
+import MyPromise from '../myPromise.js';
+
 export const go = (arg, ...fns) => fns.reduce((res, fn) => fn(res), arg);
 
 export const pipe = (fn, ...fns) => (...args) => go(fn(...args), ...fns);
@@ -11,10 +13,10 @@ export const _ = {
   },
 };
 
-const delayForEach = (fn, iter, delay) => {
-  for (const x of iter) {
-    setTimeout(() => {
-      fn(x);
-    }, delay);
+export async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    const result = await callback(array[index], index, array);
   }
-};
+}
+
+export const promiseDelay = (value, delay) => new MyPromise((resolve, rej) => setTimeout(() => resolve(value), delay));

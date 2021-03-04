@@ -3,7 +3,7 @@ import { arrowRotate } from './arrow.js';
 import { renderPlate, blingText } from './canvas.js';
 import { setReceiveBox, makeBtnAble, translateForSend } from './domControl.js';
 import { getHexIdx, stringToHexArr } from './util/calculate.js';
-import { _ } from './util/util.js';
+import { _, asyncForEach, promiseDelay } from './util/util.js';
 const { log } = console;
 const BLANK = ' ';
 const receiveBox = _.$('.receive>input');
@@ -25,20 +25,13 @@ const getSendBoxValue = () => sendBox.value;
 const initReceiveBox = () => {
   receiveBox.value = '';
 };
-
-const sendMessage = (word) => {
+//prettier-ignore
+const sendMessage = async (word) => {
   const parsedWord = stringToHexArr(word);
-  parsedWord.forEach((value, idx) => {
-    new MyPromise((res, rej) => {
-      setTimeout(() => {
-        res({ value, idx });
-      }, 5000 * idx);
-    })
+  asyncForEach(parsedWord, async (value, idx) => {
+    await promiseDelay({ value, idx }, idx === 0 ? 0 : 5000)
       .then(({ value, idx }) => {
         if (!isFirstIdx(idx)) setReceiveBox(BLANK, receiveBox); //글자 하나당 receiveBox에 띄어쓰기 추가(맨처음 제외)
-        return { value, idx };
-      })
-      .then(({ value, idx }) => {
         if (isLastIdx(idx, parsedWord)) {
           setTimeout(() => {
             blingText({ idx: null, clear: true }); //글자 깜빡임 interval 제거
@@ -47,14 +40,11 @@ const sendMessage = (word) => {
         }
         return value;
       })
-      .then((hex) => {
-        const chars = hex.split('');
-        chars.forEach((value, idx) => {
-          new MyPromise((res, rej) => {
-            setTimeout(() => {
-              res(value);
-            }, 2000 * idx);
-          }).then((value) => {
+      .then((value) => {
+        const chars = value.split('');
+        asyncForEach(chars, async (value, idx) => {
+          await promiseDelay( value, idx === 0 ? 0 : 2000)
+          .then((value) => {
             arrowRotate(value);
             setReceiveBox(value, receiveBox);
             blingText({ value, clear: false });

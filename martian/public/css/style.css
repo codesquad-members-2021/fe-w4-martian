@@ -2,6 +2,104 @@ body {
   padding: 50px;
 }
 
+.wheel__arrow {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  top: 220px;
+  left: 220px;
+}
+
+.wheel__letter span {
+  position: absolute;
+  font-size: 20px;
+  color: white;
+}
+
+.wheel__letter .letter:nth-of-type(1) {
+  top: 330.55023px;
+  left: 374.2523px;
+}
+
+.wheel__letter .letter:nth-of-type(2) {
+  top: 373.50082px;
+  left: 331.6749px;
+}
+
+.wheel__letter .letter:nth-of-type(3) {
+  top: 396.88833px;
+  left: 275.90203px;
+}
+
+.wheel__letter .letter:nth-of-type(4) {
+  top: 397.15221px;
+  left: 215.42461px;
+}
+
+.wheel__letter .letter:nth-of-type(5) {
+  top: 374.2523px;
+  left: 159.44977px;
+}
+
+.wheel__letter .letter:nth-of-type(6) {
+  top: 331.6749px;
+  left: 116.49918px;
+}
+
+.wheel__letter .letter:nth-of-type(7) {
+  top: 275.90203px;
+  left: 93.11167px;
+}
+
+.wheel__letter .letter:nth-of-type(8) {
+  top: 215.42461px;
+  left: 92.84779px;
+}
+
+.wheel__letter .letter:nth-of-type(9) {
+  top: 159.44977px;
+  left: 115.7477px;
+}
+
+.wheel__letter .letter:nth-of-type(10) {
+  top: 116.49918px;
+  left: 158.3251px;
+}
+
+.wheel__letter .letter:nth-of-type(11) {
+  top: 93.11168px;
+  left: 214.098px;
+}
+
+.wheel__letter .letter:nth-of-type(12) {
+  top: 92.84783px;
+  left: 274.5756px;
+}
+
+.wheel__letter .letter:nth-of-type(13) {
+  top: 115.74796px;
+  left: 330.55135px;
+}
+
+.wheel__letter .letter:nth-of-type(14) {
+  top: 158.32642px;
+  left: 373.50615px;
+}
+
+.wheel__letter .letter:nth-of-type(15) {
+  top: 214.10407px;
+  left: 396.91128px;
+}
+
+.wheel__letter .letter:nth-of-type(16) {
+  top: 274.60092px;
+  left: 397.24236px;
+}
+
 .main__wrapper {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;

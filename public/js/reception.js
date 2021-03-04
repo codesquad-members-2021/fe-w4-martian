@@ -29,6 +29,7 @@ const signalToReception = (ele,i) =>{
             LightOn(target,hexCode);
 
 
+            
         },2000 *(i+1))
     }); 
 };

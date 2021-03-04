@@ -11,8 +11,6 @@ table {
 .main--upper {
   position: relative;
   display: flex;
-}
-.main--upper .chart-text {
   font-size: 0.2rem;
   fill: #b5d99c;
 }
@@ -21,12 +19,13 @@ table {
   width: 600px;
   height: 600px;
 }
-.main--upper .arrow img {
+.main--upper .arrow--img {
   position: absolute;
   left: 205px;
   top: 225px;
   width: 90px;
-  transform: rotate(-78.75deg);
+  transform: rotate(-78.5deg);
+  transition: all 1s;
 }
 .main--upper .receiver img {
   width: 50px;
@@ -46,6 +45,7 @@ table {
 .main--lower div input {
   width: 300px;
   height: 40px;
+  margin: 10px 0;
   border-radius: 10px;
   border-style: solid;
 }

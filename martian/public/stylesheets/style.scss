@@ -11,11 +11,8 @@ table {
 .main--upper {
   position: relative;
   display: flex;
-
-  .chart-text {
-    font-size: 0.2rem;
-    fill: #b5d99c;
-  }
+  font-size: 0.2rem;
+  fill: #b5d99c;
 
   .svg {
     background: white;
@@ -23,12 +20,13 @@ table {
     height: 600px;
   }
 
-  .arrow img {
+  .arrow--img {
     position: absolute;
     left: 205px;
     top: 225px;
     width: 90px;
-    transform: rotate(-78.75deg);
+    transform: rotate(-78.5deg);
+    transition: all 1s;
   }
 
   .receiver img {
@@ -48,6 +46,7 @@ table {
     input {
       width: 300px;
       height: 40px;
+      margin: 10px 0;
       border-radius: 10px;
       border-style: solid;
     }
@@ -55,6 +54,7 @@ table {
     .main--hex--text {
       color: grey;
     }
+
     button {
       background-color: lightgray;
       color: white;

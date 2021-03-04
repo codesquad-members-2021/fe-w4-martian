@@ -8,5 +8,13 @@ export const _ = {
   },
   $all: function (selector, base = document) {
     return base.querySelectorAll(selector);
+  },
+};
+
+const delayForEach = (fn, iter, delay) => {
+  for (const x of iter) {
+    setTimeout(() => {
+      fn(x);
+    }, delay);
   }
 };

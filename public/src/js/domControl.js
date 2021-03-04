@@ -1,5 +1,5 @@
 import { _ } from './util/util.js';
-import { hexCodeArr } from './util/calculate.js';
+import { hexCodeArr, hexArrToString } from './util/calculate.js';
 
 const BLANK = ' ';
 
@@ -13,6 +13,17 @@ export const setReceiveBox = (idx, inputBox) => {
 export const makeBtnAble = (btn) => (btn.disabled = false);
 
 //발신박스에 넣기
-export const setSendBox = (value, sendBox) => {
+const setSendBox = (value, sendBox) => {
   sendBox.value = value;
+};
+
+const translateHex = (value) => {
+  const hexArr = value.split(BLANK);
+  return hexArrToString(hexArr);
+};
+
+export const translateForSend = (receiveBox, sendBox) => {
+  const value = receiveBox.value;
+  const translatedStr = translateHex(value);
+  setSendBox(translatedStr, sendBox);
 };

@@ -1,5 +1,5 @@
 import { _ } from './util/util.js';
-import { getHexValue, hexArrToString } from './util/calculate.js';
+import { hexArrToString } from './util/calculate.js';
 
 const BLANK = ' ';
 

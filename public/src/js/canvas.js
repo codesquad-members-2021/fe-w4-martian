@@ -1,5 +1,5 @@
 import { _ } from './util/util.js';
-import { getHexValue } from './util/calculate.js';
+import { getHexIdx, getHexValue } from './util/calculate.js';
 
 const canvas = _.$('#canvas');
 const ctx = canvas.getContext('2d');
@@ -79,7 +79,8 @@ export const renderPlate = () => {
 };
 
 // 글자 반짝이기
-const initBlingText = (renderTimer = null, blingTimer = null) => ({ idx, clear = false }) => {
+const initBlingText = (renderTimer = null, blingTimer = null) => ({ value, clear = false }) => {
+  const idx = getHexIdx(value);
   if (blingTimer || renderTimer) clearBling(blingTimer, renderTimer);
   if (!clear) {
     blingTimer = setInterval(renderBlingText.bind(this, idx), 200);

@@ -10,7 +10,7 @@ const decToHex = (dec) => {
   let hex = '';
   while (dec) {
     const mod = dec % 16;
-    hex = mod > 10 ? hexCode[mod] + hex : mod + hex;
+    hex = hexCodeArr[mod] + hex;
     dec = Math.floor(dec / 16);
   }
   return hex;
@@ -27,8 +27,10 @@ const hexToDec = (hex) => {
 };
 
 const charToHex = pipe(charToDec, decToHex);
+const hexToChar = pipe(hexToDec, decToChar);
 
 export const stringToHexArr = (str) => str.split('').map((v) => charToHex(v));
+export const hexArrToString = (arr) => arr.map((v) => hexToChar(v)).join('');
 
 export const getHexIdx = (val) => hexCodeArr.indexOf(val);
 export const getHexValue = (idx) => hexCodeArr[idx];

@@ -54,15 +54,11 @@ const sendMessage = (word) => {
             setTimeout(() => {
               res(value);
             }, 2000 * idx);
-          })
-            .then((value) => {
-              arrowRotate(value);
-              setReceiveBox(value, receiveBox);
-              return getHexIdx(value);
-            })
-            .then((idx) => {
-              blingText({ idx, clear: false });
-            });
+          }).then((value) => {
+            arrowRotate(value);
+            setReceiveBox(value, receiveBox);
+            blingText({ value, clear: false });
+          });
         });
       });
   });

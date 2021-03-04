@@ -31,7 +31,7 @@ const finishSetting = () => {
 현재 부모? Promise에서의 idx(index) 값을 37번줄의 비동기 프로미스콜백함수에서 사용하게 하는 방법은 뭐가 있을지...?
 */
 const dealChar = async (value, idx, arr) => {
-  await promiseDelay({ value: { value, idx }, delay: idx === 0 ? 0 : 5000 }).then(({ value, idx }) => {
+  await promiseDelay({ value: { value, idx }, delay: 5000 }).then(({ value, idx }) => {
     const charArray = value.split('');
     asyncForEach(dealHex, charArray);
     if (isLastIdx(idx, arr)) finishSetting();

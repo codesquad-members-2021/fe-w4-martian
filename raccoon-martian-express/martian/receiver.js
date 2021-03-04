@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const $earthInterpretButton = document.querySelector('#earth-interpret--button');
 const $marsInterpretButton = document.querySelector('#mars-interpret--button');
 const $earthInput = document.querySelector('#earth--input');
@@ -205,6 +206,7 @@ class RaccoonPromise {
     console.log('너의 실패 이유다!');
   }
 }
+=======
 
 const $earthInterpretButton = document.querySelector('#earth-interpret--button');
 const $marsInterpretButton = document.querySelector('#mars-interpret--button');
@@ -323,3 +325,4 @@ class RaccoonPromise {
     console.log('너의 실패 이유다!');
   }
 }
+>>>>>>> raccoon1

@@ -4,8 +4,10 @@ import { hexArrToString, getHexIdx } from './util/calculate.js';
 const arrow = _.$('.arrow');
 const BLANK = ' ';
 
-//input box에 입력하기
+//input box
 export const setInputValue = (value, inputBox) => (inputBox.value += value);
+export const getInputValue = (inputBox) => inputBox.value;
+export const initInput = (inputBox) => setInputValue('', inputBox);
 
 //수신 박스 able로 만들기
 export const makeBtnAble = (btn) => (btn.disabled = false);

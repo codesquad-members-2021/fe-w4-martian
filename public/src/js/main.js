@@ -1,19 +1,21 @@
 import { renderPlate, blingText } from './canvas.js';
-import { arrowRotate, setInputValue, makeBtnAble, translateForSend } from './domControl.js';
+import {
+  arrowRotate,
+  setInputValue,
+  getInputValue,
+  initInputValue,
+  makeBtnAble,
+  translateForSend,
+} from './domControl.js';
 import { stringToHexArr } from './util/calculate.js';
 import { _, pipe, asyncForEach, promiseDelay } from './util/util.js';
-const { log } = console;
 const BLANK = ' ';
 const receiveBox = _.$('.receive>input');
 const sendBox = _.$('.send>input');
 const translateBtn = _.$('.receive>button');
 const sendBtn = _.$('.send>button');
 
-//초기 원판 render
-
 const isLastIdx = (idx, arr) => idx === arr.length - 1;
-const getSendBoxValue = () => sendBox.value;
-const initReceiveBox = () => (receiveBox.value = '');
 
 //마지막까지 다돌면 하는 셋팅
 const finishSetting = () => {
@@ -30,8 +32,8 @@ const finishSetting = () => {
 */
 const dealChar = async (value, idx, arr) => {
   await promiseDelay({ value: { value, idx }, delay: idx === 0 ? 0 : 5000 }).then(({ value, idx }) => {
-    const chars = value.split('');
-    asyncForEach(dealHex, chars);
+    const charArray = value.split('');
+    asyncForEach(dealHex, charArray);
     if (isLastIdx(idx, arr)) finishSetting();
   });
 };
@@ -52,15 +54,15 @@ const init = () => {
   translateBtn.addEventListener('click', translateForSend.bind(null, receiveBox, sendBox));
   sendBtn.addEventListener('click', sendMessageToEarth);
 };
-//문자 -> 실행
+//인자로문자 -> 실행
 const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
 //input박스 문자 가져오기 -> sendMessage
-const sendMessageToMars = pipe(getSendBoxValue, sendMessage);
+const sendMessageToMars = pipe(getInputValue, sendMessage);
 
 const sendMessageToEarth = () => {
-  initReceiveBox();
-  sendMessageToMars();
+  initInputValue(receiveBox);
+  sendMessageToMars(sendBox);
 };
 
 init();
-sendMessage('he');
+// sendMessage('he');

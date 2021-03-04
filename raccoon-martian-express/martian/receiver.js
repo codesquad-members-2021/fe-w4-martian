@@ -7,9 +7,33 @@ const $marsInfo = document.querySelector('#mars--info');
 const $send2earthButton = document.querySelector('#send-to-earth--button');
 const $send2marsButton = document.querySelector('#send-to-mars--button');
 const $arrow = document.querySelector('.arrow-circle');
+const $roulette = document.querySelector('.roulette');
 
 const MARS = 'mars';
 const EARTH = 'earth';
+
+const colorSet = {
+  blue: '#0d6efd',
+  indigo: '#6610f2',
+  purple: '#6f42c1',
+  pink: '#d63384',
+  red: '#dc3545',
+  orange: '#fd7e14',
+  yellow: '#ffc107',
+  green: '#198754',
+  teal: '#20c997',
+  cyan: '#0dcaf0',
+  gray: '#6c757d',
+  grayDark: '#343a40',
+  primary: '#0d6efd',
+  secondary: '#6c757d',
+  success: '#198754',
+  info: '#0dcaf0',
+  warning: '#ffc107',
+  danger: '#dc3545',
+  light: '#f8f9fa',
+  dark: '#212529',
+};
 
 $earthInterpretButton.addEventListener('click', interpretor);
 $marsInterpretButton.addEventListener('click', interpretor);
@@ -59,21 +83,42 @@ function send2earth() {
 function moveArrow(planet, value) {
   const inputHexOnMars = (value) => ($marsInfo.value += value);
   const inputHexOnEarth = (value) => ($earthInfo.value += value);
-  const delay = () => new Promise((resolve) => setTimeout(resolve, 2000));
+  const delay = () => new Promise((resolve) => setTimeout(resolve, 1000));
   let piece = 360 / 16;
 
   let arr = value.split('');
   (async () => {
     for (let el of arr) {
       const hexCode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
-      await delay();
+      await delay(); // 아.. 얘가 '기다려~' 하는 애라서 await이네...
       let idx = hexCode.indexOf(el);
-      let rotateDeg = (piece * idx * 2) / 2 + 10; // 보정
-      console.log(el, idx, rotateDeg);
-      $arrow.style.transform = `rotate(${rotateDeg}deg)`;
-      $arrow.style.transition = `1s ease-in-out`;
-      if (planet === EARTH) inputHexOnMars(el);
-      if (planet === MARS) inputHexOnEarth(el);
+      if (idx === -1) {
+        $arrow.style.background = `${Object.values(colorSet)[Math.floor(Math.random() * (Object.values(colorSet).length - 0) + 0)]}`;
+        $arrow.style.transition = `1s ease-in-out`;
+        setTimeout(() => {
+          $arrow.removeAttribute('style');
+          $arrow.style.transition = `1s ease-in-out`;
+        }, 1000);
+      } else {
+        let rotateDeg = (piece * idx * 2) / 2 + 10; // 보정
+
+        // arror ani 로 분리
+        $arrow.style.transform = `rotate(${rotateDeg}deg)`;
+        $arrow.style.transition = `1s ease-in-out`;
+
+        // piece ani 로 분리
+        $roulette.querySelector(`.piece-${idx}`).style.borderTopColor = `${Object.values(colorSet)[idx]}`;
+        $roulette.querySelector(`.piece-${idx}`).style.opacity = `50%`;
+        $roulette.querySelector(`.piece-${idx}`).style.transition = `1s ease-in-out`;
+        setTimeout(() => {
+          $roulette.querySelector(`.piece-${idx}`).removeAttribute('style');
+          $roulette.querySelector(`.piece-${idx}`).style.transition = `1s ease-in-out`;
+        }, 1000);
+      }
+      setTimeout(() => {
+        if (planet === EARTH) inputHexOnMars(el);
+        if (planet === MARS) inputHexOnEarth(el);
+      }, 1000);
     }
   })();
 }

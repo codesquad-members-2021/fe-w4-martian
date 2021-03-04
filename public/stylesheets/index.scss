@@ -11,10 +11,30 @@
     justify-content:space-between;
     align-items: center;
 }
-.moon {
+.mars {
+    position:relative;
     height:400px;
     margin-top: 50px;
     margin-left: 50px;
+}
+
+.allow {
+    position:absolute;
+    top:38%;
+    left:44%;
+}
+
+
+.blink {
+    animation-name: blink;
+    animation-delay: .8s;
+    animation-duration: 0.5s;
+    animation-iteration-count: 4;
+}
+
+@keyframes blink {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .send {
@@ -35,6 +55,44 @@
     .send_first {
         padding-bottom: 100px;
     }
+}
+
+.send_button_off {
+    display: none;
+}
+
+.send_button1 {
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: black;
+        color:white;
+    }
+    &:active {
+        transform: translateY(2px);
+    }
+
+}
+
+.send_button2 {
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: black;
+        color:white;
+    }
+    &:active {
+        transform: translateY(2px);
+    }
+
 }
 
 .earth {

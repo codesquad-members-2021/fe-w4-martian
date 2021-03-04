@@ -1,4 +1,4 @@
-class MyPromise {
+export default class MyPromise {
   constructor(initialStr) {
     this.cbList = [];
 
@@ -16,9 +16,3 @@ class MyPromise {
     return this;
   }
 }
-
-console.log('start');
-
-new MyPromise('hello').then((v) => v + ' world').then((v) => v + ' and crong');
-
-console.log('end');

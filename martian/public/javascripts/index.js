@@ -1,6 +1,9 @@
-const $charText = document.querySelector('.main--char--text');
-const $hexText = document.querySelector('.main--hex--text');
-const $sendBtn = document.querySelector('.main--char--button');
+import _ from './util.js';
+import MyPromise from './myPromise.js';
+
+const $charText = _.$('.main--char--text');
+const $hexText = _.$('.main--hex--text');
+const $sendBtn = _.$('.main--char--button');
 let hexText = '';
 
 const translasteToHex = (e) => {
@@ -15,14 +18,17 @@ const showText = (text) => {
   $hexText.value = text;
 };
 
-const handleArrowOnWheel = (i) => {
-  const $chartText = document.querySelectorAll('.chart-text');
-  const hexTyping = '';
+const handleArrowOnWheel = () => {
+  const $chartText = _.$All('.chart-text');
+  let hexTyping = '';
   const hexTextByOne = [...hexText];
   for (let i = 0; i < hexTextByOne.length; i++) {
+    if (i === 0) {
+      $hexText.value = 0;
+    }
+    hexTyping += hexTextByOne[i];
     $hexText.value = hexTyping;
     $chartText[hexTextByOne[i]].classList.add('blink');
-    $hexText.value += hexTyping;
     setTimeout(() => {
       $chartText[hexTextByOne[i]].classList.remove('blink');
     }, 2000);
@@ -36,7 +42,7 @@ const renderMessage = () => {
   handleHexMessageBox();
 };
 
-$charText.addEventListener('keyup', translasteToHex);
-$sendBtn.addEventListener('click', renderMessage);
+_.addEvent($charText, 'keyup', translasteToHex);
+_.addEvent($sendBtn, 'click', renderMessage);
 
 //   const hexTextByTwo = hexText.match(/..?/g);

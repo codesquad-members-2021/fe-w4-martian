@@ -40,6 +40,9 @@ table {
   flex-direction: column;
   padding: 50px;
 }
+.main--lower div:focus {
+  outline: none;
+}
 .main--lower div input {
   width: 300px;
   height: 40px;
@@ -50,7 +53,7 @@ table {
   color: grey;
 }
 .main--lower div button {
-  background-color: #0396a6;
+  background-color: lightgray;
   color: white;
   width: 100px;
   height: 35px;
@@ -58,6 +61,9 @@ table {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+.main--lower div button:focus {
+  outline: none;
 }
 
 .blink {

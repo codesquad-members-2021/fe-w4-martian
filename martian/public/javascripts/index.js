@@ -14,32 +14,41 @@ const translasteToHex = (e) => {
   showText(hexText);
 };
 
-const showText = (text) => {
-  $hexText.value = text;
-};
+const showText = (text) => ($hexText.value = text);
 
 const handleArrowOnWheel = () => {
   const $chartText = _.$All('.chart-text');
   let hexTyping = '';
   const hexTextByOne = [...hexText];
-  for (let i = 0; i < hexTextByOne.length; i++) {
-    if (i === 0) {
-      $hexText.value = 0;
-    }
-    hexTyping += hexTextByOne[i];
-    $hexText.value = hexTyping;
-    $chartText[hexTextByOne[i]].classList.add('blink');
-    setTimeout(() => {
-      $chartText[hexTextByOne[i]].classList.remove('blink');
-    }, 2000);
-  }
+
+  let asyncFn = (i) => {
+    return new Promise((resolve, reject) => {
+      if (i === 0) {
+        $hexText.value = 0;
+      }
+
+      hexTyping += hexTextByOne[i];
+      showText(hexTyping);
+      $chartText[hexTextByOne[i]].classList.add('blink');
+
+      setTimeout(() => {
+        $chartText[hexTextByOne[i]].classList.remove('blink');
+        resolve(true);
+      }, 2000);
+    });
+  };
+
+  hexTextByOne.reduce((acc, cur, index) => {
+    return acc.then(() => {
+      return asyncFn(index);
+    });
+  }, Promise.resolve());
 };
 
 const handleHexMessageBox = () => {};
 
 const renderMessage = () => {
   handleArrowOnWheel();
-  handleHexMessageBox();
 };
 
 _.addEvent($charText, 'keyup', translasteToHex);

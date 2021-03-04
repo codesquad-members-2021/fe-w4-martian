@@ -75,4 +75,4 @@ const sendMessageToEarth = () => {
 };
 
 init();
-sendMessage('h');
+sendMessage('hk');

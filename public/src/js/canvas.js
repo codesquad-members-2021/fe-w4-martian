@@ -52,11 +52,9 @@ const text = (value, x, y, color = '#fff') => {
 
 const renderText = () => {
   const location = getLocationText();
-  console.log(location);
   for (let i = 0; i <= 15; i++) {
     const { x, y } = location[i];
-    if (i < 10) text(i, x, y);
-    else text(getHexValue(i), x, y);
+    text(getHexValue(i), x, y);
   }
 };
 

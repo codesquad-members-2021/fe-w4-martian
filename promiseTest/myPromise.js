@@ -1,4 +1,5 @@
 const { log } = console;
+<<<<<<< HEAD
 const arr = [1, 2, 3, 4, 5];
 const getDelay = (v, time) => new Promise((resolve) => setTimeout(() => resolve(v), time));
 
@@ -20,6 +21,10 @@ const reduceAsync = async (cbFn, acc, iter) => {
   return acc;
 };
 =======
+=======
+const go = (arg, ...fns) => fns.reduce((res, fn) => fn(res), arg);
+const pipe = (fn, ...fns) => (...args) => go(fn(...args), ...fns);
+>>>>>>> aa48666... Refactor. asyncForEach, promiseDelay 적용
 class MyPromise {
   constructor(fn) {
     this.cbList = [];
@@ -51,19 +56,46 @@ class MyPromise {
   }
 }
 
-new MyPromise((res, rej) => {
-  setTimeout(() => {
-    res(1);
-    rej();
-  }, 1000);
-})
-  .then((v) => v + 1)
-  .then((v) => v + 2)
-  .then(log)
-  .catch(() => {
-    log('error');
+const k = [1, 2, 3, 4, 5, 6, 7, 8];
+
+async function test() {
+  const promiseFunction = (v) => new MyPromise((resolve) => setTimeout(() => resolve(v), 1000));
+
+  // for (let i = 0; i < k.length; i++) {
+  //   const res = await promiseFunction(i);
+  //   console.log(res);
+  // }
+
+  asyncForEach(k, async (v, idx) => {
+    await promiseFunction(v).then(log);
+    // console.log(res);
   });
+<<<<<<< HEAD
 >>>>>>> 12aa611... Feat. MyPromise Class
+=======
+}
+
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    const result = await callback(array[index], index, array);
+  }
+}
+
+test();
+
+// new MyPromise((res, rej) => {
+//   setTimeout(() => {
+//     res(1);
+//     rej();
+//   }, 1000);
+// })
+//   .then((v) => v + 1)
+//   .then((v) => v + 2)
+//   .then(log)
+//   .catch(() => {
+//     log('error');
+//   });
+>>>>>>> aa48666... Refactor. asyncForEach, promiseDelay 적용
 
 const print = async () => {
   const sum = await reduceAsync(cbFn, arr);

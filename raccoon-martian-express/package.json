@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "raccoon-martian-express",
   "version": "0.0.0",
@@ -25,3 +26,25 @@
     "last 3 safari versions"
   ]
 }
+=======
+{
+  "name": "raccoon-martian-express",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "debug": "nodemon --inspect ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1",
+    "sass-math": "^1.0.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "1.12.3",
+    "sass": "^1.32.8"
+  }
+}
+>>>>>>> raccoon1

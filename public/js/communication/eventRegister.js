@@ -1,18 +1,19 @@
 import _ from '../util.js';
-import {charToHex, hexToChar} from './convert.js';
-import { sendTimer } from './timer.js';
+import {charToHex, hexToChar} from '../convert.js';
+import { sendMessageAnotherPlanet } from './communicate.js';
 
 // 이벤트 등록 ------------------------------------------------------------------------
-// 송수신 정보(button): click event
+// 송수신 정보, 해석하기(btn): click event
 const translateBtnClickEvent = (translateBtn, receiveContentInput) => {
-    _.addEvent(translateBtn, 'click', () =>
-        translateBtnClickEventHandler(receiveContentInput)
+    _.addEvent(translateBtn, 'click', (e) =>
+        translateBtnClickEventHandler(e, receiveContentInput)
     );
 };
-const translateBtnClickEventHandler = (receiveContentInput) => {
+const translateBtnClickEventHandler = ({target}, receiveContentInput) => {
     let receiveContentValue = receiveContentInput.value;
     if (receiveContentValue.length === 0) return;
-    receiveContentInput.value =  receiveContentValue.split(" ").map((v) => hexToChar(v)).join('');    
+    receiveContentInput.value =  receiveContentValue.split(" ").map((v) => hexToChar(v)).join(''); 
+    target.disabled = true;   
 };
 
 // 발신정보입력(input):  keyup event
@@ -27,35 +28,46 @@ const sendContentInputKeyUpEventHandler = ({target}, receiveContentInput) => {
     receiveContentInput.value = arrCovertHex.join(' ');
 };
 
-// 발신정보입력(btn):  click event
-const sendBtnClickEvent = (sendBtn, sendContentInput, anotherReceiveContentInput) => {
+// 발신정보입력, 다른행성으로 메시지보내기(btn):  click event
+const sendBtnClickEvent = (sendBtn, sendContentInput, anotherTransceiverParts) => {
     _.addEvent(sendBtn, 'click', () =>
-        sendBtnClickEventHandler(sendContentInput, anotherReceiveContentInput),
+        sendBtnClickEventHandler(sendContentInput, anotherTransceiverParts),
     );
 };
-const sendBtnClickEventHandler = (sendContentInput, anotherReceiveContentInput) => {
+
+const sendBtnClickEventHandler = (sendContentInput, anotherTransceiverParts) => {
+    const {
+        receiveContentInput: anotherReceiveInput,
+        canvasInfo: anotherCanvasInfo,
+        translateBtn: anotherTranslateBtn, 
+    } = anotherTransceiverParts;
+
     let sendContentValue = sendContentInput.value;
     if (sendContentValue.length === 0) return;
     
-    if (anotherReceiveContentInput.value.length > 0) 
-        anotherReceiveContentInput.value = '';
-    const convertHex = sendContentValue.split('').map((v) => charToHex(v).toUpperCase()).join(" ");
-    
-    let startCharPos = 0;
+    if (anotherReceiveInput.value.length > 0) 
+        anotherReceiveInput.value = '';
+     
+    const infoFromPlanet = {
+        anotherCanvasInfo,
+        anotherInput: anotherReceiveInput,
+        resultText: sendContentValue.split('').map((v) => charToHex(v).toUpperCase()).join(" "),
+        charPos: 0
+    };
+
     const timeout = 2000;    
-    sendTimer(convertHex, anotherReceiveContentInput, startCharPos, timeout)
-        .then((ok) => console.log(ok))
+    sendMessageAnotherPlanet(infoFromPlanet, timeout)
+        .then(() => anotherTranslateBtn.disabled = false)
         .catch((err) => console.error(err.message));
 };
 
 // [F] setCommunicate, 최종 실행용  ------------------------------------------------------------------------
 const setCommunicate = (transceiverParts, anotherTransceiverParts) => {
     const { receiveContentInput, translateBtn, sendContentInput, sendBtn } = transceiverParts;
-    const { receiveContentInput: anotherReceiveContentInput } = anotherTransceiverParts;
 
     translateBtnClickEvent(translateBtn, receiveContentInput);    
     sendContentInputKeyUpEvent(sendContentInput, receiveContentInput);
-    sendBtnClickEvent(sendBtn, sendContentInput, anotherReceiveContentInput);  
+    sendBtnClickEvent(sendBtn, sendContentInput, anotherTransceiverParts);  
 };
 
 export default setCommunicate;

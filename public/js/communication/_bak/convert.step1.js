@@ -1,4 +1,4 @@
-// martian-step1 때 작업한 convert.js
+// martian-step1 때 작업한 convert.js (백업용)
 
 import _ from './util.js';
 

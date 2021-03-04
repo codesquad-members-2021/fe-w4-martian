@@ -27,7 +27,7 @@
         %>
             <section class=<%= type %>>
                 <div class="transceiver__view">      
-                    <img src="/img/top_arrow.png" alt="arrow" class="transform__rotate-16">
+                    <img src="/img/top_arrow.png" alt="arrow">
                     <canvas width="500" height="500" class=<%= canvasName %> ></canvas>
                 </div>
 
@@ -35,7 +35,7 @@
                     <div class="transceiver__control__receive">
                         <p>송수신정보</p>
                         <input type="text" class="received__text" readonly/>                    
-                        <button type="button" class="translate__btn">해석하기</button>
+                        <button type="button" class="translate__btn" disabled>해석하기</button>
                     </div>
 
                     <div class="transceiver__control__send">

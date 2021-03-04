@@ -78,13 +78,17 @@ section {
         }
 
         button {
-            cursor: pointer;
+            cursor: pointer;            
             font-weight: 600;
             font-size: 15px;
             padding: 10px 5px;
             border-radius: 10%;            
             color: $white;
             background-color: $btnBackColor;
+        }
+        button:disabled {
+            cursor: not-allowed;
+            background-color: #572f04;
         }
     }
 }

@@ -72,5 +72,9 @@ section {
   color: #fff;
   background-color: #b45f06;
 }
+.transceiver__control div button:disabled {
+  cursor: not-allowed;
+  background-color: #572f04;
+}
 
 /*# sourceMappingURL=index.css.map */

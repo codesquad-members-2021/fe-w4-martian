@@ -1,7 +1,10 @@
 import {factors} from "./common.js";
-const signalTorecption = (ele,i) =>{
+const rotateState = {
+    currPoint:0,
+    currDeg:22.5,
+};
+const signalToReception = (ele,i) =>{
     //일단 요소 다가져와 놓고 나중에 빼기 
-
     const hexArray = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
     new Promise ((res,rej)=>{
         setTimeout(()=>{
@@ -19,23 +22,20 @@ const signalTorecption = (ele,i) =>{
             // console.log("ele",ele);
             ele = ele.toUpperCase();
             const index = hexArray.indexOf(ele);
-            // console.log("index",index);
+            console.log("index",index);
             const target = hexDic[hexArray[index]];
-            // console.log("tar",target);
-
+            console.log("tar",target);
 
             LightOn(target,hexCode);
 
+
         },2000 *(i+1))
+    }); 
+};
 
-    });
+const turn =()=>{
+    const {arrow}=factors;
 
-
-    
-    
-  
-
-   
 };
 
 const LightOn = (target,hexCode)=>{
@@ -43,7 +43,7 @@ const LightOn = (target,hexCode)=>{
     t.classList.add('light');
 
 }
-export {signalTorecption,LightOn};
+export {signalToReception,LightOn};
 
 // const rotateArrow = (a,b,i) =>{
 //     //일단 요소 다가져와 놓고 나중에 빼기 

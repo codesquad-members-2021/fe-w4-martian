@@ -3,7 +3,7 @@
 
 import {factors} from "./common.js";
 import {transmission} from "./transmission.js"
-import {rotateArrow,LightOn} from "./reception.js"
+// import {signalTorecption} from "./reception.js"
 const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
 
 

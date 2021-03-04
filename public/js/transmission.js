@@ -1,5 +1,5 @@
 import {hex2a,a2Hex} from "./notation.js"
-import {rotateArrow,LightOn} from "./reception.js";
+import {signalTorecption,LightOn} from "./reception.js";
 
 //입력받은 발신정보 16진수로 변환 
 const transmission = (factors) =>{
@@ -35,8 +35,8 @@ const response = (content, factors) =>{
     const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
     var i=0;
     while(content.length>0){
-        content.shift().split("").forEach((el)=>{
-            rotateArrow(el,i)
+        content.shift().split("").forEach((ele)=>{
+            signalTorecption(ele,i)
             i++;
         })
     }

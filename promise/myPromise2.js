@@ -1,11 +1,14 @@
 class MyPromise2 {
     constructor(){
+
         this.cbList=[];
     }
 
     then(cb){
 
     }
+
+
 }
 
 const p = new MyPromise2((resolve,reject)=>{

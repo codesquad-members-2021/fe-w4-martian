@@ -1,13 +1,16 @@
 // import {getCanvas} from '/js/canvas.js';
 // getCanvas();
 
-import {factors} from "./common.js";
+import {factors, txt} from "./common.js";
 import {transmission} from "./transmission.js"
-import {rotateArrow,LightOn} from "./reception.js"
-const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
+// import {signalToReception,LightOn,turn} from "./reception.js"
+// const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
 
+// import {signalToReception,turn,LightOn} from "./reception.js"
 
 transmission(factors);
-// rotateArrow(factors);
+
+
+// signalToReception(factors);
 
 

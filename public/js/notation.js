@@ -1,6 +1,5 @@
 const a2Hex = (text)=>{
     //text->ASCII->16진수
-    // console.log(text.charCodeAt(0));
     return text.charCodeAt(0).toString(16);
 };
 
@@ -9,9 +8,8 @@ const a2Hex = (text)=>{
 const hex2a=(hex)=>{
     var str = '';
     for (var i = 0; (i <= hex.length); i += 2){
-     //    console.log("hex.substr(i,2)",hex.substr(i,2));
+        
         str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-     //    console.log(i,"안의 str",str);
     }
  // console.log(str);
  return str;

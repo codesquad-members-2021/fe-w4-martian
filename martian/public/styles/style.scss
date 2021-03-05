@@ -134,9 +134,9 @@ button {
   color: #fff;
 }
 
-button:hover {
-  background-color: #b52a3f;
-}
+// button:hover:not([disabled]) {
+//   background-color: #b52a3f;
+// }
 
 input {
   padding: 3px;

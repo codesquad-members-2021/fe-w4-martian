@@ -29,35 +29,3 @@
 .last {
   @include animation(fadeOut, 0.5s, 0.5s, 4, linear, alternate);
 }
-// @-webkit-keyframes fadeOut {
-//   0% {
-//     opacity: 1;
-//   }
-//   100% {
-//     opacity: 0;
-//   }
-// }
-// @-moz-keyframes fadeOut {
-//   0% {
-//     opacity: 1;
-//   }
-//   100% {
-//     opacity: 0;
-//   }
-// }
-// @-ms-keyframes fadeOut {
-//   0% {
-//     opacity: 1;
-//   }
-//   100% {
-//     opacity: 0;
-//   }
-// }
-// @-o-keyframes fadeOut {
-//   0% {
-//     opacity: 1;
-//   }
-//   100% {
-//     opacity: 0;
-//   }
-// }

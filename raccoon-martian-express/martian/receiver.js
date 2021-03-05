@@ -85,17 +85,36 @@ let hexQueue = [];
 
 function setHexQueue() {
   $earthInfo.value.split('').forEach((el) => hexQueue.push(el));
+  return hexQueue;
 }
 
-function send2mars() {
-  setHexQueue();
+function isEmpty(arr) {
+  return arr.length === 0;
+}
+
+function messageReceiver() {
+  // test가 끝나면 setInterval로 바꿀것
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(setHexQueue());
+    }, 2000);
+  });
+}
+
+async function send2mars() {
+  await messageReceiver() //
+    .then((data) => {
+      if (isEmpty(data)) return;
+      moveArrow(EARTH, data);
+    });
+
   initDom($marsInfo);
   // 1. moveArrow가 5초마다 hexQueue를 확인한다.
   //    1-1. queue.length가 0이면 타이머 리셋
   //    1-2. queue.length가 0이 아니면 moveArrow()
   // 2. moveArrow가 동작중일때는 상태를 바꿔준다.
   // 3. moveArrow가 동작중일때는 queue에 데이터를 추가할 수만 있음 / 동작은 앞선 동작이 끝난 후에!
-  return moveArrow(EARTH, hexQueue);
+  return;
 }
 
 function send2earth() {
@@ -109,8 +128,7 @@ function moveArrow(planet, valueArr) {
   const delay = () => new Promise((resolve) => setTimeout(resolve, 1000));
   let piece = 360 / 16;
   let arr = Array.prototype.slice.call(valueArr); // 배열복사
-  console.log(valueArr);
-  console.log(arr);
+
   (async () => {
     for (let el of arr) {
       const hexCode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
@@ -131,7 +149,6 @@ function moveArrow(planet, valueArr) {
       }, 1000);
 
       hexQueue.shift();
-      console.log(valueArr);
       console.log(hexQueue);
     }
   })();

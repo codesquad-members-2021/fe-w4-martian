@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 const express = require("express");
 const router = express.Router();
 =======
@@ -10,6 +11,10 @@ var router = express.Router();
 const express = require("express");
 const router = express.Router();
 >>>>>>> e99ca98 ([Fix] Accept feedback)
+=======
+const express = require("express");
+const router = express.Router();
+>>>>>>> 521d52e6f4034e072f3bd813a755a5a7b5318756
 
 /* GET home page. */
 router.get("/", function (req, res, next) {

@@ -1,8 +1,6 @@
 node_modules
-<<<<<<< HEAD
-=======
+
 .cache
 dist
 practice
 bin
->>>>>>> 521d52e ([Chore] Conflict, update .gitignore and rotate)

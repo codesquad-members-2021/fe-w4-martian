@@ -81,6 +81,7 @@ async function asyncForEach(callback, array) {
   }
 }
 
+<<<<<<< HEAD
 // test();
 
 new Promise((res) => {
@@ -101,6 +102,9 @@ new Promise((res) => {
     }, 1000);
   })
   .then(log);
+=======
+test();
+>>>>>>> Kyle
 
 // new MyPromise((res, rej) => {
 //   setTimeout(() => {

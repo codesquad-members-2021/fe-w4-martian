@@ -4,6 +4,10 @@
   margin-top: 50px;
   border: 1px solid black;
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> Kyle
 .canvas-wrapper {
   position: relative;
 }
@@ -19,12 +23,25 @@
   color: #0b5394;
   transition: all 0.2s;
 }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 91dc7404182e35c6e6d7fdaf68bca5e026677fd6
+>>>>>>> Kyle
 .wrapper {
   display: flex;
   margin-left: 100px;
   margin-top: 50px;
 }
 
+<<<<<<< HEAD
 .receive {
+=======
+<<<<<<< HEAD
+.receive {
+=======
+.receive-info {
+>>>>>>> 91dc7404182e35c6e6d7fdaf68bca5e026677fd6
+>>>>>>> Kyle
   margin-right: 30px;
 }

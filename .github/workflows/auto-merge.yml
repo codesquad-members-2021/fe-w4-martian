@@ -1,4 +1,4 @@
-ame: "PR Merge on time"
+name: "PR Merge on time"
 
 on:
   schedule:

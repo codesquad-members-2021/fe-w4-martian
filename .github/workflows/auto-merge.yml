@@ -49,7 +49,7 @@ jobs:
                 await github.pulls.merge({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                pull_number: node.number,
+                pull_number: 71,
                 merge_method: "squash"
              })
             }

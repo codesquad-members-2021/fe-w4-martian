@@ -1,42 +1,68 @@
-import MyPromise from './myPromise.js';
-import { arrowRotate } from './arrow.js';
 import { renderPlate, blingText } from './canvas.js';
-import { setReceiveBox, makeBtnAble } from './domControl.js';
+import {
+  arrowRotate,
+  setInputValue,
+  getInputValue,
+  initInputValue,
+  makeBtnAble,
+  translateForSend,
+} from './domControl.js';
 import { stringToHexArr } from './util/calculate.js';
-import { translate } from './translate.js';
-import { _ } from './util/util.js';
-const { log } = console;
+import { _, pipe, asyncForEach, promiseDelay } from './util/util.js';
 const BLANK = ' ';
 const receiveBox = _.$('.receive>input');
 const sendBox = _.$('.send>input');
 const translateBtn = _.$('.receive>button');
+const sendBtn = _.$('.send>button');
 
-//초기 원판 render
-renderPlate();
-translateBtn.addEventListener('click', translate.bind(null, receiveBox, sendBox));
+const isLastIdx = (idx, arr) => idx === arr.length - 1;
 
-//초기 전송 단어
-const word = 'hello world';
+//마지막까지 다돌면 하는 셋팅
+const finishSetting = () => {
+  setTimeout(() => {
+    blingText({ idx: null, clear: true }); //글자 깜빡임 interval 제거
+    makeBtnAble(translateBtn);
+  }, 5000);
+};
 
-//문자=>hex Arr
-const parsedWord = stringToHexArr(word); //go(word,stringToHexArr)
-
-//2. 5초-2초 간격으로 진행
-new MyPromise(parsedWord, 5000)
-  .then((value, idx) => {
-    if (idx !== 0) setReceiveBox(BLANK, receiveBox); //글자 하나당 receiveBox에 띄어쓰기 추가(맨처음 제외)
-    if (idx === parsedWord.length - 1) {
-      setTimeout(() => {
-        blingText({ idx: null, clear: true }); //글자 깜빡임 interval 제거 (마지막일 때)
-        makeBtnAble(translateBtn);
-      }, 5000);
-    }
-    return value;
-  })
-  .then((hex) => {
-    const chars = hex.split('');
-    new MyPromise(chars, 2000)
-      .then(arrowRotate)
-      .then((idx) => setReceiveBox(idx, receiveBox))
-      .then((idx) => blingText.call(null, { idx, clear: false }));
+// 한단어의 16진수를 처리하는 forEach 콜백함수 / 이름이 마땅히..생각이 안나네요
+/*
+질문:
+현재 부모? Promise에서의 idx(index) 값을 37번줄의 비동기 프로미스콜백함수에서 사용하게 하는 방법은 뭐가 있을지...?
+*/
+const dealChar = async (value, idx, arr) => {
+  await promiseDelay({ value: { value, idx }, delay: 5000 }).then(({ value, idx }) => {
+    const charArray = value.split('');
+    asyncForEach(dealHex, charArray);
+    if (isLastIdx(idx, arr)) finishSetting();
   });
+};
+
+//16진수 하나를 처리하는 forEach 콜백함수
+const dealHex = async (value, idx, arr) => {
+  await promiseDelay({ value: { value, idx }, delay: idx === 0 ? 0 : 2000 }).then(({ value, idx }) => {
+    arrowRotate(value);
+    setInputValue(value, receiveBox);
+    blingText({ value, clear: false });
+    if (isLastIdx(idx, arr)) setInputValue(BLANK, receiveBox);
+  });
+};
+
+//원판 렌더링 및 이벤트
+const init = () => {
+  renderPlate();
+  translateBtn.addEventListener('click', translateForSend.bind(null, receiveBox, sendBox));
+  sendBtn.addEventListener('click', sendMessageToEarth);
+};
+//인자로문자 -> 실행
+const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
+//input박스 문자 가져오기 -> sendMessage
+const sendMessageToMars = pipe(getInputValue, sendMessage);
+
+const sendMessageToEarth = () => {
+  initInputValue(receiveBox);
+  sendMessageToMars(sendBox);
+};
+
+init();
+sendMessage('he');

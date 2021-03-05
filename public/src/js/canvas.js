@@ -1,8 +1,22 @@
 import { _ } from './util/util.js';
-import { hexCode } from './util/calculate.js';
+import { getHexIdx, getHexValue } from './util/calculate.js';
 
 const canvas = _.$('#canvas');
 const ctx = canvas.getContext('2d');
+
+const getLocationText = () => {
+  const location = {};
+  let textInitialX = 270;
+  let textInitialY = 100;
+  const textLocationX = [0, 65, 45, 25, 0, -25, -45, -65, -65, -65, -45, -25, 0, 25, 45, 65];
+  const textLocationY = [0, 20, 50, 60, 60, 60, 50, 20, 0, -20, -50, -60, -60, -60, -50, -20];
+  for (let i = 0; i < 16; i++) {
+    textInitialX += textLocationX[i];
+    textInitialY += textLocationY[i];
+    location[i] = { x: textInitialX, y: textInitialY };
+  }
+  return location;
+};
 
 const toRadian = (angle) => (angle * Math.PI) / 180;
 
@@ -37,32 +51,17 @@ const text = (value, x, y, color = '#fff') => {
 };
 
 const renderText = () => {
-  let textInitialX = 270;
-  let textInitialY = 100;
-  const textLocationX = [0, 65, 45, 25, 0, -25, -45, -65, -65, -65, -45, -25, 0, 25, 45, 65];
-  const textLocationY = [0, 20, 50, 60, 60, 60, 50, 20, 0, -20, -50, -60, -60, -60, -50, -20];
+  const location = getLocationText();
   for (let i = 0; i <= 15; i++) {
-    textInitialX += textLocationX[i];
-    textInitialY += textLocationY[i];
-    if (i < 10) text(i, textInitialX, textInitialY);
-    else text(hexCode[i], textInitialX, textInitialY);
+    const { x, y } = location[i];
+    text(getHexValue(i), x, y);
   }
 };
 
-const renderBlingText = (target) => {
-  let textInitialX = 270;
-  let textInitialY = 100;
-  const textLocationX = [0, 65, 45, 25, 0, -25, -45, -65, -65, -65, -45, -25, 0, 25, 45, 65];
-  const textLocationY = [0, 20, 50, 60, 60, 60, 50, 20, 0, -20, -50, -60, -60, -60, -50, -20];
-  for (let i = 0; i <= 15; i++) {
-    textInitialX += textLocationX[i];
-    textInitialY += textLocationY[i];
-    let color;
-    if (i !== target) continue;
-    else color = i === target ? 'blue' : '#FFF';
-    if (i < 10) text(i, textInitialX, textInitialY, color);
-    else text(hexCode[i], textInitialX, textInitialY, color);
-  }
+const renderBlingText = (targetIdx) => {
+  const location = getLocationText();
+  const { x, y } = location[targetIdx];
+  text(getHexValue(targetIdx), x, y, 'blue');
 };
 
 export const renderPlate = () => {
@@ -80,7 +79,8 @@ export const renderPlate = () => {
 };
 
 // 글자 반짝이기
-const initBlingText = (renderTimer = null, blingTimer = null) => ({ idx, clear = false }) => {
+const initBlingText = (renderTimer = null, blingTimer = null) => ({ value, clear = false }) => {
+  const idx = getHexIdx(value);
   if (blingTimer || renderTimer) clearBling(blingTimer, renderTimer);
   if (!clear) {
     blingTimer = setInterval(renderBlingText.bind(this, idx), 200);

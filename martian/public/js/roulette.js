@@ -1,4 +1,4 @@
-const getRoulette = (length) => {
+const drawRoulette = (length) => {
   let itemHtml = ``;
   for (let i = 0; i < length; i++) {
     itemHtml += `<div class="line line${i + 1}">
@@ -9,4 +9,4 @@ const getRoulette = (length) => {
   return itemHtml;
 };
 
-export { getRoulette };
+export { drawRoulette };

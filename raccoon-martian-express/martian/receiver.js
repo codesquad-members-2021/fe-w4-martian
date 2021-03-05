@@ -75,29 +75,42 @@ function hex2str(hex) {
     .join('');
 }
 
-function sendMessage() {}
-
 function initDom(dom) {
   if (dom.value.length > 0) dom.value = '';
 }
 
+// Send to Mars 버튼을 누르면 여기에 데이터가 저장된다.
+// 이걸 서버에 저장할 수 있나...
+let hexQueue = [];
+
+function setHexQueue() {
+  $earthInfo.value.split('').forEach((el) => hexQueue.push(el));
+}
+
 function send2mars() {
+  setHexQueue();
   initDom($marsInfo);
-  return moveArrow(EARTH, $earthInfo.value);
+  // 1. moveArrow가 5초마다 hexQueue를 확인한다.
+  //    1-1. queue.length가 0이면 타이머 리셋
+  //    1-2. queue.length가 0이 아니면 moveArrow()
+  // 2. moveArrow가 동작중일때는 상태를 바꿔준다.
+  // 3. moveArrow가 동작중일때는 queue에 데이터를 추가할 수만 있음 / 동작은 앞선 동작이 끝난 후에!
+  return moveArrow(EARTH, hexQueue);
 }
 
 function send2earth() {
   initDom($earthInfo);
-  return moveArrow(MARS, $marsInfo.value);
+  return moveArrow(MARS, $marsInfo.value.split(''));
 }
 
-function moveArrow(planet, value) {
-  const inputHexOnMars = (value) => ($marsInfo.value += value);
-  const inputHexOnEarth = (value) => ($earthInfo.value += value);
+function moveArrow(planet, valueArr) {
+  const inputHexOnMars = (str) => ($marsInfo.value += str);
+  const inputHexOnEarth = (str) => ($earthInfo.value += str);
   const delay = () => new Promise((resolve) => setTimeout(resolve, 1000));
   let piece = 360 / 16;
-
-  let arr = value.split('');
+  let arr = Array.prototype.slice.call(valueArr); // 배열복사
+  console.log(valueArr);
+  console.log(arr);
   (async () => {
     for (let el of arr) {
       const hexCode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
@@ -116,6 +129,10 @@ function moveArrow(planet, value) {
         if (planet === EARTH) inputHexOnMars(el);
         if (planet === MARS) inputHexOnEarth(el);
       }, 1000);
+
+      hexQueue.shift();
+      console.log(valueArr);
+      console.log(hexQueue);
     }
   })();
 }
@@ -136,14 +153,18 @@ function arrowAnimation(deg) {
 
 function pieceAnamation(i) {
   setTimeout(() => {
-    // piece ani 로 분리
     $roulette.querySelector(`.piece-${i}`).style.borderTopColor = `${Object.values(colorSet)[i]}`;
     $roulette.querySelector(`.piece-${i}`).style.opacity = `50%`;
     $roulette.querySelector(`.piece-${i}`).style.transition = `1s ease-in-out`;
+    $roulette.querySelector(`.hex-${i}`).style.color = `${Object.values(colorSet)[i]}`;
+    $roulette.querySelector(`.hex-${i}`).style.opacity = `50%`;
+    $roulette.querySelector(`.hex-${i}`).style.transition = `1s ease-in-out`;
   }, 500);
   setTimeout(() => {
     $roulette.querySelector(`.piece-${i}`).removeAttribute('style');
     $roulette.querySelector(`.piece-${i}`).style.transition = `1s ease-in-out`;
+    $roulette.querySelector(`.hex-${i}`).removeAttribute('style');
+    $roulette.querySelector(`.hex-${i}`).style.transition = `1s ease-in-out`;
   }, 1000);
 }
 

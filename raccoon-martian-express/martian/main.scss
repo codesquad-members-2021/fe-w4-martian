@@ -110,7 +110,7 @@ body {
             border-top-width: $marsDiameter;
             border-right-width: tanDeg($pieceAngle);
             transform-origin: left bottom;
-            border-top-color: rgba(255, 255, 255, 0.5);
+            border-top-color: rgba(255, 255, 255, 0.2);
             transform: rotate($thisAngle - 1deg);
           }
           .hex-code {
@@ -119,7 +119,7 @@ body {
             position: absolute;
             top: -250px;
             left: 38px;
-            color: #333;
+            color: #fff;
             font-size: 30px;
             font-weight: 600;
             font-family: 'Space Mono', monospace;

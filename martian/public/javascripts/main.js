@@ -71,14 +71,11 @@ const receiveMsg = (msg) => {
     let hexMsg = getHexFromMsg(msg);       // 5초에 한 번씩 이 함수가 실행..
     const time = () => {
         setTimeout(() => {
-            const firstChar = hexMsg.slice(0,1);
-            hexMsg = hexMsg.substring(1);
-            console.log(hexMsg);
-            // rotateArrow(firstChar);
-            // if(hexMsg.length === 0) clearTimeout();
-            // else time();
 
-        }, 2000);
+            console.log(hexMsg);    // 이 내부가 실행될때마다 앞자리가 하나씩 짤린 hexMsg를 리턴받자.. 
+                                    // 잘린 앞자리는 rotateArrow(여기) 로..
+            // time();              // setTimeout 재귀
+        },0);
     }
     time();
 }

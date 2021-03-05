@@ -17,4 +17,15 @@ const _ = {
     appendChildren: (target, ...children) => children.forEach((child) => target.appendChild(child)),
 };
 
+export const setCanvasInfo = (canvas, color, arrowImage) => ({canvas, color, arrowImage});
+export const createTransceiverParts = (transceiverReceiveWrap, transceiverSendWrap, canvasInfo ) => {
+    return {
+        receiveContentInput: _.$(".received__text", transceiverReceiveWrap),
+        translateBtn: _.$(".translate__btn", transceiverReceiveWrap),
+        sendContentInput: _.$(".send__text", transceiverSendWrap),    
+        sendBtn: _.$(".send__btn", transceiverSendWrap),
+        canvasInfo,
+    }
+};
+
 export default _;

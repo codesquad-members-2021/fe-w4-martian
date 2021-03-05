@@ -1,27 +1,27 @@
-import _ from './util.js';
-import createCanvas from "./createCanvas.js";
-import convertCommunication from "./convert.js";
+import _, { setCanvasInfo, createTransceiverParts } from './util.js';
+import {createCanvas} from "./canvasController.js";
+import setCommunicate from "./communication/eventRegister.js";
 
-const earthCanvas = {
-    canvas: _.$('.earth-transceiver'),
-    color: "#1693DC",
-}
-const marsCanvas = {
-    canvas: _.$('.mars-transceiver'),
-    color: '#42023F',
-};
-createCanvas(earthCanvas);
-createCanvas(marsCanvas);
+const marsCanvas = _.$('.mars-transceiver');
+const marsCanvasColor = '#42023F';
+const marsArrowImage = _.$('.mars .transceiver__view img');
 
-// 공사중 ----▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-const transceiverReceiveWrap = _.$(".transceiver__control__receive");
-const transceiverSendWrap = _.$(".transceiver__control__send");
+const earthCanvas = _.$('.earth-transceiver');
+const earthCanvasColor = '#1693DC';
+const earthArrowImage = _.$('.earth .transceiver__view img');
 
-const transceiverParts = {
-    receiveContentInput: _.$("input", transceiverReceiveWrap),
-    translateBtn: _.$("button", transceiverReceiveWrap),
-    sendContentInput: _.$(".send__text", transceiverSendWrap),    
-    sendToEarthBtn: _.$("button", transceiverSendWrap),
-};
+const marsCanvasInfo = setCanvasInfo(marsCanvas, marsCanvasColor, marsArrowImage);
+const earthCanvasInfo = setCanvasInfo(earthCanvas, earthCanvasColor, earthArrowImage);
+createCanvas(marsCanvasInfo);
+createCanvas(earthCanvasInfo);
 
-convertCommunication(transceiverParts);
+
+const marsTransceiverReceiveWrap = _.$(".mars .transceiver__control__receive");
+const marsTransceiverSendWrap = _.$(".mars .transceiver__control__send");
+const earthTransceiverReceiveWrap = _.$(".earth .transceiver__control__receive");
+const earthTransceiverSendWrap = _.$(".earth .transceiver__control__send");
+
+const marsTransceiverParts = createTransceiverParts(marsTransceiverReceiveWrap, marsTransceiverSendWrap, marsCanvasInfo);
+const earthTransceiverParts = createTransceiverParts(earthTransceiverReceiveWrap, earthTransceiverSendWrap, earthCanvasInfo);
+setCommunicate(marsTransceiverParts, earthTransceiverParts);
+setCommunicate(earthTransceiverParts, marsTransceiverParts);

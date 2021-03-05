@@ -11,12 +11,12 @@
 }
 
 
-@for $i from 1 through 16 {
+@for $i from 0 through 15 {
     .transform__rotate-#{$i} {        
-        @if $i == 1 {
+        @if $i == 0 {
             transform: rotate(11.25deg);
         } @else {
-            transform: rotate(( ($i - 1) * 22.5deg) + 11.25deg);
+            transform: rotate(($i * 22.5deg) + 11.25deg);
         }
         // 1. 11.25 -> 2. 33.75(22.5 +) -> 3. 56.25(22.5 +) -> 4 ....
     }

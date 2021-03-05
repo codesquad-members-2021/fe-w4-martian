@@ -68,19 +68,27 @@ section {
         }
 
         input {
-            padding: 8px 3px;
+            padding: 8px 5px;
             box-shadow: 0 0 0 1.05px $lightBlack;
-            border-radius: 3%;
-            width: 100%;
+            border-radius: 30px;
+            width: 400px;                        
         }
+        .received__text {
+            background-color: #dfdfdf;
+        }
+
         button {
-            cursor: pointer;
+            cursor: pointer;            
             font-weight: 600;
             font-size: 15px;
             padding: 10px 5px;
             border-radius: 10%;            
             color: $white;
             background-color: $btnBackColor;
+        }
+        button:disabled {
+            cursor: not-allowed;
+            background-color: #572f04;
         }
     }
 }

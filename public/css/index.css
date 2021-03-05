@@ -55,10 +55,13 @@ section {
   font-size: 18px;
 }
 .transceiver__control div input {
-  padding: 8px 3px;
+  padding: 8px 5px;
   box-shadow: 0 0 0 1.05px #333;
-  border-radius: 3%;
-  width: 100%;
+  border-radius: 30px;
+  width: 400px;
+}
+.transceiver__control div .received__text {
+  background-color: #dfdfdf;
 }
 .transceiver__control div button {
   cursor: pointer;
@@ -68,6 +71,10 @@ section {
   border-radius: 10%;
   color: #fff;
   background-color: #b45f06;
+}
+.transceiver__control div button:disabled {
+  cursor: not-allowed;
+  background-color: #572f04;
 }
 
 /*# sourceMappingURL=index.css.map */

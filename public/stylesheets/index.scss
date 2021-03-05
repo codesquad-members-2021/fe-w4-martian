@@ -9,6 +9,7 @@ video {
     z-index: -1;
 }
 
+
 .title {
     display: flex;
     justify-content: space-between;
@@ -23,12 +24,14 @@ video {
     justify-content:space-between;
     align-items: center;
 }
+
 .mars {
     position:relative;
     height:400px;
     margin-top: 50px;
     margin-left: 50px;
 }
+
 
 .allow {
     position:absolute;
@@ -136,7 +139,9 @@ video {
 input {
     display:block;
     width:350px;
+
     height: 50px;
+
     padding: 0;
     border: 1px solid;
     font-size: 20px;
@@ -145,6 +150,7 @@ input {
     border-radius: 10px;
     text-align: center;
     outline: none;
+
 }
 
 .button {

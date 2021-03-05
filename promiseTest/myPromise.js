@@ -1,9 +1,15 @@
 const { log } = console;
 <<<<<<< HEAD
+<<<<<<< HEAD
 const arr = [1, 2, 3, 4, 5];
 const getDelay = (v, time) => new Promise((resolve) => setTimeout(() => resolve(v), time));
 
 <<<<<<< HEAD
+=======
+const arr = [1, 2, 3, 4, 5];
+const getDelay = (v, time) => new Promise((resolve) => setTimeout(() => resolve(v), time));
+
+>>>>>>> 10bb103... Fix. 깃충돌로 생긴 오류들 수정
 const cbFn = async (acc, v) => {
   const res = await getDelay(v, 1000);
   log('acc+res:', acc + res);
@@ -14,6 +20,7 @@ const reduceAsync = async (cbFn, acc, iter) => {
   if (!iter) {
     iter = acc[Symbol.iterator]();
     acc = iter.next().value;
+<<<<<<< HEAD
   }
   for (const x of iter) {
     acc = await cbFn(acc, x);
@@ -31,11 +38,13 @@ class MyPromise {
     this.errCbList = [];
     this.status;
     fn(this.resolve.bind(this), this.reject.bind(this));
+=======
+>>>>>>> 10bb103... Fix. 깃충돌로 생긴 오류들 수정
   }
-  then(cb) {
-    this.cbList.push(cb);
-    return this;
+  for (const x of iter) {
+    acc = await cbFn(acc, x);
   }
+<<<<<<< HEAD
   catch(cb) {
     this.errCbList.push(cb);
   }
@@ -119,6 +128,10 @@ test();
 //     log('error');
 //   });
 >>>>>>> aa48666... Refactor. asyncForEach, promiseDelay 적용
+=======
+  return acc;
+};
+>>>>>>> 10bb103... Fix. 깃충돌로 생긴 오류들 수정
 
 const print = async () => {
   const sum = await reduceAsync(cbFn, arr);

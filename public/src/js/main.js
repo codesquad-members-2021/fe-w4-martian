@@ -50,8 +50,8 @@ const dealHex = async (value, idx, arr) => {
   }).then(({ value, idx }) => {
     arrowRotate(value);
     setInputValue(value, receiveBox);
-    if (isLastIdx(idx, arr)) setInputValue(BLANK, receiveBox);
     blingText({ value, clear: false });
+    if (isLastIdx(idx, arr)) setInputValue(BLANK, receiveBox);
   });
 };
 //수신 박스 able로 만들기

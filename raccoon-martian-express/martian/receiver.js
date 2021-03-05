@@ -39,10 +39,15 @@ $marsInterpretButton.addEventListener('click', interpretor);
 $earthInput.addEventListener('keyup', immiInterpretor);
 $marsInput.addEventListener('keyup', immiInterpretor);
 $earthInput.addEventListener('click', initInput);
-// $earthInput.addEventListener('click', receiver);
 $marsInput.addEventListener('click', initInput);
 $send2marsButton.addEventListener('click', send2mars);
 $send2earthButton.addEventListener('click', send2earth);
+
+// Send to Mars 버튼을 누르면 여기에 데이터가 저장된다.
+// 이걸 서버에 저장할 수 있나...
+let hexQueue = [];
+let receiver;
+let arrowStatus = false;
 
 function initInput(e) {
   if (e.currentTarget.value.length > 0) e.currentTarget.value = '';
@@ -58,8 +63,16 @@ function immiInterpretor(e) {
 function interpretor(e) {
   const isEarthInterpretButton = () => e.target.id === 'earth-interpret--button';
   const isMarsInterpretButton = () => e.target.id === 'mars-interpret--button';
-  if (isEarthInterpretButton()) $earthInfo.value = hex2str($earthInfo.value);
-  if (isMarsInterpretButton()) $marsInfo.value = hex2str($marsInfo.value);
+  if (isEarthInterpretButton()) {
+    $earthInfo.value = hex2str($earthInfo.value);
+    $earthInterpretButton.disabled = true;
+    $send2earthButton.disabled = false;
+  }
+  if (isMarsInterpretButton()) {
+    $marsInfo.value = hex2str($marsInfo.value);
+    $marsInterpretButton.disabled = true;
+    $send2marsButton.disabled = false;
+  }
 }
 
 function str2hex(str) {
@@ -77,15 +90,14 @@ function hex2str(hex) {
 }
 
 function initDom(dom) {
+  if (arrowStatus) return;
   if (dom.value.length > 0) dom.value = '';
 }
 
-// Send to Mars 버튼을 누르면 여기에 데이터가 저장된다.
-// 이걸 서버에 저장할 수 있나...
-let hexQueue = [];
-
 function setHexQueue() {
-  $earthInfo.value.split('').forEach((el) => hexQueue.push(el));
+  let queue = [];
+  $earthInfo.value.split('').forEach((el) => queue.push(el));
+  hexQueue.push(queue);
   return hexQueue;
 }
 
@@ -94,19 +106,13 @@ function isEmpty(arr) {
 }
 
 function messageReceiver() {
-  // test가 끝나면 setInterval로 바꿀것
   return new Promise((resolve) => {
     resolve(hexQueue);
-  })
-    .then((data) => {
-      if (isEmpty(data)) return;
-      moveArrow(EARTH, data);
-      stopReceiver();
-    })
-    .then(() => startReceiver());
+  }).then((data) => {
+    if (isEmpty(data)) return;
+    moveArrow(EARTH, data);
+  });
 }
-
-let receiver;
 
 function startReceiver() {
   // console.log('start receiver');
@@ -123,13 +129,15 @@ startReceiver();
 
 function send2mars() {
   setHexQueue();
+  $send2marsButton.disabled = true;
   initDom($marsInfo);
   return;
 }
 
 function send2earth() {
   initDom($earthInfo);
-  return moveArrow(MARS, $marsInfo.value.split(''));
+  $send2earthButton.disabled = true;
+  return moveArrow(MARS, [$marsInfo.value.split('')]);
 }
 
 function moveArrow(planet, valueArr) {
@@ -138,11 +146,14 @@ function moveArrow(planet, valueArr) {
   const delay = () => new Promise((resolve) => setTimeout(resolve, 1000));
   const hexCode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
   let piece = 360 / hexCode.length;
-  let arr = Array.prototype.slice.call(valueArr); // 배열복사
-  hexQueue = []; // 배열 초기화
 
+  let arr = Array.prototype.slice.call(valueArr[0]); // 배열복사
+
+  hexQueue.shift();
+  console.log(hexQueue);
   (async () => {
     for (let el of arr) {
+      arrowStatus = true;
       await delay(); // 아.. 얘가 '기다려~' 하는 애라서 await이네...
       // await은 promise를 기다린다. from DD
       let idx = hexCode.indexOf(el);
@@ -155,14 +166,16 @@ function moveArrow(planet, valueArr) {
       }
 
       // 여긴 못빼고있다.....
+      // ...아...
       setTimeout(() => {
         if (planet === EARTH) inputHexOnMars(el);
         if (planet === MARS) inputHexOnEarth(el);
       }, 1000);
-
-      hexQueue.shift();
-      console.log(arr);
     }
+    if (planet === EARTH) $marsInterpretButton.disabled = false;
+    if (planet === MARS) $earthInterpretButton.disabled = false;
+
+    arrowStatus = false;
   })();
 }
 

@@ -47,3 +47,4 @@
 3. 캔버스 함수 나누기
 4. 캔버스 scss for문으로 구현해보기
 5. forEach말고 map혹은 reduce로 구현해보기
+   ddsds

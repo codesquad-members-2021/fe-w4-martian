@@ -29,7 +29,7 @@ table {
     left: 205px;
     top: 225px;
     width: 90px;
-    transform: rotate(-78.5deg);
+    transform: rotate(0deg);
     transition: all 1s;
   }
 
@@ -64,6 +64,11 @@ table {
       color: grey;
     }
 
+    // .main--hex--button {
+    //   background-color: lightgrey;
+    //   pointer-events: none;
+    // }
+
     button {
       background-color: #0396a6;
       color: white;
@@ -78,15 +83,34 @@ table {
       }
     }
   }
+
   .notification {
     width: 260px;
-    height: 40px;
-    visibility: hidden;
-    line-height: 40px;
-    color: lightgrey;
-    text-align: center;
-    background-color: #0396a6;
-    border-radius: 10px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    .notification--message {
+      width: 170px;
+      height: 30px;
+      font-size: 14px;
+      line-height: 30px;
+      text-align: center;
+      display: none;
+      background-color: #d90452;
+      color: white;
+      font-weight: bold;
+    }
+
+    .notification--completion {
+      width: 260px;
+      height: 40px;
+      display: none;
+      line-height: 40px;
+      color: lightgrey;
+      text-align: center;
+      background-color: #0396a6;
+      border-radius: 10px;
+    }
   }
 }
 

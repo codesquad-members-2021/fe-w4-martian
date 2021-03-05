@@ -29,7 +29,7 @@ table {
   left: 205px;
   top: 225px;
   width: 90px;
-  transform: rotate(-78.5deg);
+  transform: rotate(0deg);
   transition: all 1s;
 }
 .main--left .receiver img {
@@ -76,8 +76,25 @@ table {
 }
 .main--right .notification {
   width: 260px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+.main--right .notification .notification--message {
+  width: 170px;
+  height: 30px;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  display: none;
+  background-color: #d90452;
+  color: white;
+  font-weight: bold;
+}
+.main--right .notification .notification--completion {
+  width: 260px;
   height: 40px;
-  visibility: hidden;
+  display: none;
   line-height: 40px;
   color: lightgrey;
   text-align: center;

@@ -6,4 +6,8 @@ const _ = {
     target.addEventListener(eventType, callback, options),
 };
 
-export default _;
+const hexToDec = (val) => {
+  return parseInt(val, 16);
+};
+
+export { _, hexToDec };

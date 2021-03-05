@@ -1,107 +1,27 @@
 const { log } = console;
-const go = (arg, ...fns) => fns.reduce((res, fn) => fn(res), arg);
-const pipe = (fn, ...fns) => (...args) => go(fn(...args), ...fns);
-class MyPromise {
-  constructor(fn) {
-    this.cbList = [];
-    this.errCbList = [];
-    this.status;
-    fn(this.resolve.bind(this), this.reject.bind(this));
+const arr = [1, 2, 3, 4, 5];
+const getDelay = (v, time) => new Promise((resolve) => setTimeout(() => resolve(v), time));
+
+const cbFn = async (acc, v) => {
+  const res = await getDelay(v, 1000);
+  log('acc+res:', acc + res);
+  return acc + res;
+};
+
+const reduceAsync = async (cbFn, acc, iter) => {
+  if (!iter) {
+    iter = acc[Symbol.iterator]();
+    acc = iter.next().value;
   }
-  then(cb) {
-    this.cbList.push(cb);
-    return this;
+  for (const x of iter) {
+    acc = await cbFn(acc, x);
   }
-  catch(cb) {
-    this.errCbList.push(cb);
-  }
-  resolve(value) {
-    if (this.status !== 'rejected') {
-      this.status = 'fulfilled';
-      pipe(...this.cbList)(value);
-    }
-    return this;
-  }
-  reject() {
-    if (this.status !== 'fulfilled') {
-      this.status = 'rejected';
-      if (this.errCbList.length) pipe(...this.errCbList)();
-      else console.error('rejected');
-    }
-    return this;
-  }
-}
+  return acc;
+};
 
-const k = [1, 2, 3, 4, 5, 6, 7, 8];
+const print = async () => {
+  const sum = await reduceAsync(cbFn, arr);
+  log('sum: ', sum);
+};
 
-async function test() {
-  const promiseFunction = (v) => new MyPromise((resolve) => setTimeout(() => resolve(v), 1000));
-
-  // for (let i = 0; i < k.length; i++) {
-  //   const res = await promiseFunction(i);
-  //   console.log(res);
-  // }
-
-  asyncForEach(k, async (v, idx) => {
-    await promiseFunction(v).then(log);
-    // console.log(res);
-  });
-}
-
-async function asyncForEach(callback, array) {
-  for (let index = 0; index < array.length; index++) {
-    const result = await callback(array[index], index, array);
-  }
-}
-
-<<<<<<< HEAD
-// test();
-
-new Promise((res) => {
-  setTimeout(() => {
-    res(1);
-  }, 1000);
-})
-  .then((v) => {
-    log(v + 1);
-    setTimeout(() => {
-      return v + 1;
-    }, 1000);
-  })
-  .then((v) => {
-    setTimeout(() => {
-      log(v + 1);
-      return v + 1;
-    }, 1000);
-  })
-  .then(log);
-=======
-test();
->>>>>>> Kyle
-
-// new MyPromise((res, rej) => {
-//   setTimeout(() => {
-//     res(1);
-//     rej();
-//   }, 1000);
-// })
-//   .then((v) => v + 1)
-//   .then((v) => v + 2)
-//   .then(log)
-//   .catch(() => {
-//     log('error');
-//   });
-
-// console.log('start');
-// new MyPromise((res, rej) => res('hello'))
-//   .then((v) => v + ' world')
-//   .then((v) => v + ' and Kyle')
-//   .then(log);
-// console.log('end');
-
-// new Promise((res, rej) => {
-//   setTimeout(() => {
-//     rej('error');
-//     res(1);
-//   }, 1000);
-// }).then(log);
+print();

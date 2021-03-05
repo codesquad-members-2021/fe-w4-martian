@@ -15,9 +15,9 @@ export const _ = {
   },
 };
 
-export const asyncForEach = curry(async (callback, array, ...args) => {
+export const asyncForEach = curry(async (callback, array) => {
   for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array, ...args);
+    await callback(array[index], index, array);
   }
 });
 

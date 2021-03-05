@@ -26,11 +26,12 @@ const finishSetting = () => {
 };
 
 // 한단어의 16진수를 처리하는 forEach 콜백함수 / 이름이 마땅히..생각이 안나네요
-const dealChar = (value, idx, arr) => {
-  promiseDelay({
+const dealChar = async (value, idx, arr) => {
+  await promiseDelay({
     value: { value, idx, arr },
     delay: idx === 0 ? 0 : 5000,
   }).then(({ value, idx, arr }) => {
+    console.log(value);
     const charArray = value.split('');
     asyncForEach(dealHex, charArray);
     if (isLastIdx(idx, arr)) finishSetting();
@@ -38,15 +39,15 @@ const dealChar = (value, idx, arr) => {
 };
 
 //16진수 하나를 처리하는 forEach 콜백함수
-const dealHex = (value, idx, arr) => {
-  promiseDelay({
+const dealHex = async (value, idx, arr) => {
+  await promiseDelay({
     value: { value, idx },
     delay: idx === 0 ? 0 : 2000,
   }).then(({ value, idx }) => {
     arrowRotate(value);
     setInputValue(value, receiveBox);
-    if (isLastIdx(idx, arr)) setInputValue(BLANK, receiveBox);
     blingText({ value, clear: false });
+    if (isLastIdx(idx, arr)) setInputValue(BLANK, receiveBox);
   });
 };
 
@@ -68,4 +69,4 @@ const init = () => {
 };
 
 init();
-sendMessage('he');
+sendMessage('hello');

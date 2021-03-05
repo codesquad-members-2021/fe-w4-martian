@@ -36,45 +36,14 @@ const sendContentInputKeyUpEventHandler = ({ target }, receiveContentInput) => {
 // 발신정보입력, 다른행성으로 메시지보내기(btn):  click event
 const sendBtnClickEvent = (transceiverParts, anotherTransceiverParts) => {
     const { sendBtn, sendContentInput, sendHiddenInput } = transceiverParts;
+    const { receiveContentInput: anotherReceiveInput } = anotherTransceiverParts;
 
     _.addEvent(sendBtn, 'click', () =>
-        sendBtnClickEventHandler(sendContentInput, sendHiddenInput, anotherTransceiverParts)
+        sendBtnClickEventHandler(sendContentInput, sendHiddenInput, anotherReceiveInput)
     );
 };
 
-const sendBtnClickEventHandler = (sendContentInput, sendHiddenInput, anotherTransceiverParts) => {   
-    const {
-        receiveContentInput: anotherReceiveInput,
-        canvasInfo: anotherCanvasInfo,
-        translateBtn: anotherTranslateBtn, 
-    } = anotherTransceiverParts;
-
-    let sendContentValue = sendContentInput.value;
-    if (sendContentValue.length === 0) return;
-    
-    if (anotherReceiveInput.value.length > 0) 
-        anotherReceiveInput.value = '';
-     
-    const infoFromPlanet = {
-        anotherCanvasInfo,
-        anotherInput: anotherReceiveInput,
-        resultText: sendContentValue.split('').map((v) => charToHex(v).toUpperCase()).join(" "),
-        charPos: 0
-    };
-
-    const timeout = 2000;    
-    sendMessageAnotherPlanet(infoFromPlanet, timeout)
-        .then(() => anotherTranslateBtn.disabled = false)
-        .catch((err) => console.error(err.message));
-    
-
-/*
-    const {
-        receiveContentInput: anotherReceiveInput,
-        canvasInfo: anotherCanvasInfo,
-        translateBtn: anotherTranslateBtn,
-    } = anotherTransceiverParts;
-
+const sendBtnClickEventHandler = (sendContentInput, sendHiddenInput, anotherReceiveInput) => {
     let sendContentValue = sendContentInput.value;
     if (sendContentValue.length === 0) return;
 
@@ -85,10 +54,9 @@ const sendBtnClickEventHandler = (sendContentInput, sendHiddenInput, anotherTran
         .map((v) => charToHex(v).toUpperCase())
         .join(' ');
     sendHiddenInput.dataset.send = resultData;
-*/
 };
 
-// dataset 속성이 바뀌는 걸 감지하기 위해 MutationObserver 사용 (미완)
+// dataset.send(data-send) 속성이 바뀌는 걸 감지하기 위해 MutationObserver 사용
 const setMutationObserver = (node, nodeAttrName) => {
     const observer = new MutationObserver((mutations) => 
         mutations.forEach((mutation) => {
@@ -115,7 +83,9 @@ const setCommunicate = (transceiverParts, anotherTransceiverParts) => {
     sendContentInputKeyUpEvent(sendContentInput, receiveContentInput);
     sendBtnClickEvent(transceiverParts, anotherTransceiverParts);
 
-    setMutationObserver(sendHiddenInput);
+    setInterval(() =>  console.log(sendHiddenInput.dataset.send) , 5000);
+
+    // setMutationObserver(sendHiddenInput);
 };
 
 export default setCommunicate;

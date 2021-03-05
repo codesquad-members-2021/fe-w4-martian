@@ -21,5 +21,4 @@ export const asyncForEach = curry(async (callback, array, ...args) => {
   }
 });
 
-export const promiseDelay = ({ value, delay }) =>
-  new Promise((resolve, rej) => setTimeout(() => resolve(value), delay));
+export const promiseDelay = ({ value, delay }) => new MyPromise((resolve) => setTimeout(() => resolve(value), delay));

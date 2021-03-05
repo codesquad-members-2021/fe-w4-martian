@@ -51,7 +51,6 @@ const dealHex = (value, idx, arr) => {
 };
 
 //인자로문자 -> 실행
-// const sendMessage = pipe(stringToHexArr, Promise.resolve(asyncForEach(dealChar)), finishSetting);
 const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
 //input박스 문자 가져오기 -> sendMessage
 const sendMessageToMars = pipe(getInputValue, sendMessage);

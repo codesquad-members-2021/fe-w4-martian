@@ -1,22 +1,9 @@
 import { hexadecimals, selectors, rotateState, times } from "../util.js";
 import MyPromise from "../Promise.js";
 
-const turn = (diff, currDeg, element, isClockWise) => {
-  element.style.transition = `${times.transition}ms`;
-  if (isClockWise) {
-    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDeg + diff * 22.5}deg)`;
-    currDeg += diff * 22.5;
-  }
-  if (!isClockWise) {
-    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDeg - diff * 22.5}deg)`;
-    currDeg -= diff * 22.5;
-  }
-  return currDeg;
-};
+const getEndPoint = (array, target) => array.findIndex((item) => item.toString() === target);
 
-const lightOn = (target, className) => target[1].classList.add(className);
-
-const lightOut = (target) => target[1].classList.remove("light");
+const capital = (letter) => letter.toUpperCase();
 
 const findTextTarget = (elements, capital) => {
   // console.log(elements);
@@ -41,9 +28,22 @@ const turnAsDirection = ({ state, key }, element, { diff, absDiff }) => {
   return currDeg;
 };
 
-const getEndPoint = (array, target) => array.findIndex((item) => item.toString() === target);
+const turn = (diff, currDeg, element, isClockWise) => {
+  element.style.transition = `${times.transition}ms`;
+  if (isClockWise) {
+    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDeg + diff * 22.5}deg)`;
+    currDeg += diff * 22.5;
+  }
+  if (!isClockWise) {
+    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDeg - diff * 22.5}deg)`;
+    currDeg -= diff * 22.5;
+  }
+  return currDeg;
+};
 
-const capital = (letter) => letter.toUpperCase();
+const lightOn = (target, className) => target[1].classList.add(className);
+
+const lightOut = (target) => target[1].classList.remove("light");
 
 const adela = (f, ...fns) => (...args) =>
   args.length

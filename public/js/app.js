@@ -1,24 +1,35 @@
-import { MyPromise } from "./myPromise";
 import { draw } from "./canvas";
-import { str2hex, hex2str } from "./send";
-const { log } = console;
+import { $ } from "./selectors"
+import { str2ascArr, asc2hex, devideArr, devideText, printData, activateButton, printInterpretation, printSendMessage, printToEarthMessage } from "./transceiver";
 
 const init = () => {
+    const str = "hello";
+    const data = devideArr(str2ascArr(str));
+    const delayTime = 100;
+    const totalDelayTime = delayTime * (data.length - 1);
+    const input = $.sendMessage;
     draw();
-    hex2str()
+    printData({
+        target: $.sendReceiveMessage,
+        data,
+        delayTime
+    });
+    activateButton({
+        button: $.interpretButton,
+        totalDelayTime
+    });
+    printInterpretation({
+        target: $.interpretedText,
+        button: $.interpretButton,
+        data: asc2hex(str2ascArr(str))
+    });
+    input.addEventListener('keyup', () => {
+        printSendMessage({
+            input,
+            sendMessage: $.sendMessage.value,
+            target: $.interpretedSendMessage
+        })
+    });
+    printToEarthMessage();
 };
 init();
-
-
-/*Mypromise Test
-
-console.log('start');
-new MyPromise("Hello ", 1)
-    .then(v => v + "World! ")
-    .then(v => v + "this is swing")
-    .then(console.log);
-console.log('end');
-
-console.log(hex2str(arr))
-
-*/

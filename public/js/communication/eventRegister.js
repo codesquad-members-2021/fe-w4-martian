@@ -54,13 +54,13 @@ const sendBtnClickEventHandler = (sendContentInput, sendHiddenInput, anotherRece
         .split('')
         .map((v) => charToHex(v).toUpperCase())
         .join(' ');
-    sendHiddenInput.dataset.send = resultData;
+    sendHiddenInput.value = resultData;
 };
 
 // 몇 초마다 수신 체크 (5초마다 수신확인)
 const checkReceive = (sendHiddenInput, anotherTransceiverParts, interval) => {
     setInterval(() => {                
-        if (!sendHiddenInput.dataset.send) return;
+        if (!sendHiddenInput.value) return;
         
         const {
             receiveContentInput: anotherReceiveInput,
@@ -71,10 +71,10 @@ const checkReceive = (sendHiddenInput, anotherTransceiverParts, interval) => {
         const infoFromPlanet = {
             anotherCanvasInfo,
             anotherInput: anotherReceiveInput,
-            resultData: sendHiddenInput.dataset.send,
+            resultData: sendHiddenInput.value,
             charPos: 0
         };
-        sendHiddenInput.dataset.send = '';
+        sendHiddenInput.value = '';
     
         const timeout = 2000;    
         sendMessageAnotherPlanet(infoFromPlanet, timeout)

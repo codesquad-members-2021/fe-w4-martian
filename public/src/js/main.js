@@ -19,8 +19,10 @@ const isLastIdx = (idx, arr) => idx === arr.length - 1;
 
 //마지막까지 다돌면 하는 셋팅
 const finishSetting = () => {
-  blingText({ idx: null, clear: true }); //글자 깜빡임 interval 제거
-  makeBtnAble(translateBtn);
+  setTimeout(() => {
+    blingText({ idx: null, clear: true }); //글자 깜빡임 interval 제거
+    makeBtnAble(translateBtn);
+  }, 5000);
 };
 
 // 한단어의 16진수를 처리하는 forEach 콜백함수 / 이름이 마땅히..생각이 안나네요
@@ -36,6 +38,7 @@ const dealChar = async (value, idx, arr) => {
     console.log(value);
     const charArray = value.split('');
     asyncForEach(dealHex, charArray);
+    if (isLastIdx(idx, arr)) finishSetting();
   });
 };
 
@@ -60,6 +63,7 @@ const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
 const sendMessageToMars = pipe(getInputValue, sendMessage);
 
 //인자로문자 -> 실행
+// const sendMessage = pipe(stringToHexArr, Promise.resolve(asyncForEach(dealChar)), finishSetting);
 const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
 //input박스 문자 가져오기 -> sendMessage
 const sendMessageToMars = pipe(getInputValue, sendMessage);

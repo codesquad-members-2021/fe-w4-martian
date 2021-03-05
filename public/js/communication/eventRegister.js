@@ -47,7 +47,8 @@ const sendBtnClickEventHandler = (sendContentInput, sendHiddenInput, anotherRece
     let sendContentValue = sendContentInput.value;
     if (sendContentValue.length === 0) return;
 
-    if (anotherReceiveInput.value.length > 0) anotherReceiveInput.value = '';
+    if (anotherReceiveInput.value.length > 0) 
+        anotherReceiveInput.value = '';
 
     const resultData = sendContentValue
         .split('')
@@ -56,17 +57,51 @@ const sendBtnClickEventHandler = (sendContentInput, sendHiddenInput, anotherRece
     sendHiddenInput.dataset.send = resultData;
 };
 
-// dataset.send(data-send) 속성이 바뀌는 걸 감지하기 위해 MutationObserver 사용
-const setMutationObserver = (node, nodeAttrName) => {
+
+// dataset.send(data-send) 속성이 바뀌는 걸 감지하기 위해 MutationObserver 사용.
+// 굳이 이렇게 안해도 될 듯 하지만..
+const setCheckObserver = (node, anotherTransceiverParts, interval) => {
     const observer = new MutationObserver((mutations) => 
         mutations.forEach((mutation) => {
-            const { type, attributeName } = mutation;
-            if (type == 'attributes' && attributeName === nodeAttrName)
-                console.log(`${nodeAttrName} change`);            
+            const { type, target } = mutation;
+            if (type == 'attributes' && target === node)
+                checkReceive(node, anotherTransceiverParts, interval);
         })
     );
     observer.observe(node, { attributes: true });
 };
+
+// 몇 초마다 수신 체크 (5초마다 수신확인)
+const checkReceive = (sendHiddenInput, anotherTransceiverParts, interval) => {
+    const intervalId = setInterval(() => {        
+        console.log(1);
+        if (!sendHiddenInput.dataset.send) return;
+        
+        const {
+            receiveContentInput: anotherReceiveInput,
+            canvasInfo: anotherCanvasInfo,
+            translateBtn: anotherTranslateBtn, 
+        } = anotherTransceiverParts;
+
+        const infoFromPlanet = {
+            anotherCanvasInfo,
+            anotherInput: anotherReceiveInput,
+            resultData: sendHiddenInput.dataset.send,
+            charPos: 0
+        };
+        sendHiddenInput.dataset.send = '';
+    
+        const timeout = 2000;    
+        sendMessageAnotherPlanet(infoFromPlanet, timeout)
+            .then(() => {
+                anotherTranslateBtn.disabled = false;
+                clearInterval(intervalId);
+            })
+            .catch((err) => console.error(err.message));
+
+    }, interval);
+};
+
 
 
 
@@ -82,10 +117,9 @@ const setCommunicate = (transceiverParts, anotherTransceiverParts) => {
     translateBtnClickEvent(translateBtn, receiveContentInput);
     sendContentInputKeyUpEvent(sendContentInput, receiveContentInput);
     sendBtnClickEvent(transceiverParts, anotherTransceiverParts);
-
-    setInterval(() =>  console.log(sendHiddenInput.dataset.send) , 5000);
-
-    // setMutationObserver(sendHiddenInput);
+    
+    const checkReceiveIntervalTime = 5000;
+    setCheckObserver(sendHiddenInput, anotherTransceiverParts, checkReceiveIntervalTime);
 };
 
 export default setCommunicate;

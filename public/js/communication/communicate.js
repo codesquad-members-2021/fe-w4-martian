@@ -28,25 +28,25 @@ const receivedData = (canvas, timeout) => {
 // 화살표 위치 변경, 캔버스 색상 변경
 const changeArrowAndPieColor = (infoFromPlanet, timeout) =>
     new Promise((resolve, reject) => {
-        const { anotherCanvasInfo, anotherInput, resultText } = infoFromPlanet;
+        const { anotherCanvasInfo, anotherInput, resultData } = infoFromPlanet;
         let { charPos } = infoFromPlanet;
         const { arrowImage } = anotherCanvasInfo;
 
         const executeTimer = () => {
             setTimeout(() => {
                 try {
-                    if (resultText === anotherInput.value) {
+                    if (resultData === anotherInput.value) {
                         arrowImage.className = '';
                         resolve('changeArrowAndPieColor OK');                        
                     } else {
-                        let currChar = resultText[charPos];
+                        let currChar = resultData[charPos];
                         if (!currChar)
                             throw new Error('Error - changeArrowAndPieColor');
                         anotherInput.value += currChar;
                         charPos++;
 
                         if (checkWhiteSpace(currChar)) {
-                            currChar = resultText[charPos];
+                            currChar = resultData[charPos];
                             anotherInput.value += currChar;
                             charPos++;
                         }
@@ -73,7 +73,7 @@ const sendMessageAnotherPlanet = (infoFromPlanet, timeout) => {
             changeArrowAndPieColor(infoFromPlanet, timeout).then(() =>
                 resolve('OK'),
             ),
-        );
+        ).catch((err)=> console.error(err));
     });
 };
 

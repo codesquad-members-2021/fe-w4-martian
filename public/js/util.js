@@ -22,7 +22,8 @@ export const createTransceiverParts = (transceiverReceiveWrap, transceiverSendWr
     return {
         receiveContentInput: _.$(".received__text", transceiverReceiveWrap),
         translateBtn: _.$(".translate__btn", transceiverReceiveWrap),
-        sendContentInput: _.$(".send__text", transceiverSendWrap),    
+        sendContentInput: _.$(".send__text", transceiverSendWrap),   
+        sendHiddenInput: _.$(".send__transfer__data", transceiverSendWrap),   
         sendBtn: _.$(".send__btn", transceiverSendWrap),
         canvasInfo,
     }

@@ -12,7 +12,7 @@
 
 
 @for $i from 0 through 15 {
-    .transform__rotate-#{$i} {        
+    .transform__rotate__#{$i} {
         @if $i == 0 {
             transform: rotate(11.25deg);
         } @else {

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+
+  <canvas class="big_circle" width="1000" height="1000"></canvas>
+  <i class="material-icons" data-action="point">
+    north
+  </i>
+
+  <form class = "hex_info">
+    <h1>송수신정보</h1>
+    <input placeholder="16진수" class = "hex_info_input">
+    <button class = "hex_info_submit"  disabled = true>해석하기</button>
+  </form>
+
+  <form class = "str_info">
+    <h1>발신정보입력</h1>
+    <input placeholder="문자열" class = "str_info_input">
+    <button class = "str_info_submit"  disabled = true>지구로 보내기</button>
+  </form>
+
+  <div class = mode_info>
+    <h2 class = "current_mode">수신모드</h2>
+    <button class = "toggle_mode">모드 변경</button>
+  </div>
+  <script type="module" src="/javascripts/main.js"></script>
+  <!-- <script type="module" src="/javascripts/myPromise.js"></script> -->
+
+</body>
+
+</html>

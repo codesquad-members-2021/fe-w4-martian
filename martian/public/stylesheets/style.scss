@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+$arrow_position : 285px;
+
+
+
+
+.material-icons {
+    color:rgb(52, 31, 170);
+    position: absolute;
+    left: $arrow_position;
+    top: $arrow_position;
+    font-weight: bold;
+    font-size: 300%;
+    transition: transform 1s;
+    transform: rotate(0.03turn); 
+}
+
+.str_info {
+    position: absolute;
+    left:400px;
+    top:600px;
+}
+
+.hex_info {
+    position: absolute;
+    left:50px;
+    top:600px;
+}
+
+.mode_info {
+    position: absolute;
+    left: 600px;
+    top: 300px;
+}
+
+
+
+.num_wrapper {
+    
+    .num_0 {
+        position: absolute;
+        left: 340px;
+        top: 130px;
+    }
+    .num_1 {
+        position: absolute;
+        left: 400px;
+        top: 150px;
+    }
+    .num_2 {
+        position: absolute;
+        left: 450px;
+        top: 200px;
+    }
+    .num_3 {
+        position: absolute;
+        left: 470px;
+        top: 260px;
+    }
+    .num_4 {
+        position: absolute;
+        left: 470px;
+        top: 330px;
+    }
+    .num_5 {
+        position: absolute;
+        left: 450px;
+        top: 390px;
+    }
+    .num_6 {
+        position: absolute;
+        left: 400px;
+        top: 440px;
+    }
+    .num_7 {
+        position: absolute;
+        left: 340px;
+        top: 470px;
+    }
+    .num_8 {
+        position: absolute;
+        left: 270px;
+        top: 470px;
+    }
+    .num_9 {
+        position: absolute;
+        left: 200px;
+        top: 450px;
+    }
+    .num_a {
+        position: absolute;
+        left: 160px;
+        top: 400px;
+    }
+    .num_b {
+        position: absolute;
+        left: 140px;
+        top: 340px;
+    }
+    .num_c {
+        position: absolute;
+        left: 140px;
+        top: 260px;
+    }
+    .num_d {
+        position: absolute;
+        left: 160px;
+        top: 200px;
+    }
+    .num_e {
+        position: absolute;
+        left: 200px;
+        top: 160px;
+    }
+    .num_f {
+        position: absolute;
+        left: 270px;
+        top: 130px;
+    }
+
+}

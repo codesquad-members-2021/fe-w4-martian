@@ -7,7 +7,7 @@ const BLANK = ' ';
 //input box
 export const setInputValue = (value, inputBox) => (inputBox.value += value);
 export const getInputValue = (inputBox) => inputBox.value;
-export const initInputValue = (inputBox) => setInputValue('', inputBox);
+export const initInputValue = (inputBox) => (inputBox.value = '');
 
 //수신 박스 able로 만들기
 export const makeBtnAble = (btn) => (btn.disabled = false);

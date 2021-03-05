@@ -30,7 +30,12 @@ const HEX_FN = (decimalnumber) => {
     return decimalnumber.toString(16).toUpperCase();
 }
 
+const STR_FN = (hex) => {
+    String.fromCharCode(parseInt(hex,16))
+}
+
 let result = null;
+let hex_result = null;
 
 // 지구 => 화성
 SEND_E_M.addEventListener("keyup", (e) => {
@@ -42,7 +47,8 @@ SEND_E_M.addEventListener("keyup", (e) => {
         }
         result = hex;
         SEND_BUTTON1.classList.remove("send_button_off")
-        // SEND_E_M.value = `${hex}`;
+        HEX_PROMPT1.value = '';
+        STRING_PROMPT1.value = '';
     }
 });
 
@@ -70,8 +76,12 @@ SEND_BUTTON1.addEventListener("click", () => {
 });
 
 // 16진수의 공백을 없애고 숫자하나하나 배열에 닮는 함수
+const arr_factory = (hex_string) => {
+    return hex_string.trim("").split(" ");
+}
+
 const arr = (hex) => {
-    let hex_arr = hex.trim("").split(" ");
+    let hex_arr = arr_factory(hex);
     let str = '';
     for(let i of hex_arr) {
         str += i;
@@ -91,16 +101,16 @@ TRANSLATE_BUTTON[0].addEventListener("click", () => {
         if(parseInt((target[counter]/1),16) < 10) {
             allow_blink(target[counter]);
             blink_list(target[counter]);
+            write_hex(target[counter]);
             if(counter !== target.length) counter++;
         } else if(parseInt(target[counter],16) >= 10) {
             allow_blink(parseInt((target[counter]),16));
             blink_list(parseInt((target[counter]),16));
+            write_hex(parseInt((target[counter]),16));
             if(counter !== target.length) counter++;
         }
     },2500)
 
-    
-    
 })
 
 const allow_blink = (target) => {
@@ -109,14 +119,34 @@ const allow_blink = (target) => {
 }
 
 const blink_list = (target) => {
-    
     BLINK_LIST[target].classList.add("blink");
     setTimeout(() => {
         BLINK_LIST[target].classList.remove("blink");
+    }, 2000);;
+}
+
+// allow가 가르키는 숫자를 16진수로 출력하는 함수
+const write_hex = (target) => {
+    setTimeout(() => {
         if(target<10) {
             HEX_PROMPT1.value += target;
         } else {
             HEX_PROMPT1.value += HEX_FN(target);
         }
-    }, 2000);;
+    },2000); 
 }
+TRANSLATE_BUTTON[1].addEventListener("click", () => {
+    let hex = HEX_PROMPT1.value;
+    let arr = arr_factory(result);
+    let str = '';
+    let counter = 0;
+    for(let i in hex) {
+        str += hex[i];
+        console.log(str,hex[i],arr[i]);
+        if( str === arr[counter]) {
+            STRING_PROMPT1.value += String.fromCharCode(parseInt(str,16));
+            str = '';
+            counter++;
+        }
+    }
+})

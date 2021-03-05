@@ -1,24 +1,30 @@
-import { textToHex, hexToText } from "./convert.js";
-import { rotate } from "./rotate.js";
-import { times } from "../util.js";
-import MyPromise from "../Promise.js";
+import * as convert from "./convertor.js";
+import { rotateRoulette } from "./rotation.js";
+// import { times } from "../util.js";
+// import MyPromise from "../Promise.js";
 
 const isString = ({ keyCode }) => (keyCode >= 65 && keyCode <= 90) || keyCode === 32;
 
 const registerEvent = (type, element, ...fns) => element.addEventListener(type, (e) => fns.forEach((fn) => fn(e)));
 
+const isLast = (index, iterator) => index === iterator.length - 1;
+
 const response = (content, receivers) => {
   const { receivedContentHex, translatorButton } = receivers;
-  content.split("").forEach((letter, i) =>
-    rotate(letter, i, i === content.length - 1).then((capital) =>
-      new MyPromise((resolve, reject) => {
-        setTimeout(() => {
-          receivedContentHex.value += capital;
-          resolve(i === content.length - 1);
-        }, times.receive);
-      }).then((res) => (translatorButton.disabled = res ? false : true))
-    )
-  );
+  for (let i = 0; i < content.length; i++) {
+    const letter = content[i];
+    rotateRoulette(letter, i, isLast(i, content)).then((res) => {
+      receivedContentHex.value += res;
+      translatorButton.disabled = isLast(i, content) ? false : true;
+    });
+    // string을 split하는 시간 + forEach로 오래걸릴것 같은데, 차라리 for(let i ...)문이 더 나을까..?
+    // content.split("").forEach((letter, i) =>
+    //   rotateRoulette(letter, i, isLast(i, content)).then((res) => {
+    //     receivedContentHex.value += res;
+    //     translatorButton.disabled = isLast(i, content) ? false : true;
+    //   })
+    // );
+  }
 };
 
 const throttle = (func, limit) => {
@@ -39,7 +45,7 @@ const communicate = (senders, receivers) => {
   const { receivedContentHex, translatorButton, receivedContentText } = receivers;
   let translatedWord = ``;
 
-  const convertKeydown = (e) => (isString(e) ? (translatedWord += textToHex(e)) : (translatedWord = sentContentHex.value));
+  const convertKeydown = (e) => (isString(e) ? (translatedWord += convert.textToHex(e)) : (translatedWord = sentContentHex.value));
 
   const convertKeyup = (e) => (sentContentHex.value = isString(e) ? translatedWord : sentContentHex.value);
 
@@ -50,11 +56,10 @@ const communicate = (senders, receivers) => {
     translatedWord = ``;
   };
   const translate = () => {
-    receivedContentText.innerText += `${hexToText(receivedContentHex.value)}\n`;
+    receivedContentText.innerText += `${convert.hexToText(receivedContentHex.value)}\n`;
     receivedContentHex.value = ``;
     translatorButton.disabled = true;
   };
-
   registerEvent("keydown", sentContentHex, throttle(convertKeydown, 100));
   registerEvent("keyup", sentContentHex, throttle(convertKeyup, 100));
   registerEvent("click", sendToEarthButton, sendToEarth);

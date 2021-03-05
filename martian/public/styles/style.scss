@@ -115,3 +115,31 @@ input {
   background-color: #ddd;
   font-size: 12px;
 }
+
+.communication__inputs {
+  display: flex;
+  flex-direction: column;
+
+  .receivedContent__text {
+    margin-top: 1em;
+  }
+}
+
+button {
+  cursor: pointer;
+  font-size: 12px;
+  background-color: $vivid_red;
+  padding: 5px 10px;
+  border-radius: 7px;
+  color: #fff;
+}
+
+// button:hover:not([disabled]) {
+//   background-color: #b52a3f;
+// }
+
+input {
+  padding: 3px;
+  background-color: #ddd;
+  font-size: 12px;
+}

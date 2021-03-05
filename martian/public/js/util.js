@@ -1,4 +1,5 @@
 const hexadecimals = [...Array(10).keys(), "A", "B", "C", "D", "E", "F"];
+
 const selectors = {
   arrow: document.querySelector(".roulette__arrow"),
   translatorButton: document.querySelector(".translate__button"),
@@ -9,10 +10,12 @@ const selectors = {
   lineText: document.querySelectorAll(".line__text"),
 };
 
-const rotateState = {
+const rotationState = {
   currPoint: 0,
   currDeg: 15,
   pastTarget: null,
+  maxDistance: 7,
+  oneDeg: 22.5,
 };
 
 const times = {
@@ -21,4 +24,4 @@ const times = {
   transition: 300,
 };
 
-export { hexadecimals, selectors, rotateState, times };
+export { hexadecimals, selectors, rotationState, times };

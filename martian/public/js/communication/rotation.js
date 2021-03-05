@@ -1,4 +1,4 @@
-import { hexadecimals, selectors, rotateState, times } from "../util.js";
+import { hexadecimals, selectors, rotationState, times } from "../util.js";
 import MyPromise from "../Promise.js";
 
 const getEndPoint = (array, target) => array.findIndex((item) => item.toString() === target);
@@ -17,20 +17,21 @@ const getDistance = ({ state, key }, endPoint) => {
 
 const turnAsDirection = ({ state, key }, element, { distance, absDistance }) => {
   let currDegree = state[key];
-  if (absDistance > 7) currDegree = distance <= 0 ? turnArrow(16 - absDistance, currDegree, element, true) : turnArrow(16 - absDistance, currDegree, element, false);
-  if (absDistance <= 7) currDegree = distance <= 0 ? turnArrow(absDistance, currDegree, element, false) : turnArrow(absDistance, currDegree, element, true);
+  if (absDistance > rotationState.maxDistance)
+    currDegree = distance <= 0 ? turnArrow(hexadecimals.length - absDistance, currDegree, element, true) : turnArrow(hexadecimals.length - absDistance, currDegree, element, false);
+  if (absDistance <= rotationState.maxDistance) currDegree = distance <= 0 ? turnArrow(absDistance, currDegree, element, false) : turnArrow(absDistance, currDegree, element, true);
   return currDegree;
 };
 
 const turnArrow = (movingCount, currDegree, element, isClockWise) => {
   element.style.transition = `${times.transition}ms`;
   if (isClockWise) {
-    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDegree + movingCount * 22.5}deg)`;
-    currDegree += movingCount * 22.5;
+    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDegree + movingCount * rotationState.oneDeg}deg)`;
+    currDegree += movingCount * rotationState.oneDeg;
   }
   if (!isClockWise) {
-    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDegree - movingCount * 22.5}deg)`;
-    currDegree -= movingCount * 22.5;
+    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDegree - movingCount * rotationState.oneDeg}deg)`;
+    currDegree -= movingCount * rotationState.oneDeg;
   }
   return currDegree;
 };
@@ -52,15 +53,15 @@ const adela = (f, ...fns) => (...args) =>
 const rotateRoulette = (letter, i, isLast) =>
   new MyPromise((resolve, reject) =>
     setTimeout(() => {
-      if (rotateState.pastTarget) lightOut(rotateState.pastTarget);
+      if (rotationState.pastTarget) lightOut(rotationState.pastTarget);
       const endPoint = getEndPoint(hexadecimals, capital(letter));
       const target = adela(findTarget, getHTMLElements, capital)("line__text", letter);
-      const diff = adela(getDistance, { state: rotateState, key: "currPoint" }, endPoint)();
-      const direction = adela(turnAsDirection, { state: rotateState, key: "currDeg" }, selectors.arrow, diff)();
+      const diff = adela(getDistance, { state: rotationState, key: "currPoint" }, endPoint)();
+      const direction = adela(turnAsDirection, { state: rotationState, key: "currDeg" }, selectors.arrow, diff)();
       !isLast ? lightOn(target, "light") : lightOn(target, "last");
-      rotateState.pastTarget = target;
-      rotateState.currDeg = direction;
-      rotateState.currPoint = endPoint;
+      rotationState.pastTarget = target;
+      rotationState.currDeg = direction;
+      rotationState.currPoint = endPoint;
       resolve(capital(letter));
     }, times.send * (i + 1))
   );

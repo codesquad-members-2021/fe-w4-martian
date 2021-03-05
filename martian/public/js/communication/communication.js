@@ -19,7 +19,7 @@ const response = (content, receivers) => {
     });
     // string을 split하는 시간 + forEach로 오래걸릴것 같은데, 차라리 for(let i ...)문이 더 나을까..?
     // content.split("").forEach((letter, i) =>
-    //   rotate(letter, i, isLast(i, content)).then((res) => {
+    //   rotateRoulette(letter, i, isLast(i, content)).then((res) => {
     //     receivedContentHex.value += res;
     //     translatorButton.disabled = isLast(i, content) ? false : true;
     //   })

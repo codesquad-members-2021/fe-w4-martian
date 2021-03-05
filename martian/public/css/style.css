@@ -2,6 +2,105 @@ body {
   padding: 50px;
 }
 
+.wheel__arrow {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60px;
+  width: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  top: 220px;
+  left: 220px;
+}
+
+.wheel__letter span {
+  position: absolute;
+  font-size: 20px;
+  color: white;
+}
+
+.wheel__letter .letter:nth-of-type(1) {
+  top: 90.11167px;
+  left: 272.90203px;
+}
+
+.wheel__letter .letter:nth-of-type(2) {
+  top: 113.49918px;
+  left: 328.6749px;
+}
+
+.wheel__letter .letter:nth-of-type(3) {
+  top: 156.44977px;
+  left: 371.2523px;
+}
+
+.wheel__letter .letter:nth-of-type(4) {
+  top: 212.42461px;
+  left: 394.15221px;
+}
+
+.wheel__letter .letter:nth-of-type(5) {
+  top: 272.90203px;
+  left: 393.88833px;
+}
+
+.wheel__letter .letter:nth-of-type(6) {
+  top: 328.6749px;
+  left: 370.50082px;
+}
+
+.wheel__letter .letter:nth-of-type(7) {
+  top: 371.2523px;
+  left: 327.55023px;
+}
+
+.wheel__letter .letter:nth-of-type(8) {
+  top: 394.15221px;
+  left: 271.57539px;
+}
+
+.wheel__letter .letter:nth-of-type(9) {
+  top: 393.88833px;
+  left: 211.09797px;
+}
+
+.wheel__letter .letter:nth-of-type(10) {
+  top: 370.50082px;
+  left: 155.3251px;
+}
+
+.wheel__letter .letter:nth-of-type(11) {
+  top: 327.55023px;
+  left: 112.7477px;
+}
+
+.wheel__letter .letter:nth-of-type(12) {
+  top: 271.57539px;
+  left: 89.84779px;
+}
+
+.wheel__letter .letter:nth-of-type(13) {
+  top: 211.09797px;
+  left: 90.11167px;
+}
+
+.wheel__letter .letter:nth-of-type(14) {
+  top: 155.3251px;
+  left: 113.49918px;
+}
+
+.wheel__letter .letter:nth-of-type(15) {
+  top: 112.7477px;
+  left: 156.44977px;
+}
+
+.wheel__letter .letter:nth-of-type(16) {
+  top: 89.84779px;
+  left: 212.42464px;
+}
+
 .main__wrapper {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -10,5 +109,28 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
+}
+
+.blinking {
+  -webkit-animation: blink 0.25s ease-in-out infinite alternate;
+  animation: blink 0.25s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=style.css.map */

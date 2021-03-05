@@ -8,23 +8,53 @@
 </head>
 
 <body>
-  <canvas class="wheel" width="400" height="400"></canvas>
+  <div class="wheel">
+    <canvas class="wheel__circle" width="400" height="400"></canvas>
+    <div class="wheel__letter">
+      <span class="letter">0</span>
+      <span class="letter">1</span>
+      <span class="letter">2</span>
+      <span class="letter">3</span>
+      <span class="letter">4</span>
+      <span class="letter">5</span>
+      <span class="letter">6</span>
+      <span class="letter">7</span>
+      <span class="letter">8</span>
+      <span class="letter">9</span>
+      <span class="letter">A</span>
+      <span class="letter">B</span>
+      <span class="letter">C</span>
+      <span class="letter">D</span>
+      <span class="letter">E</span>
+      <span class="letter">F</span>
+    </div>
+    <div class="wheel__arrow">
+      <img src="./images/arrow.png" alt="">
+    </div>
+  </div>
+
 
 
   <div class="main__wrapper">
-    <div class="main__receive">
-      <div>송수신정보</div>
-      <input type="text">
-      <button>해석하기</button>
+    <div class="main__receiver">
+      <div>수신정보</div>
+      <input class="receiver--input" placeholder="미구현" type="text">
+      <button class="receiver--button">수신받기</button>
     </div>
-    <div class="main__send">
+    <div class="main__result">
+      <div>해석결과</div>
+      <input class="result--input" placeholder="미구현" type="text">
+      <button class="result--button">해석하기</button>
+    </div>
+    <div class="main__sender">
       <div>발신정보입력</div>
-      <input type="text" placeholder="> hello earth">
-      <button>지구로 보내기</button>
+      <input class="sender--input" type="text" placeholder="> hello earth">
+      <button class="sender--button">지구로 보내기</button>
     </div>
   </div>
 
   <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/Communicator.js"></script>
 </body>
 
 </html>

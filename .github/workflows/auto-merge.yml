@@ -41,4 +41,14 @@ jobs:
               owner: context.repo.owner,
               name: context.repo.repo,
             }
-            console.log(context.repo);
+            
+            
+            const {repository:{pullRequests:{edges: list}}} = await github.graphql(query, variables)
+            for( let {node} of list) {  
+             await github.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: node.number,
+                merge_method: "squash"
+             })
+            }

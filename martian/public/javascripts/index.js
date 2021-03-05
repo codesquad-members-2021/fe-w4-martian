@@ -2,6 +2,7 @@
 import _ from './util.js';
 import MyPromise from './myPromise.js';
 
+const $notification = _.$('.notification');
 const $charText = _.$('.main--char--text');
 const $hexText = _.$('.main--hex--text');
 const $sendBtn = _.$('.main--char--button');
@@ -24,6 +25,7 @@ const $text = {
   E: _.$('.text-E'),
   F: _.$('.text-F'),
 };
+const initAngle = -78.5;
 let hexText = '';
 
 //const charToDec = (char) => char.charCodeAt(0)
@@ -39,56 +41,70 @@ const translasteToHex = (e) => {
 
 const showText = (text) => ($hexText.value = text);
 
-const handleWheel = () => {
-  const $chartText = _.$All('.chart-text');
-  const hexTextByOne = [...hexText];
-  let hexTyping = '';
-
-  let asyncFn = (val) => {
-    return new Promise((resolve, reject) => {
-      if (val === 0) {
-        $hexText.value = 0;
-      }
-
-      hexTyping += val;
-      showText(hexTyping);
-      $text[val].classList.add('blink');
-
-      const hexToDec = parseInt(val, 16);
-      const initAngle = -78.5;
-      const [positiveAngleToTurn, negativeAngleToTurn] = [
-        hexToDec * 22.5,
-        -360 + hexToDec * 22.5,
-      ];
-      const angleToTurn =
-        positiveAngleToTurn < 180
-          ? initAngle + positiveAngleToTurn
-          : initAngle + negativeAngleToTurn;
-
-      const transformDeg = `rotate(${angleToTurn}deg)`;
-      $arrow.style.setProperty('transform', transformDeg);
-
-      setTimeout(() => {
-        $text[val].classList.remove('blink');
-        resolve(true);
-      }, 2000);
-    });
-  };
-
-  hexTextByOne.reduce((acc, cur) => {
-    return acc.then(() => {
-      return asyncFn(cur);
-    });
-  }, Promise.resolve());
+const hexToDec = (val) => {
+  return parseInt(val, 16);
 };
 
-const handleHexMessageBox = () => {};
+const handleArrow = (val) => {
+  const angleToTurn = chooseDirection(val);
 
-const renderMessage = () => {
-  handleWheel();
+  const transformDeg = `rotate(${angleToTurn}deg)`;
+  $arrow.style.setProperty('transform', transformDeg);
+};
+
+const chooseDirection = (val) => {
+  const [positiveAngleToTurn, negativeAngleToTurn] = [
+    hexToDec(val) * 22.5,
+    -360 + hexToDec(val) * 22.5,
+  ];
+
+  return positiveAngleToTurn < 180
+    ? initAngle + positiveAngleToTurn
+    : initAngle + negativeAngleToTurn;
+};
+
+const handleWheel = () => {
+  const hexTextByOne = [...hexText];
+  let hexTyping = '';
+  let arrPromise = [];
+
+  handleWheelAsync(val).bind(this);
+
+  hexTextByOne
+    .reduce((acc, cur) => {
+      arrPromise.push(handleWheelAsync);
+      return acc.then(() => {
+        return handleWheelAsync(cur);
+      });
+    }, Promise.resolve())
+    .then(() => {
+      $notification.style.setProperty('visibility', 'visible');
+      setTimeout(() => {
+        $notification.innerHTML = 'The receiver starts now';
+      }, 2000);
+    });
+};
+
+const handleWheelAsync = (val) => {
+  return new Promise((resolve, reject) => {
+    if (val === 0) {
+      showText(0);
+    }
+
+    hexTyping += val;
+    showText(hexTyping);
+    $text[val].classList.add('blink');
+
+    handleArrow(val);
+
+    setTimeout(() => {
+      $text[val].classList.remove('blink');
+      resolve(true);
+    }, 2000);
+  });
 };
 
 _.addEvent($charText, 'keyup', translasteToHex);
-_.addEvent($sendBtn, 'click', renderMessage);
+_.addEvent($sendBtn, 'click', handleWheel);
 
 //   const hexTextByTwo = hexText.match(/..?/g);

@@ -8,18 +8,23 @@ table {
   font-family: AppleSDGothicNeo-Regular, "Malgun Gothic", "맑은 고딕", dotum, "돋움", sans-serif;
 }
 
-.main--upper {
-  position: relative;
+.body {
+  position: absolute;
+  width: 900px;
+  height: auto;
+}
+
+.main--left {
+  position: absolute;
   display: flex;
   font-size: 0.2rem;
   fill: #b5d99c;
 }
-.main--upper .svg {
+.main--left .svg {
   background: white;
   width: 600px;
-  height: 600px;
 }
-.main--upper .arrow--img {
+.main--left .arrow--img {
   position: absolute;
   left: 205px;
   top: 225px;
@@ -27,33 +32,37 @@ table {
   transform: rotate(-78.5deg);
   transition: all 1s;
 }
-.main--upper .receiver img {
+.main--left .receiver img {
   width: 50px;
 }
 
-.main--lower {
-  display: flex;
-}
-.main--lower div {
+.main--right {
+  position: absolute;
+  right: 10px;
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  padding: 50px 50px;
 }
-.main--lower div:focus {
+.main--right div {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+.main--right div:focus {
   outline: none;
 }
-.main--lower div input {
-  width: 300px;
+.main--right div input {
+  width: 260px;
   height: 40px;
   margin: 10px 0;
   border-radius: 10px;
   border-style: solid;
 }
-.main--lower div .main--hex--text {
+.main--right div .main--hex--text {
   color: grey;
 }
-.main--lower div button {
-  background-color: lightgray;
+.main--right div button {
+  background-color: #0396a6;
   color: white;
   width: 100px;
   height: 35px;
@@ -62,8 +71,18 @@ table {
   border-radius: 10px;
   cursor: pointer;
 }
-.main--lower div button:focus {
+.main--right div button:focus {
   outline: none;
+}
+.main--right .notification {
+  width: 260px;
+  height: 40px;
+  visibility: hidden;
+  line-height: 40px;
+  color: lightgrey;
+  text-align: center;
+  background-color: #0396a6;
+  border-radius: 10px;
 }
 
 .blink {

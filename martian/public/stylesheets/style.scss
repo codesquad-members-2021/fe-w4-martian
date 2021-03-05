@@ -7,9 +7,14 @@ table {
   font-family: AppleSDGothicNeo-Regular, 'Malgun Gothic', '맑은 고딕', dotum,
     '돋움', sans-serif;
 }
+.body {
+  position: absolute;
+  width: 900px;
+  height: auto;
+}
 
-.main--upper {
-  position: relative;
+.main--left {
+  position: absolute;
   display: flex;
   font-size: 0.2rem;
   fill: #b5d99c;
@@ -17,7 +22,6 @@ table {
   .svg {
     background: white;
     width: 600px;
-    height: 600px;
   }
 
   .arrow--img {
@@ -34,17 +38,22 @@ table {
   }
 }
 
-.main--lower {
+.main--right {
+  position: absolute;
+  right: 10px;
   display: flex;
+  flex-direction: column;
+  padding: 50px 50px;
   div {
     display: flex;
     flex-direction: column;
-    padding: 50px;
+    margin: 20px;
+
     &:focus {
       outline: none;
     }
     input {
-      width: 300px;
+      width: 260px;
       height: 40px;
       margin: 10px 0;
       border-radius: 10px;
@@ -56,7 +65,7 @@ table {
     }
 
     button {
-      background-color: lightgray;
+      background-color: #0396a6;
       color: white;
       width: 100px;
       height: 35px;
@@ -68,6 +77,16 @@ table {
         outline: none;
       }
     }
+  }
+  .notification {
+    width: 260px;
+    height: 40px;
+    visibility: hidden;
+    line-height: 40px;
+    color: lightgrey;
+    text-align: center;
+    background-color: #0396a6;
+    border-radius: 10px;
   }
 }
 

@@ -1,7 +1,19 @@
 import { drawCircle, renderNumbers } from "./render.js";
 import { dom } from "./dom.js";
+import {angleList} from "./angles.js";
+
 
 const MESSAGE_FROM_EARTH = "hello";
+
+const getHexFromMsg = (msg) => {
+
+    const engArray = Array.from(msg);
+    const decArray = engArray.map((el) => el.charCodeAt(0));
+    const hexArray = decArray.map((el) => el.toString(16))
+    const hexStr = hexArray.join("");
+
+    return hexStr;
+}
 
 const toggleMode = (event, trigger, target, buttonList) => {
     trigger.addEventListener(`${event}`, function () {
@@ -42,28 +54,46 @@ const rotateObject = (event, target, angle) => {
 }
 
 const runMode = (mode) => {
-    
     if (mode === "수신모드") runReceiveMode();
     else runSendMode();
 }
 
 const runReceiveMode = () => {
-    
-    const SECONDS = 1000; 
+    const SECONDS = 3000;
     setInterval(() => {
         let currentMode = dom.modeInfo.str.innerHTML
-        if(currentMode !== "수신모드") clearInterval();
-        else receiveMsg(MESSAGE_FROM_EARTH);
+        if (currentMode === "수신모드") receiveMsg(MESSAGE_FROM_EARTH)  // 5초에 한 번씩 이 함수가 실행..
+        else clearInterval();
     }, SECONDS);
 }
 
-const runSendMode = () => {
-  
+const receiveMsg = (msg) => {                  
+    let hexMsg = getHexFromMsg(msg);       // 5초에 한 번씩 이 함수가 실행..
+    const time = () => {
+        setTimeout(() => {
+            const firstChar = hexMsg.slice(0,1);
+            hexMsg = hexMsg.substring(1);
+            console.log(hexMsg);
+            // rotateArrow(firstChar);
+            // if(hexMsg.length === 0) clearTimeout();
+            // else time();
+
+        }, 2000);
+    }
+    time();
 }
 
-const receiveMsg = (msg) => {
-    // console.log(msg);
+const rotateArrow = (char) => {
+
+    console.log(char)         //angleList[msg]
+
 }
+
+const runSendMode = () => {
+    //   console.log("sendMode run")
+}
+
+
 
 const init = () => {
     const ROTATE_ANGLE = 0.03;
@@ -73,6 +103,7 @@ const init = () => {
     toggleMode("click", dom.modeInfo.button, dom.modeInfo.str, [dom.hexInfo.button, dom.strInfo.button]);
     rotateObject("click", dom.arrow, ROTATE_ANGLE);
     runMode(dom.modeInfo.str.innerHTML);
-   
+
+
 }
 init();

@@ -57,24 +57,9 @@ const sendBtnClickEventHandler = (sendContentInput, sendHiddenInput, anotherRece
     sendHiddenInput.dataset.send = resultData;
 };
 
-
-// dataset.send(data-send) 속성이 바뀌는 걸 감지하기 위해 MutationObserver 사용.
-// 굳이 이렇게 안해도 될 듯 하지만..
-const setCheckObserver = (node, anotherTransceiverParts, interval) => {
-    const observer = new MutationObserver((mutations) => 
-        mutations.forEach((mutation) => {
-            const { type, target } = mutation;
-            if (type == 'attributes' && target === node)
-                checkReceive(node, anotherTransceiverParts, interval);
-        })
-    );
-    observer.observe(node, { attributes: true });
-};
-
 // 몇 초마다 수신 체크 (5초마다 수신확인)
 const checkReceive = (sendHiddenInput, anotherTransceiverParts, interval) => {
-    const intervalId = setInterval(() => {        
-        console.log(1);
+    setInterval(() => {                
         if (!sendHiddenInput.dataset.send) return;
         
         const {
@@ -93,17 +78,11 @@ const checkReceive = (sendHiddenInput, anotherTransceiverParts, interval) => {
     
         const timeout = 2000;    
         sendMessageAnotherPlanet(infoFromPlanet, timeout)
-            .then(() => {
-                anotherTranslateBtn.disabled = false;
-                clearInterval(intervalId);
-            })
+            .then(() => anotherTranslateBtn.disabled = false)
             .catch((err) => console.error(err.message));
 
     }, interval);
 };
-
-
-
 
 // [F] setCommunicate, 최종 실행용  ------------------------------------------------------------------------
 const setCommunicate = (transceiverParts, anotherTransceiverParts) => {
@@ -119,7 +98,7 @@ const setCommunicate = (transceiverParts, anotherTransceiverParts) => {
     sendBtnClickEvent(transceiverParts, anotherTransceiverParts);
     
     const checkReceiveIntervalTime = 5000;
-    setCheckObserver(sendHiddenInput, anotherTransceiverParts, checkReceiveIntervalTime);
+    checkReceive(sendHiddenInput, anotherTransceiverParts, checkReceiveIntervalTime);
 };
 
 export default setCommunicate;

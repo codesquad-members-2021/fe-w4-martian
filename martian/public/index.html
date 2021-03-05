@@ -1,10 +1,11 @@
 <html>
   <head>
     <title>Martian</title>
+    <link rel="stylesheet" type="text/css" href="./stylesheets/reset.css" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
-  <body>
-    <div class="main--upper">
+  <body class="body">
+    <div class="main--left">
       <div class="dart-board">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -40,43 +41,45 @@
             stroke-width="0.25"
           />
 
-          <text class="chart-text" x="27.5" y="8">0</text>
-          <text class="chart-text" x="35" y="11">1</text>
-          <text class="chart-text" x="39.5" y="16.5">2</text>
-          <text class="chart-text" x="42" y="23">3</text>
-          <text class="chart-text" x="42" y="30">4</text>
-          <text class="chart-text" x="39.5" y="37">5</text>
-          <text class="chart-text" x="34" y="42">6</text>
-          <text class="chart-text" x="27" y="44.5">7</text>
-          <text class="chart-text" x="20" y="44.5">8</text>
-          <text class="chart-text" x="13.5" y="41.5">9</text>
-          <text class="chart-text" x="8" y="36.5">A</text>
-          <text class="chart-text" x="6" y="30">B</text>
-          <text class="chart-text" x="6" y="23">C</text>
-          <text class="chart-text" x="9" y="16">D</text>
-          <text class="chart-text" x="14" y="11">E</text>
-          <text class="chart-text" x="20.5" y="8">F</text>
+          <text class="text-0" x="27.5" y="8">0</text>
+          <text class="text-1" x="35" y="11">1</text>
+          <text class="text-2" x="39.5" y="16.5">2</text>
+          <text class="text-3" x="42" y="23">3</text>
+          <text class="text-4" x="42" y="30">4</text>
+          <text class="text-5" x="39.5" y="37">5</text>
+          <text class="text-6" x="34" y="42">6</text>
+          <text class="text-7" x="27" y="44.5">7</text>
+          <text class="text-8" x="20" y="44.5">8</text>
+          <text class="text-9" x="13.5" y="41.5">9</text>
+          <text class="text-A" x="8" y="36.5">A</text>
+          <text class="text-B" x="6" y="30">B</text>
+          <text class="text-C" x="6" y="23">C</text>
+          <text class="text-D" x="9" y="16">D</text>
+          <text class="text-E" x="14" y="11">E</text>
+          <text class="text-F" x="20.5" y="8">F</text>
         </svg>
       </div>
       <div class="arrow">
-        <img src="./images/arrow.png" alt="" />
-      </div>
-      <div class="receiver">
-        <img src="./images/universe.png" alt="" />
+        <img class="arrow--img" src="./images/arrow.png" alt="" />
       </div>
     </div>
 
-    <div class="main--lower">
-      <div class="main--hex-code">
+    <div class="main--right">
+      <div class="main--hex">
         <p>송수신정보</p>
-        <input type="text" class="fname" />
-        <button>해석하기</button>
+        <input type="text" class="main--hex--text" />
+        <button class="main--hex--button">해석하기</button>
       </div>
-      <div class="main--text">
+      <div class="notification">
+        <button class="notification--message">New message!</button>
+        <div class="notification--completion">Transfer done</div>
+      </div>
+      <div class="main--char">
         <p>발신정보입력</p>
-        <input type="text" class="fname" />
-        <button>지구로 보내기</button>
+        <input type="text" class="main--char--text" />
+        <button class="main--char--button">지구로 보내기</button>
       </div>
     </div>
+    <script type="module" src="./javascripts/index.js"></script>
   </body>
 </html>

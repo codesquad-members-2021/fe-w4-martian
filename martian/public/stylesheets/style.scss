@@ -7,27 +7,30 @@ table {
   font-family: AppleSDGothicNeo-Regular, 'Malgun Gothic', '맑은 고딕', dotum,
     '돋움', sans-serif;
 }
+.body {
+  position: absolute;
+  width: 900px;
+  height: auto;
+}
 
-.main--upper {
-  position: relative;
+.main--left {
+  position: absolute;
   display: flex;
-
-  .chart-text {
-    font-size: 4;
-    fill: #b5d99c;
-  }
+  font-size: 0.2rem;
+  fill: #b5d99c;
 
   .svg {
     background: white;
     width: 600px;
-    height: 600px;
   }
 
-  .arrow img {
+  .arrow--img {
     position: absolute;
     left: 205px;
     top: 225px;
     width: 90px;
+    transform: rotate(0deg);
+    transition: all 1s;
   }
 
   .receiver img {
@@ -35,18 +38,36 @@ table {
   }
 }
 
-.main--lower {
+.main--right {
+  position: absolute;
+  right: 10px;
   display: flex;
+  flex-direction: column;
+  padding: 50px 50px;
   div {
     display: flex;
     flex-direction: column;
-    padding: 50px;
+    margin: 20px;
+
+    &:focus {
+      outline: none;
+    }
     input {
-      width: 300px;
+      width: 260px;
       height: 40px;
-      border-radius: 7px;
+      margin: 10px 0;
+      border-radius: 10px;
       border-style: solid;
     }
+
+    .main--hex--text {
+      color: grey;
+    }
+
+    // .main--hex--button {
+    //   background-color: lightgrey;
+    //   pointer-events: none;
+    // }
 
     button {
       background-color: #0396a6;
@@ -55,7 +76,59 @@ table {
       height: 35px;
       margin: 20px 0;
       border: none;
-      border-radius: 7px;
+      border-radius: 10px;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
     }
+  }
+
+  .notification {
+    width: 260px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    .notification--message {
+      width: 170px;
+      height: 30px;
+      font-size: 14px;
+      line-height: 30px;
+      text-align: center;
+      display: none;
+      background-color: #d90452;
+      color: white;
+      font-weight: bold;
+    }
+
+    .notification--completion {
+      width: 260px;
+      height: 40px;
+      display: none;
+      line-height: 40px;
+      color: lightgrey;
+      text-align: center;
+      background-color: #0396a6;
+      border-radius: 10px;
+    }
+  }
+}
+
+.blink {
+  animation-name: blinker;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

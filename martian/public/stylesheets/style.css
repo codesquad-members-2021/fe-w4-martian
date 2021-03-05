@@ -8,51 +8,117 @@ table {
   font-family: AppleSDGothicNeo-Regular, "Malgun Gothic", "맑은 고딕", dotum, "돋움", sans-serif;
 }
 
-.main--upper {
-  position: relative;
-  display: flex;
+.body {
+  position: absolute;
+  width: 900px;
+  height: auto;
 }
-.main--upper .chart-text {
-  font-size: 4;
+
+.main--left {
+  position: absolute;
+  display: flex;
+  font-size: 0.2rem;
   fill: #b5d99c;
 }
-.main--upper .svg {
+.main--left .svg {
   background: white;
   width: 600px;
-  height: 600px;
 }
-.main--upper .arrow img {
+.main--left .arrow--img {
   position: absolute;
   left: 205px;
   top: 225px;
   width: 90px;
+  transform: rotate(0deg);
+  transition: all 1s;
 }
-.main--upper .receiver img {
+.main--left .receiver img {
   width: 50px;
 }
 
-.main--lower {
-  display: flex;
-}
-.main--lower div {
+.main--right {
+  position: absolute;
+  right: 10px;
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  padding: 50px 50px;
 }
-.main--lower div input {
-  width: 300px;
+.main--right div {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+.main--right div:focus {
+  outline: none;
+}
+.main--right div input {
+  width: 260px;
   height: 40px;
-  border-radius: 7px;
+  margin: 10px 0;
+  border-radius: 10px;
   border-style: solid;
 }
-.main--lower div button {
+.main--right div .main--hex--text {
+  color: grey;
+}
+.main--right div button {
   background-color: #0396a6;
   color: white;
   width: 100px;
   height: 35px;
   margin: 20px 0;
   border: none;
-  border-radius: 7px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.main--right div button:focus {
+  outline: none;
+}
+.main--right .notification {
+  width: 260px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+.main--right .notification .notification--message {
+  width: 170px;
+  height: 30px;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  display: none;
+  background-color: #d90452;
+  color: white;
+  font-weight: bold;
+}
+.main--right .notification .notification--completion {
+  width: 260px;
+  height: 40px;
+  display: none;
+  line-height: 40px;
+  color: lightgrey;
+  text-align: center;
+  background-color: #0396a6;
+  border-radius: 10px;
+}
+
+.blink {
+  animation-name: blinker;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

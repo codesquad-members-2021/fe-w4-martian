@@ -39,6 +39,7 @@ $marsInterpretButton.addEventListener('click', interpretor);
 $earthInput.addEventListener('keyup', immiInterpretor);
 $marsInput.addEventListener('keyup', immiInterpretor);
 $earthInput.addEventListener('click', initInput);
+// $earthInput.addEventListener('click', receiver);
 $marsInput.addEventListener('click', initInput);
 $send2marsButton.addEventListener('click', send2mars);
 $send2earthButton.addEventListener('click', send2earth);
@@ -95,25 +96,34 @@ function isEmpty(arr) {
 function messageReceiver() {
   // test가 끝나면 setInterval로 바꿀것
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(setHexQueue());
-    }, 2000);
-  });
-}
-
-async function send2mars() {
-  await messageReceiver() //
+    resolve(hexQueue);
+  })
     .then((data) => {
       if (isEmpty(data)) return;
       moveArrow(EARTH, data);
-    });
+      stopReceiver();
+    })
+    .then(() => startReceiver());
+}
 
+let receiver;
+
+function startReceiver() {
+  // console.log('start receiver');
+  if (receiver) stopReceiver();
+  receiver = setInterval(messageReceiver, 5000);
+}
+
+function stopReceiver() {
+  // console.log('stop receiver');
+  clearInterval(receiver);
+}
+
+startReceiver();
+
+function send2mars() {
+  setHexQueue();
   initDom($marsInfo);
-  // 1. moveArrow가 5초마다 hexQueue를 확인한다.
-  //    1-1. queue.length가 0이면 타이머 리셋
-  //    1-2. queue.length가 0이 아니면 moveArrow()
-  // 2. moveArrow가 동작중일때는 상태를 바꿔준다.
-  // 3. moveArrow가 동작중일때는 queue에 데이터를 추가할 수만 있음 / 동작은 앞선 동작이 끝난 후에!
   return;
 }
 
@@ -126,13 +136,15 @@ function moveArrow(planet, valueArr) {
   const inputHexOnMars = (str) => ($marsInfo.value += str);
   const inputHexOnEarth = (str) => ($earthInfo.value += str);
   const delay = () => new Promise((resolve) => setTimeout(resolve, 1000));
-  let piece = 360 / 16;
+  const hexCode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+  let piece = 360 / hexCode.length;
   let arr = Array.prototype.slice.call(valueArr); // 배열복사
+  hexQueue = []; // 배열 초기화
 
   (async () => {
     for (let el of arr) {
-      const hexCode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
       await delay(); // 아.. 얘가 '기다려~' 하는 애라서 await이네...
+      // await은 promise를 기다린다. from DD
       let idx = hexCode.indexOf(el);
       if (idx === -1) {
         spaceAnimation();
@@ -149,7 +161,7 @@ function moveArrow(planet, valueArr) {
       }, 1000);
 
       hexQueue.shift();
-      console.log(hexQueue);
+      console.log(arr);
     }
   })();
 }
@@ -173,22 +185,12 @@ function pieceAnamation(i) {
     $roulette.querySelector(`.piece-${i}`).style.borderTopColor = `${Object.values(colorSet)[i]}`;
     $roulette.querySelector(`.piece-${i}`).style.opacity = `50%`;
     $roulette.querySelector(`.piece-${i}`).style.transition = `1s ease-in-out`;
-    $roulette.querySelector(`.hex-${i}`).style.color = `${Object.values(colorSet)[i]}`;
-    $roulette.querySelector(`.hex-${i}`).style.opacity = `50%`;
-    $roulette.querySelector(`.hex-${i}`).style.transition = `1s ease-in-out`;
   }, 500);
   setTimeout(() => {
     $roulette.querySelector(`.piece-${i}`).removeAttribute('style');
     $roulette.querySelector(`.piece-${i}`).style.transition = `1s ease-in-out`;
-    $roulette.querySelector(`.hex-${i}`).removeAttribute('style');
-    $roulette.querySelector(`.hex-${i}`).style.transition = `1s ease-in-out`;
   }, 1000);
 }
-
-let helloHex = str2hex('hello');
-
-console.log(`test hex: ${helloHex}`);
-console.log(`test str: ${hex2str(helloHex)}`);
 
 // ===== 여기는 지구 =====
 

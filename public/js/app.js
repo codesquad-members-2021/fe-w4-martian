@@ -1,35 +1,43 @@
 import { draw } from "./canvas";
-import { $ } from "./selectors"
-import { str2ascArr, asc2hex, devideArr, devideText, printData, activateButton, printInterpretation, printSendMessage, printToEarthMessage } from "./transceiver";
+import { _ } from "./util";
+import { str2ascArr, devideArr, devideText, printData, activateButton, printInterpretation, printSendMessage } from "./transceiver";
 
 const init = () => {
     const str = "hello";
     const data = devideArr(str2ascArr(str));
     const delayTime = 100;
     const totalDelayTime = delayTime * (data.length - 1);
-    const input = $.sendMessage;
+
     draw();
     printData({
-        target: $.sendReceiveMessage,
+        target: _.$("#sendReceiveMessage"),
         data,
         delayTime
     });
     activateButton({
-        button: $.interpretButton,
+        button: _.$("#interpretButton"),
         totalDelayTime
     });
-    printInterpretation({
-        target: $.interpretedText,
-        button: $.interpretButton,
-        data: asc2hex(str2ascArr(str))
-    });
-    input.addEventListener('keyup', () => {
+    _.$("#interpretButton").addEventListener("click", () => {
+        printInterpretation({
+            target: _.$("#interpretedText"),
+            data: devideText(_.$("#sendReceiveMessage").innerHTML, 2)
+        });
+    })
+
+    _.$("#sendMessage").addEventListener('keyup', () => {
         printSendMessage({
-            input,
-            sendMessage: $.sendMessage.value,
-            target: $.interpretedSendMessage
+            sendMessage: _.$("#sendMessage").value,
+            target: _.$("#interpretedSendMessage")
         })
     });
-    printToEarthMessage();
+    _.$("#sendMessageButton").addEventListener('click', () => {
+        _.$("#sendReceiveMessage").innerHTML = "";
+        printData({
+            target: _.$("#sendReceiveMessage"),
+            data: _.$("#interpretedSendMessage").innerHTML,
+            delayTime
+        });
+    })
 };
 init();

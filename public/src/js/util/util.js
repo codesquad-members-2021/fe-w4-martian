@@ -15,11 +15,11 @@ export const _ = {
   },
 };
 
-export const asyncForEach = curry(async (callback, array) => {
+export const asyncForEach = curry(async (callback, array, ...args) => {
   for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
+    await callback(array[index], index, array, ...args);
   }
 });
 
 export const promiseDelay = ({ value, delay }) =>
-  new MyPromise((resolve, rej) => setTimeout(() => resolve(value), delay));
+  new Promise((resolve, rej) => setTimeout(() => resolve(value), delay));

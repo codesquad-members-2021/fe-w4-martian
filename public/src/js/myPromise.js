@@ -11,7 +11,9 @@ class MyPromise {
     this.cbList = [];
     this.errCbList = [];
     this.status = STATUS.PENDING;
-    fn(this.resolve.bind(this), this.reject.bind(this));
+    setTimeout(() => {
+      fn(this.resolve.bind(this), this.reject.bind(this));
+    }, 0);
   }
   then(cb) {
     this.cbList.push(cb);

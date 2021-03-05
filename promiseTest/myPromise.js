@@ -54,7 +54,26 @@ async function asyncForEach(callback, array) {
   }
 }
 
-test();
+// test();
+
+new Promise((res) => {
+  setTimeout(() => {
+    res(1);
+  }, 1000);
+})
+  .then((v) => {
+    log(v + 1);
+    setTimeout(() => {
+      return v + 1;
+    }, 1000);
+  })
+  .then((v) => {
+    setTimeout(() => {
+      log(v + 1);
+      return v + 1;
+    }, 1000);
+  })
+  .then(log);
 
 // new MyPromise((res, rej) => {
 //   setTimeout(() => {

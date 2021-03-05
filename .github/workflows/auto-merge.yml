@@ -1,4 +1,4 @@
-name: "PR Merge on time"
+name: "PR Merge on time v2"
 
 on:
   schedule:
@@ -42,6 +42,7 @@ jobs:
               name: context.repo.repo,
             }
             
+            console.log(context.repo);
             
             const {repository:{pullRequests:{edges: list}}} = await github.graphql(query, variables)
             for( let {node} of list) {  

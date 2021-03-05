@@ -1,5 +1,6 @@
 import MyPromise from "./MyPromise.js";
-import { sendSignal } from "./receiveSignal.js";
+import { sendSignal, convertCharToHex } from "./receiveSignal.js";
+import { onSendEvent } from "./sendSignal.js";
 
-//메세지를 받는다?
-sendSignal();
+sendSignal(convertCharToHex("crong"));
+onSendEvent();

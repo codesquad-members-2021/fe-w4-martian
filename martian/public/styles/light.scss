@@ -1,49 +1,31 @@
-// test
+@mixin animation($name, $duration, $delay, $iteration-count, $timing-function, $direction) {
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-delay: $delay;
+  animation-iteration-count: $iteration-count;
+  animation-timing-function: $timing-function;
+  animation-direction: $direction;
+}
+
+@mixin keyframe($animation-name) {
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@include keyframe(fadeOut) {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
 .light {
-  -webkit-animation: fadeOut 1s 1s infinite linear alternate;
-  -moz-animation: fadeOut 1s 1s infinite linear alternate;
-  -ms-animation: fadeOut 1s 1s infinite linear alternate;
-  -o-animation: fadeOut 1s 1s infinite linear alternate;
-  animation: fadeOut 1s 1s infinite linear alternate;
+  @include animation(fadeOut, 0.5s, 0.5s, infinite, linear, alternate);
 }
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@-webkit-keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@-moz-keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@-ms-keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@-o-keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+
+.last {
+  @include animation(fadeOut, 0.5s, 0.5s, 4, linear, alternate);
 }

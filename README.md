@@ -39,12 +39,15 @@
    문제점 해결방안 : innerHTML이 채워지면, 이 함수를 실행한다.
 2. [지구로 보내기]를 하면, undefined가 뜨고 PrintData가 된다.
    이것도 비동기 문제인 것 같다.
+3. 지구로 보내는 메시지 입력시 한글자씩 밀린다
 
 - 고칠사항
 
-1. js로 반복해서 dom templating
-2. 캔버스 22.5 매직넘버 고치기
-3. 캔버스 함수 나누기
-4. 캔버스 scss for문으로 구현해보기
-5. forEach말고 map혹은 reduce로 구현해보기
-   ddsds
+1. git conflict 해결
+2. js로 반복해서 dom templating
+3. 캔버스 22.5 매직넘버 고치기
+4. 캔버스 함수 나누기
+5. 캔버스 scss for문으로 구현해보기
+6. forEach말고 map혹은 reduce로 구현해보기
+
+커밋을 여러개를 날리면 충돌이 난다..

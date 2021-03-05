@@ -6,47 +6,50 @@ const rotateState = {
     currDeg:22.5,
 };
 
-
+//화살표 회전
 const signalToReception = (ele,i) =>{
-
+    const {receptInp,sendInp,sendBtn,receptBtn}=factors;
     const hexArray = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
     const temp = new Promise ((res,rej)=>{
         setTimeout(()=>{
-            console.log("i",i,"******************************");
-            // console.log("ele",ele);
+
             ele = ele.toUpperCase();
             const index = hexArray.indexOf(ele);
-            console.log("index",index);
             const target = txt[ele];
-            console.log("tar",target);
+            // console.log("index",index);
+            // console.log("i",i,"******************************");
+            // console.log("tar",target);
         
             LightOn(target);
     
             const interval = index-rotateState.currPoint;
             if(interval>=0){
                 // rotateState.currDeg += 22.5* interval;
-                console.log("오른쪽으로 돌라고 지시, interval:",interval)
                 turn("right",rotateState.currDeg,interval); 
             }
             if(interval<0){
                 // rotateState.currDeg -= 22.5* interval;
-                console.log("왼쪽으로 돌라고 지시, interval:",interval)
                 turn("left",rotateState.currDeg,interval);
             }
-            rotateState.cuffPoint = index;
-            res(target);
+            // rotateState.currPoint = index;
+            // console.log("여기서의ele",ele);
+            res(ele);
 
         },2000 *(i+1));
     });
     
-    temp.then((target)=>{
-        setTimeout(()=>{
-            LightOut(target);
-        },2000);
-    });
+
+    temp.then((letter) => {
+        setTimeout(() => {
+            receptInp.value += letter;
+            LightOut(txt[letter]);
+        }, 2000);
+    })  
 };
 
 
+
+//화살표 회전각 찾기
 const turn =(direction,currDeg,interval)=>{
     const { arrow } = factors;
 
@@ -54,10 +57,12 @@ const turn =(direction,currDeg,interval)=>{
     if (direction==="right"){
         // console.log("라이트 turn 들어옴, direction:",direction,"currDeg",currDeg,"interval",interval);
         // console.log("돌아야 할 각도:", currDeg + interval*22.5)
+
         arrow.style.transform = `rotate(${currDeg + interval * 22.5}deg)`;
         currDeg += interval * 22.5;
     }
     if (direction==="left"){
+
         // console.log("레프트 turn 들어옴, direction:",direction,"currDeg",currDeg,"interval",interval);
         // console.log("돌아야 할 각도:", currDeg - interval*22.5)
         arrow.style.transform = `rotate(${currDeg - interval * 22.5}deg)`;
@@ -67,30 +72,15 @@ const turn =(direction,currDeg,interval)=>{
 
 };
 
+//글자 깜빡임
 const LightOn = (target)=>{
     target.classList.add('light');
-
 }
 
 const LightOut = (target)=>{
     target.classList.remove('light');
 }
+
+
 export {signalToReception,LightOn,LightOut,turn};
 
-// const rotateArrow = (a,b,i) =>{
-//     //일단 요소 다가져와 놓고 나중에 빼기 
-//     const {sendInp, sendBtn, sendTr, receptInp, receptBtn} = factors;
-//     const hexArray = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
-//     const hexCode = document.querySelectorAll(".line__txt");
-//     // console.log(line);
-//     // console.log(line[0]);
-//     var x = hexCode[12].innerText
-//     console.log("x",x);
-//     console.log(hexArray.indexOf(x));
-//     var a = hexArray.indexOf(x);
-
-//     sendBtn.addEventListener("click",(e)=>{
-//         arrow.style.transform = "rotate(" + (a+1) * 22.5 + "deg)";
-
-//     })
-// }

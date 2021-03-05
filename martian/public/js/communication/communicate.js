@@ -40,13 +40,17 @@ const throttle = (func, limit) => {
 =======
 const send = (contents, receivedContent) =>
   contents.split("").forEach((letter, idx) => setTimeout(() => (receivedContent.value += letter), 500 * (idx + 1)));
+<<<<<<< HEAD
 // 시간을 계속 지연시켜주기.. 바보.. 왜 이런걸로 삽질 ㅜㅜ
 >>>>>>> e63811c ([Create] Roulette)
+=======
+>>>>>>> 840dfaa ([Add] Roulette)
 
 const communicate = (senders, receivers) => {
   const { sentContentHex, sendToEarthButton } = senders;
   const { receivedContentHex, translatorButton, receivedContentText } = receivers;
   let translatedWord = ``;
+  let initDeg = 15;
 
   const convertKeydown = (e) => (isString(e) ? (translatedWord += textToHex(e)) : (translatedWord = sentContentHex.value));
 <<<<<<< HEAD
@@ -61,7 +65,17 @@ const communicate = (senders, receivers) => {
   const sendToEarth = () => {
     const contents = sentContentHex.value;
     send(contents, receivedContentHex);
+<<<<<<< HEAD
 >>>>>>> e63811c ([Create] Roulette)
+=======
+    // 이 부분에서 룰렛 rotate 하는거 해야할 것 같음
+    // 5초 간격으로 문자를 받으면 -> 해당 문자에 룰렛 화살표가 2초간 머묾
+    // 가까운 방향으로 회전 -> 문자별로 시계방향이 더 빠른지, 반시계방향이 더 빠른지 계산하는 알고리즘 짜기
+    // const arrow = document.querySelector(".roulette__arrow");
+    // arrow.style.transition = `300ms`;
+    // arrow.style.transform = `translate3d(-50%, -50%, 0px) rotate(${(initDeg += 15)}deg)`;
+    // promise 사용하기
+>>>>>>> 840dfaa ([Add] Roulette)
     sentContentHex.value = ``;
     translatedWord = ``;
   };
@@ -82,6 +96,7 @@ const communicate = (senders, receivers) => {
   registerEvent("keyup", sentContentHex, convertKeyup);
   registerEvent("click", sendToEarthButton, sendToEarth);
   registerEvent("click", translatorButton, translate);
+<<<<<<< HEAD
   // registerEvent("click", sendToEarthButton, () => {
   //   const contents = sentContentHex.value;
   //   send(contents, receivedContentHex);
@@ -94,6 +109,8 @@ const communicate = (senders, receivers) => {
   //   receivedContentHex.value = ``;
   // });
 >>>>>>> e63811c ([Create] Roulette)
+=======
+>>>>>>> 840dfaa ([Add] Roulette)
 };
 
 export { communicate };

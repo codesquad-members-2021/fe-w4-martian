@@ -1,5 +1,8 @@
+import { hexadecimals } from "./util.js";
+
 const canvas = document.querySelector("#myRoulette");
 const context = canvas.getContext("2d");
+
 const drawRoulette = (width, height) => {
   canvas.width = width;
   canvas.height = height;
@@ -17,10 +20,9 @@ const drawRoulette = (width, height) => {
   context.fill();
   context.stroke();
 
-  //   let start = 0;
   const text_center_x = center_x - 5;
   const text_center_y = center_y + 5;
-  [...Array(10).keys(), "A", "B", "C", "D", "E", "F"].reduce((start, item) => {
+  hexadecimals.reduce((start, item) => {
     context.beginPath();
     context.moveTo(center_x, center_y);
     context.arc(center_x, center_y, r, (start * Math.PI) / 180, ((start + 22.5) * Math.PI) / 180);

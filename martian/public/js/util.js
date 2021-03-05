@@ -1,4 +1,5 @@
 const hexadecimals = [...Array(10).keys(), "A", "B", "C", "D", "E", "F"];
+<<<<<<< HEAD
 const selectors = {
   arrow: document.querySelector(".roulette__arrow"),
   translatorButton: document.querySelector(".translate__button"),
@@ -22,3 +23,7 @@ const times = {
 };
 
 export { hexadecimals, selectors, rotateState, times };
+=======
+
+export { hexadecimals };
+>>>>>>> 840dfaa ([Add] Roulette)

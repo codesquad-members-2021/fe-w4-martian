@@ -28,4 +28,13 @@
 
 .last {
   @include animation(fadeOut, 0.5s, 0.5s, 4, linear, alternate);
+  @include animation(fadeOut, 0.5s, 0.5s, 4, linear, alternate);
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

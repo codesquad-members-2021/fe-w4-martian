@@ -14,6 +14,8 @@ const response = (content, receivers) => {
   for (let i = 0; i < content.length; i++) {
     const letter = content[i];
     rotateRoulette(letter, i, isLast(i, content)).then((res) => {
+      console.log(`res`);
+      console.log(res);
       receivedContentHex.value += res;
       translatorButton.disabled = isLast(i, content) ? false : true;
     });
@@ -55,11 +57,13 @@ const communicate = (senders, receivers) => {
     sentContentHex.value = ``;
     translatedWord = ``;
   };
+
   const translate = () => {
     receivedContentText.innerText += `${convert.hexToText(receivedContentHex.value)}\n`;
     receivedContentHex.value = ``;
     translatorButton.disabled = true;
   };
+
   registerEvent("keydown", sentContentHex, throttle(convertKeydown, 100));
   registerEvent("keyup", sentContentHex, throttle(convertKeyup, 100));
   registerEvent("click", sendToEarthButton, sendToEarth);

@@ -143,3 +143,12 @@ input {
   background-color: #ddd;
   font-size: 12px;
 }
+
+.communication__inputs {
+  display: flex;
+  flex-direction: column;
+
+  .receivedContent__text {
+    margin-top: 1em;
+  }
+}

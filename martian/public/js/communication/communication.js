@@ -54,23 +54,20 @@ const communicate = (senders, receivers) => {
   const sendToEarth = () => {
     const content = sentContentHex.value;
     response(content, { receivedContentHex, translatorButton });
-    const convertKeyup = (e) => (isString(e) ? (sentContentHex.value = translatedWord) : sentContentHex.value);
-    const sendToEarth = () => {
-      const contents = sentContentHex.value;
-      send(contents, receivedContentHex);
-      sentContentHex.value = ``;
-      translatedWord = ``;
-    };
-    const translate = () => {
-      receivedContentText.innerText += `${convert.hexToText(receivedContentHex.value)}\n`;
-      receivedContentHex.value = ``;
-      translatorButton.disabled = true;
-    };
-    registerEvent("keydown", sentContentHex, throttle(convertKeydown, 100));
-    registerEvent("keyup", sentContentHex, throttle(convertKeyup, 100));
-    registerEvent("click", sendToEarthButton, sendToEarth);
-    registerEvent("click", translatorButton, translate);
+    sentContentHex.value = ``;
+    translatedWord = ``;
   };
+
+  const translate = () => {
+    receivedContentText.innerText += `${convert.hexToText(receivedContentHex.value)}\n`;
+    receivedContentHex.value = ``;
+    translatorButton.disabled = true;
+  };
+
+  registerEvent("keydown", sentContentHex, throttle(convertKeydown, 100));
+  registerEvent("keyup", sentContentHex, throttle(convertKeyup, 100));
+  registerEvent("click", sendToEarthButton, sendToEarth);
+  registerEvent("click", translatorButton, translate);
 };
 
 export { communicate };

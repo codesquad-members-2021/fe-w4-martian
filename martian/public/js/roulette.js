@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 const drawRoulette = (length) => {
+=======
+// const getLineText = (num) => `<span class="line__text" data-id='${num}'>${num}</span>`;
+
+const getRoulette = (length) => {
+>>>>>>> e99ca98 ([Fix] Accept feedback)
   let itemHtml = ``;
   for (let i = 0; i < length; i++) {
     itemHtml += `<div class="line line${i + 1}">

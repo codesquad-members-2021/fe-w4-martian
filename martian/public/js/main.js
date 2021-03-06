@@ -13,6 +13,7 @@ const sendToEarthButton = document.querySelector(".sendContent__button");
 const receivedContentHex = document.querySelector(".receivedContent__hex");
 const receivedContentText = document.querySelector(".receivedContent__text");
 
+const { sendToEarthButton, sentContentHex, receivedContentHex, translatorButton, receivedContentText } = selectors;
 const senders = { sentContentHex, sendToEarthButton };
 const receivers = { receivedContentHex, translatorButton, receivedContentText };
 communicate(senders, receivers);

@@ -11,7 +11,7 @@ section {
 }
 
 .container {
-  /* border: 1px solid black; */
+  border: 1px solid black;
   position: relative;
   width: 500px;
 }
@@ -25,7 +25,8 @@ section {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -100%, 0px);
+  transform: translate3d(-50%, -50%, 0px) rotate(15deg);
+  /* 15도씩 rotate하면 될듯 */
   text-align: center;
   display: flex;
   flex-direction: column;

@@ -38,6 +38,7 @@ const communicate = (senders, receivers) => {
   const { sentContentHex, sendToEarthButton } = senders;
   const { receivedContentHex, translatorButton, receivedContentText } = receivers;
   let translatedWord = ``;
+  let initDeg = 15;
 
   const convertKeydown = (e) => (isString(e) ? (translatedWord += textToHex(e)) : (translatedWord = sentContentHex.value));
 

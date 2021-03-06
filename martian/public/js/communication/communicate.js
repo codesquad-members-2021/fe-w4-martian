@@ -1,5 +1,5 @@
 import { textToHex, hexToText } from "./convert.js";
-import { rotate } from "./rotate.js";
+import { rotate, lightOut } from "./rotate.js";
 import { times } from "../util.js";
 import MyPromise from "../Promise.js";
 

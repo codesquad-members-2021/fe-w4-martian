@@ -8,6 +8,14 @@ const getHexFromMsg = (msg) => {
     return hexStr;
 }
 
+const getEngFromHex = (hex) => {
+    const hexArray = hex.split(" ");
+    const decArray = hexArray.map((el) => parseInt(el, 16));
+    const engArray = decArray.map((el) => String.fromCharCode(el));
+
+    return engArray.join("");
+}
+
 
 const getIdxFromChar = (char) => {
     let idx;
@@ -53,4 +61,4 @@ const getIdxFromChar = (char) => {
     return idx;
 }
 
-export {getHexFromMsg, getIdxFromChar};
+export { getHexFromMsg, getEngFromHex, getIdxFromChar };

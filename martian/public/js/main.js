@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { communicate } from "./communication/communication.js";
 import { hexadecimals, selectors } from "./util.js";
 import { drawRoulette } from "./roulette.js";
@@ -12,7 +13,13 @@ const sentContentHex = document.querySelector(".sentContent__hex");
 const sendToEarthButton = document.querySelector(".sendContent__button");
 const receivedContentHex = document.querySelector(".receivedContent__hex");
 const receivedContentText = document.querySelector(".receivedContent__text");
+=======
+import { communicate } from "./communication/communicate.js";
+import { hexadecimals, selectors } from "./util.js";
+import { getRoulette } from "./roulette.js";
+>>>>>>> 4213e21 ([Fix] rotate)
 
+const { sendToEarthButton, sentContentHex, receivedContentHex, translatorButton, receivedContentText } = selectors;
 const senders = { sentContentHex, sendToEarthButton };
 const receivers = { receivedContentHex, translatorButton, receivedContentText };
 communicate(senders, receivers);

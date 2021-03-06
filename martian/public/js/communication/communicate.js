@@ -3,10 +3,11 @@ import { rotate } from "./rotate.js";
 import { times } from "../util.js";
 import MyPromise from "../Promise.js";
 
-const isString = ({ keyCode }) => (keyCode >= 65 && keyCode <= 90) || keyCode === 32;
+const isString = ({ keyCode }) => keyCode >= 65 && keyCode <= 90;
 
 const registerEvent = (type, element, ...fns) => element.addEventListener(type, (e) => fns.forEach((fn) => fn(e)));
 
+<<<<<<< HEAD
 const response = (content, receivers) => {
   const { receivedContentHex, translatorButton } = receivers;
   content.split("").forEach((letter, i) =>
@@ -33,6 +34,10 @@ const throttle = (func, limit) => {
     }
   };
 };
+=======
+const send = (content, receiver) =>
+  content.split("").forEach((letter, i) => rotate(letter, i).then((res) => setTimeout(() => (receiver.value += res), 500)));
+>>>>>>> 4213e21 ([Fix] rotate)
 
 const communicate = (senders, receivers) => {
   const { sentContentHex, sendToEarthButton } = senders;
@@ -45,7 +50,11 @@ const communicate = (senders, receivers) => {
 
   const sendToEarth = () => {
     const content = sentContentHex.value;
+<<<<<<< HEAD
     response(content, { receivedContentHex, translatorButton });
+=======
+    send(content, receivedContentHex);
+>>>>>>> 4213e21 ([Fix] rotate)
     sentContentHex.value = ``;
     translatedWord = ``;
   };

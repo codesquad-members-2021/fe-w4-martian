@@ -1,19 +1,11 @@
 import { drawCircle, renderNumbers } from "./render.js";
 import { dom } from "./dom.js";
 import {angleList} from "./angles.js";
-
+import {getHexFromMsg, getIdxFromChar} from "./convert.js";
 
 const MESSAGE_FROM_EARTH = "hello";
+let hexMsg = getHexFromMsg(MESSAGE_FROM_EARTH);
 
-const getHexFromMsg = (msg) => {
-
-    const engArray = Array.from(msg);
-    const decArray = engArray.map((el) => el.charCodeAt(0));
-    const hexArray = decArray.map((el) => el.toString(16))
-    const hexStr = hexArray.join("");
-
-    return hexStr;
-}
 
 const toggleMode = (event, trigger, target, buttonList) => {
     trigger.addEventListener(`${event}`, function () {
@@ -58,38 +50,39 @@ const runMode = (mode) => {
     else runSendMode();
 }
 
+
 const runReceiveMode = () => {
     const SECONDS = 3000;
-    setInterval(() => {
-        let currentMode = dom.modeInfo.str.innerHTML
-        if (currentMode === "수신모드") receiveMsg(MESSAGE_FROM_EARTH)  // 5초에 한 번씩 이 함수가 실행..
-        else clearInterval();
-    }, SECONDS);
-}
+    const timer = () => {
+        setTimeout (() => {
+            const firstChar = hexMsg.slice(0,1);
+            hexMsg = hexMsg.substring(1);
+            if(dom.modeInfo.str.innerHTML !== "수신모드") return;
+            if(firstChar !== "") {
+                rotateArrow(firstChar);
+                timer();
+            } else {
+                clearTimeout();
+            }
 
-const receiveMsg = (msg) => {                  
-    let hexMsg = getHexFromMsg(msg);       // 5초에 한 번씩 이 함수가 실행..
-    const time = () => {
-        setTimeout(() => {
-
-            console.log(hexMsg);    // 이 내부가 실행될때마다 앞자리가 하나씩 짤린 hexMsg를 리턴받자.. 
-                                    // 잘린 앞자리는 rotateArrow(여기) 로..
-            // time();              // setTimeout 재귀
-        },0);
+        }, SECONDS);
     }
-    time();
+    timer();
 }
+
+
 
 const rotateArrow = (char) => {
+    const idx = getIdxFromChar(char);
 
-    console.log(char)         //angleList[msg]
+    dom.arrow.style.transform = `rotate(` + angleList[idx] + `turn)`;
+    console.log(idx);
 
 }
 
 const runSendMode = () => {
     //   console.log("sendMode run")
 }
-
 
 
 const init = () => {

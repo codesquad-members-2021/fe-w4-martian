@@ -2,11 +2,11 @@ import { hexadecimals, selectors, rotationState, times } from "../util.js";
 import MyPromise from "../Promise.js";
 
 const getEndPoint = (array, target) => {
-  const index = array.findIndex((item) => item.toString() === target[1].dataset.id);
+  const endPoint = array.findIndex((item) => item.toString() === target[1].dataset.id);
   // console.log(`target:`);
   // console.log(target);
   // console.log(`index: ${index}`);
-  return index;
+  return { endPoint, target };
 };
 
 const capital = (letter) => letter.toUpperCase();
@@ -15,16 +15,20 @@ const findTarget = (capital, elements) => Object.entries(elements).find((item) =
 
 const getHTMLElements = (className) => document.querySelectorAll(`.${className}`);
 
-const calculateDistance = ({ state, key }, endPoint) => {
+const calculateDistance = ({ state, key }, { endPoint, target }) => {
   // console.log(`endPoint: ${endPoint}`);
   // console.log(`currPoint: ${state[key]}`);
   const distance = endPoint - state[key];
   const absDistance = Math.abs(distance);
   // console.log(`dist: ${distance}, abs:${absDistance}`);
-  return { distance, absDistance, endPoint };
+  return { distance, absDistance, endPoint, target };
 };
 
-const turnAsDirection = ({ state, key, element }, { distance, absDistance, endPoint }) => {
+const transformElement = (degree) => `translate3d(-50%, -50%, 0) rotate(${degree}deg)`;
+
+const turnAsDirection = ({ state, key, element }, distanceInfo) => {
+  const { distance, absDistance, endPoint, target } = distanceInfo;
+  let currDegree = state[key];
   // console.log("hello");
   // console.log({ state, key, element });
   // console.log({ distance, absDistance });
@@ -32,18 +36,20 @@ const turnAsDirection = ({ state, key, element }, { distance, absDistance, endPo
   if (absDistance > rotationState.maxDistance) currDegree = distance <= 0 ? turnArrow(hexadecimals.length - absDistance, currDegree, element, true) : turnArrow(hexadecimals.length - absDistance, currDegree, element, false);
   if (absDistance <= rotationState.maxDistance) currDegree = distance <= 0 ? turnArrow(absDistance, currDegree, element, false) : turnArrow(absDistance, currDegree, element, true);
   // console.log(`=== ${currDegree}, ${endPoint} ===`);
-  return { currDegree, endPoint };
+  return { currDegree, endPoint, target };
 };
 
 const turnArrow = (movingCount, currDegree, element, isClockWise) => {
   element.style.transition = `${times.transition}ms`;
   if (isClockWise) {
-    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDegree + movingCount * rotationState.oneDeg}deg)`;
-    currDegree += movingCount * rotationState.oneDeg;
+    element.style.transform = transformElement((currDegree += movingCount * rotationState.oneDeg));
+    // `translate3d(-50%, -50%, 0) rotate(${currDegree + movingCount * rotationState.oneDeg}deg)`;
+    // currDegree += movingCount * rotationState.oneDeg;
   }
   if (!isClockWise) {
-    element.style.transform = `translate3d(-50%, -50%, 0) rotate(${currDegree - movingCount * rotationState.oneDeg}deg)`;
-    currDegree -= movingCount * rotationState.oneDeg;
+    element.style.transform = transformElement((currDegree -= movingCount * rotationState.oneDeg));
+    // `translate3d(-50%, -50%, 0) rotate(${currDegree - movingCount * rotationState.oneDeg}deg)`;
+    // currDegree -= movingCount * rotationState.oneDeg;
   }
   return currDegree;
 };
@@ -134,13 +140,13 @@ const go = (arg, ...fns) =>
     return fn(acc);
   }, arg);
 
-const go1 = (f) => (a) => (b) => f(a, b);
+const curry = (f) => (a) => (b) => f(a, b);
 // const adela = (f, ...fns) => f(...fns);
 // acc = capital
-const findTargetElementOfLetter = (capital) => go1(findTarget)(capital)(go("line__text", getHTMLElements));
+const findTargetElementOfLetter = (capital) => curry(findTarget)(capital)(go("line__text", getHTMLElements));
 // findTarget(capital, getHTMLElements("line__text"))
-const getEndPointInHexs = (target) => go1(getEndPoint)(hexadecimals)(target);
-const lightOnTarget = (target) => go1(lightOn)(target)("light");
+const findEndPointLocationInHexs = (target) => curry(getEndPoint)(hexadecimals)(target);
+const lightOnTarget = (target) => curry(lightOn)(target)("light");
 const updateState = (key, newValue) => {
   // console.log(`-------- ${key} ---------`);
   // console.log(newValue);
@@ -152,16 +158,16 @@ const updateState = (key, newValue) => {
       rotationState.currDeg = newValue.currDegree;
       break;
     case "pastTarget":
-      rotationState.pastTarget = newValue;
+      rotationState.pastTarget = newValue.target;
       break;
   }
   return newValue;
 };
-const updateCurrPoint = (newValue) => go1(updateState)("currPoint")(newValue);
-const updateCurrDeg = (newValue) => go1(updateState)("currDeg")(newValue);
-const updatePastTarget = (newValue) => go1(updateState)("pastTarget")(newValue);
-const calculateDistanceOfLetters = (endPoint) => go1(calculateDistance)({ state: rotationState, key: "currPoint" })(endPoint);
-const turnArrowAsDirection = (distance) => go1(turnAsDirection)({ state: rotationState, key: "currDeg", element: selectors.arrow })(distance);
+const updateCurrPoint = (newValue) => curry(updateState)("currPoint")(newValue);
+const updateCurrDeg = (newValue) => curry(updateState)("currDeg")(newValue);
+const updatePastTarget = (newValue) => curry(updateState)("pastTarget")(newValue);
+const calculateDistanceToEndPoint = (endPoint) => curry(calculateDistance)({ state: rotationState, key: "currPoint" })(endPoint);
+const turnArrowAsDirection = (distanceInfo) => curry(turnAsDirection)({ state: rotationState, key: "currDeg", element: selectors.arrow })(distanceInfo);
 
 // const lightOutPastPoint = (pastTarget) => go1(lightOut)(pastTarget)()
 
@@ -170,31 +176,58 @@ const turnArrowAsDirection = (distance) => go1(turnAsDirection)({ state: rotatio
 // const calculateDistance2 = (endPoint) => go({ state: rotationState, key: "currPoint" }, calculateDistance(endPoint));
 // const turnAsDirection2 = (distance) => go({ state: rotationState, key: "currDeg", element: selectors.arrow }, turnAsDirection(distance));
 
-const rotate = (letter, i, isLast) =>
+const rotate = (letter) =>
   go(
     letter,
     capital,
     findTargetElementOfLetter,
-    updatePastTarget,
+    // updatePastTarget,
     lightOnTarget,
-    getEndPointInHexs,
-    calculateDistanceOfLetters,
+    findEndPointLocationInHexs,
+    calculateDistanceToEndPoint,
     turnArrowAsDirection,
     updateCurrDeg,
-    updateCurrPoint
+    updateCurrPoint,
+    updatePastTarget
     // go(hexadecimals, getEndPoint),
     // go({ state: rotationState, key: "currPoint" }, calculateDistance),
     // go({ state: rotationState, key: "currDeg", element: selectors.arrow }, turnAsDirection)
   );
 
-const rotateRoulette = (letter, i) =>
-  new MyPromise((resolve, reject) => {
+// const delay = (time, ...fns) => setTimeout(() => console.log(...fns), time);
+const delay = (time, ...fns) => (x) =>
+  new MyPromise((resolve) =>
     setTimeout(() => {
-      lightOut(rotationState.pastTarget);
-      rotate(letter, i);
-      resolve(capital(letter));
-    }, times.send * (i + 1));
-  });
+      resolve(go(x, ...fns));
+      // go(x, ...fns);
+      // console.log(go(x, ...fns));
+    }, time)
+  );
+
+const rotateRoulette = (letter, i) => {
+  // return new MyPromise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     rotate({letter, i})
+  //     resolve(rotationState.pastTarget)
+  //   }, times.send * (i+1))
+  // }).then(target => )
+  // rotate({ letter, i });
+  return delay(
+    times.send * (i + 1),
+    rotate
+  )(letter)
+    .then(({ target }) => delay(times.send, lightOut)(target))
+    .then((_) => capital(letter));
+};
+
+// const rotateRoulette = (letter, i) =>
+//   new MyPromise((resolve, reject) => {
+//     setTimeout(() => {
+//       lightOut(rotationState.pastTarget);
+//       rotate(letter, i);
+//       resolve(capital(letter));
+//     }, times.send * (i + 1));
+//   });
 
 // .then((res) => {
 // setTimeout(() => {

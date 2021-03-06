@@ -1,7 +1,7 @@
 import { drawCircle, renderNumbers } from "./render.js";
 import { dom } from "./dom.js";
 import { angleList } from "./angles.js";
-import { getHexFromMsg, getIdxFromChar } from "./convert.js";
+import { getHexFromMsg, getEngFromHex, getIdxFromChar } from "./convert.js";
 
 const MESSAGE_FROM_EARTH = "hello";
 let hexMsg = getHexFromMsg(MESSAGE_FROM_EARTH);
@@ -46,7 +46,7 @@ const runMode = (mode) => {
 
 
 const runReceiveMode = () => {
-    const SECONDS = 3000;
+    const SECONDS = 1000;
     const timer = () => {
         setTimeout(() => {
             const firstChar = hexMsg.slice(0, 1);
@@ -92,13 +92,20 @@ const runSendMode = () => {
 }
 
 
-const onEvent = () => {
-    
+const onEvent = (target, event, func) => {
+    target.addEventListener(`${event}`, () => {
+        func();
+    });
+}
+
+const translate = () => {
+    const message = getEngFromHex(dom.hexInfo.input.value);
+     
+    alert(message);
 }
 
 const init = () => {
-    const ROTATE_ANGLE = 0.03;
-    onEvent();
+    onEvent(dom.hexInfo.button, 'click', translate);
     drawCircle();
     renderNumbers();
     toggleMode("click", dom.modeInfo.button, dom.modeInfo.str, [dom.hexInfo.button, dom.strInfo.button]);

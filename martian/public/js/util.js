@@ -1,4 +1,7 @@
 const hexadecimals = [...Array(10).keys(), "A", "B", "C", "D", "E", "F"];
+const selectors = {
+  arrow: null,
+};
 
 const selectors = {
   arrow: document.querySelector(".roulette__arrow"),

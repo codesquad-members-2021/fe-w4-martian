@@ -43,7 +43,10 @@ const turn = (diff, currDeg, element, isClockWise) => {
 
 const lightOn = (target, className) => target[1].classList.add(className);
 
-const lightOut = (target) => target[1].classList.remove("light");
+const lightOut = (target) => {
+  target[1].classList.remove("light");
+  console.log(`hello`);
+};
 
 const adela = (f, ...fns) => (...args) =>
   args.length
@@ -55,10 +58,24 @@ const adela = (f, ...fns) => (...args) =>
       )
     : f(...fns);
 
-const rotate = (letter, i, isLast) =>
-  new MyPromise((resolve, reject) =>
+// const rotate = (letter, i, isLast) =>
+//   new MyPromise((resolve, reject) =>
+//     setTimeout(() => {
+//       if (rotateState.pastTarget) lightOut(rotateState.pastTarget);
+//       const endPoint = getEndPoint(hexadecimals, capital(letter));
+//       const target = adela(findTextTarget, getHTMLElements, capital)("line__text", letter);
+//       const diff = adela(getDiff, { state: rotateState, key: "currPoint" }, endPoint);
+//       const direction = adela(turnAsDirection, { state: rotateState, key: "currDeg" }, selectors.arrow, diff());
+//       !isLast ? lightOn(target, "light") : lightOn(target, "last");
+//       rotateState.pastTarget = target;
+//       rotateState.currDeg = direction();
+//       rotateState.currPoint = endPoint;
+//       resolve(capital(letter));
+//     }, times.send * (i + 1))
+//   );
+const rotate = (letter, i, isLast) => {
+  const promise = new MyPromise((resolve, reject) => {
     setTimeout(() => {
-      if (rotateState.pastTarget) lightOut(rotateState.pastTarget);
       const endPoint = getEndPoint(hexadecimals, capital(letter));
       const target = adela(findTextTarget, getHTMLElements, capital)("line__text", letter);
       const diff = adela(getDiff, { state: rotateState, key: "currPoint" }, endPoint);
@@ -67,8 +84,17 @@ const rotate = (letter, i, isLast) =>
       rotateState.pastTarget = target;
       rotateState.currDeg = direction();
       rotateState.currPoint = endPoint;
-      resolve(capital(letter));
-    }, times.send * (i + 1))
-  );
+      resolve(target);
+    }, times.send * (i + 1));
+  }).then((target) => setTimeout(() => lightOut(target), times.send * (i + 1)));
+
+  // promise.then((target) => {
+  //   setTimeout(() => {
+  //     lightOut(target);
+
+  //   }, times.send * (i + 1));
+  // });
+  return promise.then(() => capital(letter));
+};
 
 export { rotate, lightOut };

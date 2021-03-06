@@ -7,17 +7,24 @@ const isString = ({ keyCode }) => (keyCode >= 65 && keyCode <= 90) || keyCode ==
 
 const registerEvent = (type, element, ...fns) => element.addEventListener(type, (e) => fns.forEach((fn) => fn(e)));
 
+const isLast = (index, iterator) => index === iterator.length - 1;
+
 const response = (content, receivers) => {
   const { receivedContentHex, translatorButton } = receivers;
-  content.split("").forEach((letter, i) =>
-    rotate(letter, i, i === content.length - 1).then((capital) =>
-      new MyPromise((resolve, reject) => {
-        setTimeout(() => {
-          receivedContentHex.value += capital;
-          resolve(i === content.length - 1);
-        }, times.receive);
-      }).then((res) => (translatorButton.disabled = res ? false : true))
-    )
+  content.split("").forEach(
+    (letter, i) =>
+      rotate(letter, i, isLast(i, content)).then((res) => {
+        receivedContentHex.value += res;
+        translatorButton.disabled = isLast(i, content) ? false : true;
+      })
+    // rotate(letter, i, i === content.length - 1).then((capital) =>
+    //   new MyPromise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       receivedContentHex.value += capital;
+    //       resolve(i === content.length - 1);
+    //     }, times.receive);
+    //   }).then((res) => (translatorButton.disabled = res ? false : true))
+    // )
   );
 };
 

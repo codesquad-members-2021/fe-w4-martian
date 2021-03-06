@@ -1,4 +1,34 @@
+body,
 ul,
 li {
   all: unset;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.container {
+  /* border: 1px solid black; */
+  position: relative;
+  width: 500px;
+}
+
+.roulette__arrow {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -100%, 0px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 60px;
 }

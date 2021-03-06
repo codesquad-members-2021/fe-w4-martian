@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 node_modules
 .cache
 dist
 practice
 bin
-=======
-node_modules
->>>>>>> d296fcf ([Create] js code of Martian-project)
+

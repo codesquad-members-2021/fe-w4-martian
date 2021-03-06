@@ -3,7 +3,7 @@ import { rotate, lightOut } from "./rotate.js";
 import { times } from "../util.js";
 import MyPromise from "../Promise.js";
 
-const isString = ({ keyCode }) => keyCode >= 65 && keyCode <= 90;
+const isString = ({ keyCode }) => (keyCode >= 65 && keyCode <= 90) || keyCode === 32;
 
 const registerEvent = (type, element, ...fns) => element.addEventListener(type, (e) => fns.forEach((fn) => fn(e)));
 
@@ -54,7 +54,6 @@ const communicate = (senders, receivers) => {
     receivedContentHex.value = ``;
     translatorButton.disabled = true;
   };
-
   registerEvent("keydown", sentContentHex, throttle(convertKeydown, 100));
   registerEvent("keyup", sentContentHex, throttle(convertKeyup, 100));
   registerEvent("click", sendToEarthButton, sendToEarth);

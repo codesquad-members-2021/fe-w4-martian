@@ -16,7 +16,6 @@ const receivedContentText = document.querySelector(".receivedContent__text");
 const senders = { sentContentHex, sendToEarthButton };
 const receivers = { receivedContentHex, translatorButton, receivedContentText };
 communicate(senders, receivers);
-// myChart;
 
 const width = 500;
 const height = 500;

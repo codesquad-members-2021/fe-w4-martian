@@ -180,3 +180,22 @@ input {
     margin-top: 1em;
   }
 }
+
+button {
+  cursor: pointer;
+  font-size: 12px;
+  background-color: $vivid_red;
+  padding: 5px 10px;
+  border-radius: 7px;
+  color: #fff;
+}
+
+button:hover {
+  background-color: #b52a3f;
+}
+
+input {
+  padding: 3px;
+  background-color: #ddd;
+  font-size: 12px;
+}

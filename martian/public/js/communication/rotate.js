@@ -5,6 +5,8 @@ const getEndPoint = (array, target) => array.findIndex((item) => item.toString()
 
 const capital = (letter) => letter.toUpperCase();
 
+const lastLight = (target) => target[1].classList.add("last");
+
 const findTextTarget = (elements, capital) => {
   // console.log(elements);
   return Object.entries(elements).find((item) => item[1].dataset.id === capital);

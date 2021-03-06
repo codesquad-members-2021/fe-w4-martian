@@ -17,8 +17,7 @@ const getDistance = ({ state, key }, endPoint) => {
 
 const turnAsDirection = ({ state, key }, element, { distance, absDistance }) => {
   let currDegree = state[key];
-  if (absDistance > rotationState.maxDistance)
-    currDegree = distance <= 0 ? turnArrow(hexadecimals.length - absDistance, currDegree, element, true) : turnArrow(hexadecimals.length - absDistance, currDegree, element, false);
+  if (absDistance > rotationState.maxDistance) currDegree = distance <= 0 ? turnArrow(hexadecimals.length - absDistance, currDegree, element, true) : turnArrow(hexadecimals.length - absDistance, currDegree, element, false);
   if (absDistance <= rotationState.maxDistance) currDegree = distance <= 0 ? turnArrow(absDistance, currDegree, element, false) : turnArrow(absDistance, currDegree, element, true);
   return currDegree;
 };

@@ -1,4 +1,8 @@
 import { textToHex, hexToText } from "./convert.js";
+<<<<<<< HEAD
+=======
+
+>>>>>>> c72d974 ([Add] rotate.js)
 import { rotate } from "./rotate.js";
 import { times } from "../util.js";
 import MyPromise from "../Promise.js";
@@ -38,7 +42,6 @@ const communicate = (senders, receivers) => {
   const { sentContentHex, sendToEarthButton } = senders;
   const { receivedContentHex, translatorButton, receivedContentText } = receivers;
   let translatedWord = ``;
-  let initDeg = 15;
 
   const convertKeydown = (e) => (isString(e) ? (translatedWord += textToHex(e)) : (translatedWord = sentContentHex.value));
 
@@ -53,13 +56,17 @@ const communicate = (senders, receivers) => {
   const translate = () => {
     receivedContentText.innerText += `${hexToText(receivedContentHex.value)}\n`;
     receivedContentHex.value = ``;
+<<<<<<< HEAD
     translatorButton.disabled = true;
+=======
+>>>>>>> c72d974 ([Add] rotate.js)
   };
 
   registerEvent("keydown", sentContentHex, throttle(convertKeydown, 100));
   registerEvent("keyup", sentContentHex, throttle(convertKeyup, 100));
   registerEvent("click", sendToEarthButton, sendToEarth);
   registerEvent("click", translatorButton, translate);
+<<<<<<< HEAD
 
   // registerEvent("click", sendToEarthButton, () => {
   //   const contents = sentContentHex.value;
@@ -72,6 +79,8 @@ const communicate = (senders, receivers) => {
   //   receivedContentText.innerText += `${hexToText(receivedContentHex.value)}\n`;
   //   receivedContentHex.value = ``;
   // });
+=======
+>>>>>>> c72d974 ([Add] rotate.js)
 };
 
 export { communicate };

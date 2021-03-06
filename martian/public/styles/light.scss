@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// test
+
+>>>>>>> 736cf22 ([Update] Try to make curry-st function:adela)
 @mixin animation($name, $duration, $delay, $iteration-count, $timing-function, $direction) {
   animation-name: $name;
   animation-duration: $duration;
@@ -23,9 +28,58 @@
 }
 
 .light {
+<<<<<<< HEAD
   @include animation(fadeOut, 0.5s, 0.5s, infinite, linear, alternate);
 }
 
 .last {
   @include animation(fadeOut, 0.5s, 0.5s, 4, linear, alternate);
+=======
+  // -webkit-animation: fadeOut 0.5s 0.5s 4 linear alternate;
+  // -moz-animation: fadeOut 0.5s 0.5s 4 linear alternate;
+  // -ms-animation: fadeOut 0.5s 0.5s 4 linear alternate;
+  // -o-animation: fadeOut 0.5s 0.5s 4 linear alternate;
+  // animation: fadeOut 0.5s 0.5s 4 linear alternate;
+  @include animation(fadeOut, 0.5s, 0.5s, 4, linear, alternate);
 }
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+>>>>>>> 736cf22 ([Update] Try to make curry-st function:adela)
+}
+// @-webkit-keyframes fadeOut {
+//   0% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 0;
+//   }
+// }
+// @-moz-keyframes fadeOut {
+//   0% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 0;
+//   }
+// }
+// @-ms-keyframes fadeOut {
+//   0% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 0;
+//   }
+// }
+// @-o-keyframes fadeOut {
+//   0% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 0;
+//   }
+// }

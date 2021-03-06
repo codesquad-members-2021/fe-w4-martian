@@ -1,7 +1,7 @@
 import { drawCircle, renderNumbers } from "./render.js";
 import { dom } from "./dom.js";
-import {angleList} from "./angles.js";
-import {getHexFromMsg, getIdxFromChar} from "./convert.js";
+import { angleList } from "./angles.js";
+import { getHexFromMsg, getIdxFromChar } from "./convert.js";
 
 const MESSAGE_FROM_EARTH = "hello";
 let hexMsg = getHexFromMsg(MESSAGE_FROM_EARTH);
@@ -32,18 +32,12 @@ const disableButton = (target, buttonList) => {
     }
 }
 
+
 const initInput = (inputList) => {
     inputList.forEach((el) => el.value = "");
 }
 
 
-const rotateObject = (event, target, angle) => {
-    target.addEventListener(`${event}`, () => {
-        angle += 0.0625;
-        target.style.transform = `rotate(${angle}turn)`;
-        console.log(angle);
-    })
-}
 
 const runMode = (mode) => {
     if (mode === "수신모드") runReceiveMode();
@@ -54,15 +48,17 @@ const runMode = (mode) => {
 const runReceiveMode = () => {
     const SECONDS = 3000;
     const timer = () => {
-        setTimeout (() => {
-            const firstChar = hexMsg.slice(0,1);
+        setTimeout(() => {
+            const firstChar = hexMsg.slice(0, 1);
             hexMsg = hexMsg.substring(1);
-            if(dom.modeInfo.str.innerHTML !== "수신모드") return;
-            if(firstChar !== "") {
+            if (dom.modeInfo.str.innerHTML !== "수신모드") return;
+            if (firstChar !== "") {
                 rotateArrow(firstChar);
+                updateHexInfo(firstChar);
                 timer();
             } else {
                 clearTimeout();
+                activeBtn(dom.hexInfo.button);
             }
 
         }, SECONDS);
@@ -70,14 +66,25 @@ const runReceiveMode = () => {
     timer();
 }
 
+const activeBtn = (button) => {
+    button.disabled = false;
+}
 
 
 const rotateArrow = (char) => {
     const idx = getIdxFromChar(char);
-
     dom.arrow.style.transform = `rotate(` + angleList[idx] + `turn)`;
-    console.log(idx);
 
+}
+
+const updateHexInfo = (char) => {
+    
+    dom.hexInfo.input.value += char;
+    
+    if(dom.hexInfo.input.value.length % 3 === 0) {
+        dom.hexInfo.input.value = dom.hexInfo.input.value.slice(0, -1);
+        dom.hexInfo.input.value += " " + char;
+    }
 }
 
 const runSendMode = () => {
@@ -85,15 +92,17 @@ const runSendMode = () => {
 }
 
 
+const onEvent = () => {
+    
+}
+
 const init = () => {
     const ROTATE_ANGLE = 0.03;
-
+    onEvent();
     drawCircle();
     renderNumbers();
     toggleMode("click", dom.modeInfo.button, dom.modeInfo.str, [dom.hexInfo.button, dom.strInfo.button]);
-    rotateObject("click", dom.arrow, ROTATE_ANGLE);
     runMode(dom.modeInfo.str.innerHTML);
-
-
 }
+
 init();

@@ -1,19 +1,11 @@
 import { drawCircle, renderNumbers } from "./render.js";
 import { dom } from "./dom.js";
-import {angleList} from "./angles.js";
-
+import { angleList } from "./angles.js";
+import { getHexFromMsg, getEngFromHex, getIdxFromChar } from "./convert.js";
 
 const MESSAGE_FROM_EARTH = "hello";
+let hexMsg = getHexFromMsg(MESSAGE_FROM_EARTH);
 
-const getHexFromMsg = (msg) => {
-
-    const engArray = Array.from(msg);
-    const decArray = engArray.map((el) => el.charCodeAt(0));
-    const hexArray = decArray.map((el) => el.toString(16))
-    const hexStr = hexArray.join("");
-
-    return hexStr;
-}
 
 const toggleMode = (event, trigger, target, buttonList) => {
     trigger.addEventListener(`${event}`, function () {
@@ -40,50 +32,59 @@ const disableButton = (target, buttonList) => {
     }
 }
 
+
 const initInput = (inputList) => {
     inputList.forEach((el) => el.value = "");
 }
 
 
-const rotateObject = (event, target, angle) => {
-    target.addEventListener(`${event}`, () => {
-        angle += 0.0625;
-        target.style.transform = `rotate(${angle}turn)`;
-        console.log(angle);
-    })
-}
 
 const runMode = (mode) => {
     if (mode === "수신모드") runReceiveMode();
     else runSendMode();
 }
 
+
 const runReceiveMode = () => {
-    const SECONDS = 3000;
-    setInterval(() => {
-        let currentMode = dom.modeInfo.str.innerHTML
-        if (currentMode === "수신모드") receiveMsg(MESSAGE_FROM_EARTH)  // 5초에 한 번씩 이 함수가 실행..
-        else clearInterval();
-    }, SECONDS);
-}
-
-const receiveMsg = (msg) => {                  
-    let hexMsg = getHexFromMsg(msg);       // 5초에 한 번씩 이 함수가 실행..
-    const time = () => {
+    const SECONDS = 1000;
+    const timer = () => {
         setTimeout(() => {
+            const firstChar = hexMsg.slice(0, 1);
+            hexMsg = hexMsg.substring(1);
+            if (dom.modeInfo.str.innerHTML !== "수신모드") return;
+            if (firstChar !== "") {
+                rotateArrow(firstChar);
+                updateHexInfo(firstChar);
+                timer();
+            } else {
+                clearTimeout();
+                activeBtn(dom.hexInfo.button);
+            }
 
-            console.log(hexMsg);    // 이 내부가 실행될때마다 앞자리가 하나씩 짤린 hexMsg를 리턴받자.. 
-                                    // 잘린 앞자리는 rotateArrow(여기) 로..
-            // time();              // setTimeout 재귀
-        },0);
+        }, SECONDS);
     }
-    time();
+    timer();
 }
+
+const activeBtn = (button) => {
+    button.disabled = false;
+}
+
 
 const rotateArrow = (char) => {
+    const idx = getIdxFromChar(char);
+    dom.arrow.style.transform = `rotate(` + angleList[idx] + `turn)`;
 
-    console.log(char)         //angleList[msg]
+}
 
+const updateHexInfo = (char) => {
+    
+    dom.hexInfo.input.value += char;
+    
+    if(dom.hexInfo.input.value.length % 3 === 0) {
+        dom.hexInfo.input.value = dom.hexInfo.input.value.slice(0, -1);
+        dom.hexInfo.input.value += " " + char;
+    }
 }
 
 const runSendMode = () => {
@@ -91,16 +92,24 @@ const runSendMode = () => {
 }
 
 
+const onEvent = (target, event, func) => {
+    target.addEventListener(`${event}`, () => {
+        func();
+    });
+}
+
+const translate = () => {
+    const message = getEngFromHex(dom.hexInfo.input.value);
+     
+    alert(message);
+}
 
 const init = () => {
-    const ROTATE_ANGLE = 0.03;
-
+    onEvent(dom.hexInfo.button, 'click', translate);
     drawCircle();
     renderNumbers();
     toggleMode("click", dom.modeInfo.button, dom.modeInfo.str, [dom.hexInfo.button, dom.strInfo.button]);
-    rotateObject("click", dom.arrow, ROTATE_ANGLE);
     runMode(dom.modeInfo.str.innerHTML);
-
-
 }
+
 init();

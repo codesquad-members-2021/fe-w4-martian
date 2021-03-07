@@ -6,7 +6,8 @@ const dom = {
     
     strInfo: {
         input : document.querySelector(".str_info_input"),
-        button : document.querySelector(".str_info_submit")
+        button : document.querySelector(".str_info_submit"),
+        str : document.querySelector(".str_from_hex")
     },
     
     modeInfo: {

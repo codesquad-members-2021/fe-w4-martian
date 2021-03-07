@@ -46,24 +46,8 @@ const runMode = (mode) => {
 
 
 const runReceiveMode = () => {
-    const SECONDS = 1000;
-    const timer = () => {
-        setTimeout(() => {
-            const firstChar = hexMsg.slice(0, 1);
-            hexMsg = hexMsg.substring(1);
-            if (dom.modeInfo.str.innerHTML !== "수신모드") return;
-            if (firstChar !== "") {
-                rotateArrow(firstChar);
-                updateHexInfo(firstChar);
-                timer();
-            } else {
-                clearTimeout();
-                activeBtn(dom.hexInfo.button);
-            }
 
-        }, SECONDS);
-    }
-    timer();
+    timer(1000, "수신모드");
 }
 
 const activeBtn = (button) => {
@@ -78,38 +62,69 @@ const rotateArrow = (char) => {
 }
 
 const updateHexInfo = (char) => {
-    
+
     dom.hexInfo.input.value += char;
-    
-    if(dom.hexInfo.input.value.length % 3 === 0) {
+
+    if (dom.hexInfo.input.value.length % 3 === 0) {
         dom.hexInfo.input.value = dom.hexInfo.input.value.slice(0, -1);
         dom.hexInfo.input.value += " " + char;
     }
 }
 
-const runSendMode = () => {
-    //   console.log("sendMode run")
+const updateRealtimeStr = () => {
+    setTimeout(() => {
+        dom.strInfo.str.innerHTML = getHexFromMsg(dom.strInfo.input.value);
+        updateRealtimeStr();
+    }, 0);
 }
 
+const timer = (seconds, mode) => {
+    setTimeout(() => {
+        const firstChar = hexMsg.slice(0, 1);
+        hexMsg = hexMsg.substring(1);
+        if (dom.modeInfo.str.innerHTML !== mode) return;
+        if (firstChar !== "") {
+            rotateArrow(firstChar);
+            updateHexInfo(firstChar);
+            timer(1000, mode);
+        } else {
+            clearTimeout();
+            activeBtn(dom.hexInfo.button);
+        }
 
-const onEvent = (target, event, func) => {
-    target.addEventListener(`${event}`, () => {
-        func();
+    }, seconds);
+}
+
+const runSendMode = () => {
+    console.log("sendMode run");
+
+
+    dom.strInfo.button.addEventListener('click', () => {
+        hexMsg = dom.strInfo.str.innerHTML;
+
+        timer(1000, "발신모드");
     });
 }
 
-const translate = () => {
-    const message = getEngFromHex(dom.hexInfo.input.value);
-     
-    alert(message);
-}
+const onEvent = (target, event, func) => {
+        target.addEventListener(`${event}`, () => {
+            func();
+        });
+    }
 
-const init = () => {
-    onEvent(dom.hexInfo.button, 'click', translate);
-    drawCircle();
-    renderNumbers();
-    toggleMode("click", dom.modeInfo.button, dom.modeInfo.str, [dom.hexInfo.button, dom.strInfo.button]);
-    runMode(dom.modeInfo.str.innerHTML);
-}
+    const translate = () => {
+        const message = getEngFromHex(dom.hexInfo.input.value);
 
-init();
+        alert(message);
+    }
+
+    const init = () => {
+        onEvent(dom.hexInfo.button, 'click', translate);
+        drawCircle();
+        renderNumbers();
+        toggleMode("click", dom.modeInfo.button, dom.modeInfo.str, [dom.hexInfo.button, dom.strInfo.button]);
+        runMode(dom.modeInfo.str.innerHTML);
+        updateRealtimeStr();
+    }
+
+    init();

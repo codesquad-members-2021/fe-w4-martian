@@ -1,2 +1,7 @@
 node_modules
+<<<<<<< HEAD
 promiseTest
+=======
+
+promiseTest
+>>>>>>> 1c804e7... Fix. mypromise

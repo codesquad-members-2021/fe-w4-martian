@@ -1,13 +1,20 @@
 const hexadecimals = [...Array(10).keys(), "A", "B", "C", "D", "E", "F"];
 
+const _ = {
+  $: (selector, element = document) => element.querySelector(selector),
+  $All: (selector, element = document) => element.querySelectorAll(selector),
+  curry: (f) => (a, ...bs) => (bs.length ? f(a, ...bs) : (...cs) => f(a, ...cs)),
+  go: (arg, ...fns) => fns.reduce((acc, fn) => fn(acc), arg),
+  pipe: (...fns) => (a) => fns.reduce((acc, fn) => fn(acc), a),
+};
+
 const selectors = {
-  arrow: document.querySelector(".roulette__arrow"),
-  translatorButton: document.querySelector(".translate__button"),
-  sentContentHex: document.querySelector(".sentContent__hex"),
-  sendToEarthButton: document.querySelector(".sendContent__button"),
-  receivedContentHex: document.querySelector(".receivedContent__hex"),
-  receivedContentText: document.querySelector(".receivedContent__text"),
-  lineText: document.querySelectorAll(".line__text"),
+  arrow: _.$(".roulette__arrow"),
+  translatorButton: _.$(".translate__button"),
+  sentContentHex: _.$(".sentContent__hex"),
+  sendToEarthButton: _.$(".sendContent__button"),
+  receivedContentHex: _.$(".receivedContent__hex"),
+  receivedContentText: _.$(".receivedContent__text"),
 };
 
 const rotationState = {
@@ -24,4 +31,4 @@ const times = {
   transition: 300,
 };
 
-export { hexadecimals, selectors, rotationState, times };
+export { hexadecimals, selectors, rotationState, times, _ };

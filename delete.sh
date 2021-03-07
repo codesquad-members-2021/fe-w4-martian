@@ -1,0 +1,16 @@
+git branch -d -r origin/Beemo
+git branch -d -r origin/Dico
+git branch -d -r origin/Kyle
+git branch -d -r origin/Luke
+git branch -d -r origin/Neis
+git branch -d -r origin/Q
+git branch -d -r origin/Rano
+git branch -d -r origin/Seong
+git branch -d -r origin/goody
+git branch -d -r origin/jenny
+git branch -d -r origin/raccoon1
+git branch -d -r origin/roulette
+git branch -d -r origin/swing
+git branch -d -r origin/tami
+git branch -d -r origin/young
+git branch -d -r origin/펭도리

@@ -1,38 +1,7 @@
-import { hexadecimals, selectors, rotationState, times } from "../util.js";
+import { hexadecimals, selectors, rotationState, times, _ } from "../util.js";
 import MyPromise from "../Promise.js";
 
-const curry = (f) => (a, ...bs) => (bs.length ? f(a, ...bs) : (...cs) => f(a, ...cs));
-
-const go = (arg, ...fns) => fns.reduce((acc, fn) => fn(acc), arg);
-
-const pipe = (...fns) => (a) => fns.reduce((acc, fn) => fn(acc), a);
-
-const getEndPoint = (array, target) => {
-  const endPoint = array.findIndex((item) => item.toString() === target[1].dataset.id);
-  return { endPoint, target };
-};
-
-const capital = (letter) => letter.toUpperCase();
-
-const getHTMLElements = (className) => document.querySelectorAll(`.${className}`);
-
-const calculateDistance = ({ state, key }, { endPoint, target }) => {
-  const distance = endPoint - state[key];
-  const absDistance = Math.abs(distance);
-
-  return { distance, absDistance, endPoint, target };
-};
-
 const transformElement = (degree) => `translate3d(-50%, -50%, 0) rotate(${degree}deg)`;
-
-const turnAsDirection = ({ state, key, element }, distanceInfo) => {
-  const { distance, absDistance, endPoint, target } = distanceInfo;
-  let currDegree = state[key];
-  if (absDistance > rotationState.maxDistance) currDegree = distance <= 0 ? turnArrow(hexadecimals.length - absDistance, currDegree, element, true) : turnArrow(hexadecimals.length - absDistance, currDegree, element, false);
-  if (absDistance <= rotationState.maxDistance) currDegree = distance <= 0 ? turnArrow(absDistance, currDegree, element, false) : turnArrow(absDistance, currDegree, element, true);
-  // console.log(`=== ${currDegree}, ${endPoint} ===`);
-  return { currDegree, endPoint, target };
-};
 
 const turnArrow = (movingCount, currDegree, element, isClockWise) => {
   element.style.transition = `${times.transition}ms`;
@@ -45,24 +14,23 @@ const turnArrow = (movingCount, currDegree, element, isClockWise) => {
   return currDegree;
 };
 
-const lightOn = (target, className) => {
-  target[1].classList.add(className);
-  return target;
-};
+const findTargetElementOfLetter = _.curry((letter, elements) => {
+  return Object.entries(elements).find((item) => item[1].dataset.id === letter.toUpperCase());
+});
 
-const lightOut = (target) => (target ? target[1].classList.remove("light") : null);
-
-const findTargetElementOfLetter = curry((letter, elements) => Object.entries(elements).find((item) => item[1].dataset.id === letter.toUpperCase()));
-const findEndPointLocationInHexs = curry((array, target) => {
+const findEndPointLocationInHexs = _.curry((array, target) => {
   const endPoint = array.findIndex((item) => item.toString() === target[1].dataset.id);
   return { endPoint, target };
 });
-const lightOnTarget = curry((classname, target) => {
+
+const lightOnTarget = _.curry((classname, target) => {
   target[1].classList.add(classname);
   return target;
 });
 
-const updateState = curry((key, newValue) => {
+const lightOut = (target) => (target ? target[1].classList.remove("light") : null);
+
+const updateState = _.curry((key, newValue) => {
   switch (key) {
     case "currPoint":
       rotationState.currPoint = newValue.endPoint;
@@ -77,58 +45,58 @@ const updateState = curry((key, newValue) => {
   return newValue;
 });
 
-const updateWholeState = pipe(
+const updateWholeState = _.pipe(
   updateState("currPoint"), //
   updateState("currDeg"), //
   updateState("pastTarget")
 );
-updateWholeState(newValue);
 
-const calculateDistanceToEndPoint = curry(({ state, key }, { endPoint, target }) => {
+const calculateDistanceToEndPoint = _.curry(({ state, key }, { endPoint, target }) => {
   const distance = endPoint - state[key];
   const absDistance = Math.abs(distance);
 
   return { distance, absDistance, endPoint, target };
 });
 
-const turnArrowAsDirection = curry(({ state, key, element }, distanceInfo) => {
+const turnArrowAsDirection = _.curry(({ state, key, element }, distanceInfo) => {
   const { distance, absDistance, endPoint, target } = distanceInfo;
   let currDegree = state[key];
-  if (absDistance > rotationState.maxDistance) currDegree = distance <= 0 ? turnArrow(hexadecimals.length - absDistance, currDegree, element, true) : turnArrow(hexadecimals.length - absDistance, currDegree, element, false);
-  if (absDistance <= rotationState.maxDistance) currDegree = distance <= 0 ? turnArrow(absDistance, currDegree, element, false) : turnArrow(absDistance, currDegree, element, true);
+  if (absDistance > rotationState.maxDistance) currDegree = turnArrow(hexadecimals.length - absDistance, currDegree, element, distance <= 0 ? true : false);
+  if (absDistance <= rotationState.maxDistance) currDegree = turnArrow(absDistance, currDegree, element, distance <= 0 ? false : true);
   return { currDegree, endPoint, target };
 });
 
 const rotate = (letter) =>
-  go(
-    "line__text",
-    getHTMLElements,
-    findTargetElementOfLetter(letter),
-    // updatePastTarget,
-    lightOnTarget("light"),
-    findEndPointLocationInHexs(hexadecimals),
-    calculateDistanceToEndPoint({ state: rotationState, key: "currPoint" }),
-    turnArrowAsDirection({ state: rotationState, key: "currDeg", element: selectors.arrow }),
+  _.go(
+    _.$All(".line__text"), //
+    findTargetElementOfLetter(letter), //
+    lightOnTarget("light"), //
+    findEndPointLocationInHexs(hexadecimals), //
+    calculateDistanceToEndPoint({ state: rotationState, key: "currPoint" }), //
+    turnArrowAsDirection({ state: rotationState, key: "currDeg", element: selectors.arrow }), //
     updateWholeState
-    // go(hexadecimals, getEndPoint),
-    // go({ state: rotationState, key: "currPoint" }, calculateDistance),
-    // go({ state: rotationState, key: "currDeg", element: selectors.arrow }, turnAsDirection)
   );
 
-const delay = (time, ...fns) => (x) =>
-  new MyPromise((resolve) =>
-    setTimeout(() => {
-      resolve(go(x, ...fns));
-    }, time)
-  );
+const delay = (time, fn) => (x) =>
+  x.length
+    ? new MyPromise((resolve) =>
+        setTimeout(() => {
+          resolve(fn(x));
+        }, time)
+      )
+    : (y) =>
+        new MyPromise((resolve) =>
+          setTimeout(() => {
+            resolve(fn(y));
+          }, time)
+        );
 
 const rotateRoulette = (letter, i) => {
-  return delay(
-    times.send * (i + 1),
-    rotate
-  )(letter)
-    .then(({ target }) => delay(times.send, lightOut)(target))
-    .then((_) => capital(letter));
+  const sendWithDelay = delay(times.send * (i + 1), rotate);
+  const lightOutWithDelay = delay(times.send, lightOut);
+  return sendWithDelay(letter)
+    .then(({ target }) => lightOutWithDelay(target))
+    .then((_) => letter.toUpperCase());
 };
 
 export { rotateRoulette };

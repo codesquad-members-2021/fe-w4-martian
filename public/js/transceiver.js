@@ -57,4 +57,3 @@ const printSendMessage = ({ sendMessage, target }) => {
 };
 
 export { str2ascArr, asc2hex, devideArr, devideText, printData, activateButton, printInterpretation, printSendMessage }
-

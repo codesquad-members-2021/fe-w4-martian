@@ -1,4 +1,5 @@
 import { _ } from "./util";
+import { moveArrow } from "./arrow"
 
 const str2ascArr = (str = input) => {
     let hexArr = [];
@@ -26,16 +27,20 @@ const devideText = (str, n) => {
 };
 
 const printData = ({ target, data, delayTime }) => {
-
     for (let i = 0; i < data.length; i++) {
         setTimeout(() => {
-            target.innerHTML += data[i]
+            const innerHtml = new Promise((resolve) => {
+                target.innerHTML += data[i];
+                resolve();
+            })
+            innerHtml
+                .then(moveArrow())
         }, delayTime * i)
     }
 };
 
 const activateButton = ({ button, totalDelayTime }) => {
-    new Promise((resolve, reject) => {
+    new Promise((resolve) => {
         setTimeout(() => {
             resolve()
         }, totalDelayTime)

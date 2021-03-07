@@ -9,26 +9,12 @@ const isLast = (index, iterator) => index === iterator.length - 1;
 
 const response = (content, receivers) => {
   const { receivedContentHex, translatorButton } = receivers;
-  for (let i = 0; i < content.length; i++) {
-    const letter = content[i];
-    rotateRoulette(letter, i, isLast(i, content)).then((res) => {
+  contents.split("").forEach((letter, i) => {
+    rotateRoulette(letter, i).then((res) => {
       receivedContentHex.value += res;
       translatorButton.disabled = isLast(i, content) ? false : true;
     });
-  }
-};
-
-const throttle = (func, limit) => {
-  let inThrottle;
-  return function () {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
-    }
-  };
+  });
 };
 
 const communicate = (senders, receivers) => {

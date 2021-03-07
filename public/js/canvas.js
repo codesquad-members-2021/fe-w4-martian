@@ -1,62 +1,66 @@
-const canvas = document.querySelector('.canvas');
-const ctx = canvas.getContext('2d');
+import { _ } from "./util";
 
-ctx.fillStyle = "#fff";
+const renderCanvas = () => {
+    const canvas = _.$('.canvas');
+    const canvasWidth = canvas.width;
+    const radian = canvasWidth / 2 - 50;
+    const smallRadian = (canvasWidth / 2 - 50) / 3;
+    const xSmallRadian = (canvasWidth / 2 - 50) / 3 - 10;
 
-function draw() {
-    //원 반지름, 센터 좌표 값 지정
-    const ref = {
-        bigRadius: 300,
-        smallRadius: 100,
-        xSmallRadius: 90,
-        centerX: 350,
-        centerY: 350,
+    const commonSpec = {
+        ctx: canvas.getContext('2d'),
+        center: canvas.width / 2,
         startAngle: 0,
         endAngle: Math.PI * 2
     };
 
-    //피자 원 테두리
-    ctx.beginPath();
-    ctx.arc(ref.centerX, ref.centerY, ref.bigRadius, ref.startAngle, ref.endAngle);
-    ctx.strokeStyle = "#3d3d3d";
-    ctx.stroke();
+    createDOM();
+    drawCircleBorder({ commonSpec }, radian, "#3d3d3d");
+    drawFilledCircle({ commonSpec }, radian, '#f77269');
+    drawCircleDevideLine({ commonSpec }, radian, 16);
+    drawFilledCircle({ commonSpec }, smallRadian, '#fff');
+    drawCircleBorder({ commonSpec }, xSmallRadian, "#3d3d3d");
+    commonSpec.ctx.closePath();
+};
 
-    //피자 원
-    ctx.beginPath();
-    ctx.arc(ref.centerX, ref.centerY, ref.bigRadius, ref.startAngle, ref.endAngle);
-    ctx.fillStyle = '#f77269';
-    ctx.fill();
-
-    //피자 선
-    ctx.beginPath();
-    let coordinates = {};
-    for (let i = 0; i <= 360; i += 22.5) {
-        coordinates.x = Math.floor(ref.bigRadius * Math.cos(toRadians(i)));
-        coordinates.y = Math.floor(ref.bigRadius * Math.sin(toRadians(i)));
-        ctx.moveTo(ref.centerX, ref.centerY);
-        ctx.lineTo(coordinates.x + ref.centerX, coordinates.y + ref.centerY)
-        ctx.stroke();
+const createDOM = () => {
+    const innerText = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+    for (let i = 0; i <= 15; i++) {
+        _.$(".canvas__contents").insertAdjacentHTML("beforeend",
+            `<div class="hex" id="hex${i}">${innerText[i]}</div>`
+        )
     }
+};
 
-    //수신기 원
-    ctx.beginPath();
-    ctx.arc(ref.centerX, ref.centerY, ref.smallRadius, ref.startAngle, ref.endAngle);
-    ctx.fillStyle = '#fff';
-    ctx.fill();
-
-    //수신기 안에 원
-    ctx.beginPath();
-    ctx.arc(ref.centerX, ref.centerY, ref.xSmallRadius, ref.startAngle, ref.endAngle);
-    ctx.strokeStyle = "#3d3d3d";
-    ctx.lineWidth = 3;
-    ctx.stroke();
-
-    //그리기 종료
-    ctx.closePath();
+const drawCircleBorder = ({ commonSpec }, radian, strokeStyle) => {
+    commonSpec.ctx.beginPath();
+    commonSpec.ctx.arc(commonSpec.center, commonSpec.center, radian, commonSpec.startAngle, commonSpec.endAngle);
+    commonSpec.ctx.strokeStyle = strokeStyle;
+    commonSpec.ctx.stroke();
 }
 
-function toRadians(degrees) {
-    return degrees * (Math.PI / 180);
+const drawFilledCircle = ({ commonSpec }, radian, fillStyle) => {
+    commonSpec.ctx.beginPath();
+    commonSpec.ctx.arc(commonSpec.center, commonSpec.center, radian, commonSpec.startAngle, commonSpec.endAngle);
+    commonSpec.ctx.fillStyle = fillStyle;
+    commonSpec.ctx.fill();
+
 }
 
-export { draw }
+const drawCircleDevideLine = ({ commonSpec }, radian, divNum) => {
+    commonSpec.ctx.beginPath();
+    let coordinates = {};
+    for (let i = 0; i <= 360; i += 360 / divNum) {
+        coordinates.x = Math.floor(radian * Math.cos(deg2rad(i)));
+        coordinates.y = Math.floor(radian * Math.sin(deg2rad(i)));
+        commonSpec.ctx.moveTo(commonSpec.center, commonSpec.center);
+        commonSpec.ctx.lineTo(coordinates.x + commonSpec.center, coordinates.y + commonSpec.center)
+        commonSpec.ctx.stroke();
+    }
+};
+
+const deg2rad = (deg) => {
+    return deg * (Math.PI / 180);
+}
+
+export { renderCanvas }

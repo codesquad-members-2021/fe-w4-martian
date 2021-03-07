@@ -1,14 +1,14 @@
-import { draw } from "./canvas";
+import { renderCanvas } from "./canvas";
 import { _ } from "./util";
 import { str2ascArr, devideArr, devideText, printData, activateButton, printInterpretation, printSendMessage } from "./transceiver";
 
 const init = () => {
-    const str = "hello";
+    const str = "HELLO";
     const data = devideArr(str2ascArr(str));
-    const delayTime = 100;
+    const delayTime = 5000;
     const totalDelayTime = delayTime * (data.length - 1);
 
-    draw();
+    renderCanvas();
     printData({
         target: _.$("#sendReceiveMessage"),
         data,

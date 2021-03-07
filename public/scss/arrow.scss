@@ -4,6 +4,18 @@
   left: 43%;
   font-size: 150px;
   color: #f2a154;
-  //   transform: rotate((360/16) * 14deg);
   transition: all 1s;
+}
+
+.blink {
+  animation: blink 500ms ease 4;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
 }

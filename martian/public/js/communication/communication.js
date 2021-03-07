@@ -14,6 +14,8 @@ const response = (content, receivers) => {
   for (let i = 0; i < content.length; i++) {
     const letter = content[i];
     rotateRoulette(letter, i, isLast(i, content)).then((res) => {
+      console.log(`res`);
+      console.log(res);
       receivedContentHex.value += res;
       translatorButton.disabled = isLast(i, content) ? false : true;
     });

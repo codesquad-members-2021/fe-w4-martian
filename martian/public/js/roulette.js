@@ -4,7 +4,7 @@ const drawRoulette = (length) => {
     itemHtml += `<div class="line line${i + 1}">
           <span class="line__text" data-id='${i}'>${i}</span>
           <span class="line__text" data-id='${(i + 8).toString(16).toUpperCase()}'>${(i + 8).toString(16).toUpperCase()}</span>
-        </div>`;
+          </div>`;
   }
   return itemHtml;
 };

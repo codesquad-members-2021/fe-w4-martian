@@ -1,5 +1,4 @@
-const pipe = (...fns) => (acc) => fns.reduce((a, f) => f(a), acc);
-
+import { _ } from "./util.js";
 export default class MyPromise {
   constructor(fn) {
     this.cbList = [];
@@ -12,7 +11,7 @@ export default class MyPromise {
     setTimeout(() => {
       try {
         this.state = "fulfilled";
-        fn(pipe(...this.cbList), this.catchCb);
+        fn(_.pipe(...this.cbList), this.catchCb);
       } catch (e) {
         this.state = "rejected";
         this.catchCb(e);

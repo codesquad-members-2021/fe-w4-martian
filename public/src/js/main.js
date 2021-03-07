@@ -26,16 +26,12 @@ const finishSetting = () => {
 };
 
 // 한단어의 16진수를 처리하는 forEach 콜백함수 / 이름이 마땅히..생각이 안나네요
-/*
-질문:
-현재 부모? Promise에서의 idx(index) 값을 37번줄의 비동기 프로미스콜백함수에서 사용하게 하는 방법은 뭐가 있을지...?
-*/
+
 const dealChar = async (value, idx, arr) => {
   await promiseDelay({
     value: { value, idx, arr },
     delay: idx === 0 ? 0 : 5000,
   }).then(({ value, idx, arr }) => {
-    console.log(value);
     const charArray = value.split('');
     asyncForEach(dealHex, charArray);
     if (isLastIdx(idx, arr)) finishSetting();
@@ -54,13 +50,6 @@ const dealHex = async (value, idx, arr) => {
     if (isLastIdx(idx, arr)) setInputValue(BLANK, receiveBox);
   });
 };
-//수신 박스 able로 만들기
-const makeBtnAble = (btn) => (btn.disabled = false);
-
-//인자로문자 -> 실행
-const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));
-//input박스 문자 가져오기 -> sendMessage
-const sendMessageToMars = pipe(getInputValue, sendMessage);
 
 //인자로문자 -> 실행
 const sendMessage = pipe(stringToHexArr, asyncForEach(dealChar));

@@ -19,6 +19,7 @@ class MyPromise {
   }
   catch(cb) {
     this.errCbList.push(cb);
+    this.cbList = [];
   }
   resolve(value) {
     if (this.status !== STATUS.REJECTED) {
@@ -27,10 +28,11 @@ class MyPromise {
     }
     return this;
   }
-  reject() {
+  reject(value) {
     if (this.status !== STATUS.FULFILLED) {
       this.status = STATUS.REJECTED;
-      if (this.errCbList.length) pipe(...this.errCbList)();
+      if (this.errCbList.length && !this.cbList.length) pipe(...this.errCbList)(value);
+      else if (this.errCbList.length && this.cbList.length) pipe(...this.errCbList, ...this.cbList)(value);
       else console.error(STATUS.REJECTED);
     }
     return this;

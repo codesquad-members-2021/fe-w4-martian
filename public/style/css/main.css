@@ -40,11 +40,6 @@ html, body, button {
 
 #arrow {
   border: 5px solid #bbb5c3;
-<<<<<<< HEAD
-=======
-  margin: 0;
-  padding: 0;
->>>>>>> COMPLETE SCSS and ejs Structure
   display: block;
   position: absolute;
   left: 50%;
@@ -57,14 +52,9 @@ html, body, button {
   border-radius: 60px;
   z-index: 9999;
   cursor: pointer;
-<<<<<<< HEAD
   font-size: 63px;
   text-align: center;
   transform: rotate(22.5deg); }
-=======
-  font-size: 40px;
-  text-align: center; }
->>>>>>> COMPLETE SCSS and ejs Structure
 
 .transmission {
   display: flex; }
@@ -112,7 +102,33 @@ html, body, button {
   top: 50%;
   transform: translateY(-50%); }
   .line .light {
-    color: red; }
+    -webkit-animation: fadeOut 0.5s infinite alternate;
+    -moz-animation: fadeOut 0.5s infinite alternate;
+    animation: fadeOut 0.5s infinite alternate; }
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 0; }
+  49% {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+
+@-moz-keyframes fadeOut {
+  0% {
+    opacity: 0; }
+  49% {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 0; }
+  49% {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
   .line span {
     color: #bbb5c3; }
   .line__1 {
@@ -143,13 +159,13 @@ html, body, button {
     transform: rotate(90deg); }
     .line__8 span {
       transform: rotate(-90deg); }
-  .line__txt {
+  .line__receptHex {
     display: block;
     position: absolute;
     font-size: 1.8rem; }
-    .line__txt:first-child {
+    .line__receptHex:first-child {
       left: 20px;
       top: 20px; }
-    .line__txt:last-child {
+    .line__receptHex:last-child {
       right: 20px;
       top: -50px; }

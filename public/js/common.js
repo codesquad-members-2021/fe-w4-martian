@@ -1,36 +1,37 @@
+const $ = document.querySelector.bind(document);
+
 const factors = {
-    arrow : document.querySelector("#arrow"),
-    receptInp : document.querySelector(".recept__inp"),
-    receptBtn : document.querySelector(".recept__btn"),
+    arrow : $("#arrow"),
+    receptInp : $(".recept__inp"),
+    receptBtn : $(".recept__btn"),
+    receptTr : $(".recept__trans"),
 
-    sendInp : document.querySelector(".send__inp"),
-    sendBtn : document.querySelector(".send__btn"),
-    sendTr : document.querySelector(".send__trans"),
 
+    sendInp : $(".send__inp"),
+    sendBtn : $(".send__btn"),
+    sendTr : $(".send__trans"),
+
+}
+
+const receptHex ={
+    '0' : $('.receptHex_0'),
+    '1' : $('.receptHex_1'),
+    '2' : $('.receptHex_2'),
+    '3' : $('.receptHex_3'),
+    '4' : $('.receptHex_4'),
+    '5' : $('.receptHex_5'),
+    '6' : $('.receptHex_6'),
+    '7' : $('.receptHex_7'),
+    '8' : $('.receptHex_8'),
+    '9' : $('.receptHex_9'),
+    'A' : $('.receptHex_A'),
+    'B' : $('.receptHex_B'),
+    'C' : $('.receptHex_C'),
+    'D' : $('.receptHex_D'),
+    'E' : $('.receptHex_E'),
+    'F' : $('.receptHex_F')
 }
 
 
 
-
-const txt ={
-    '0' : document.querySelector('.txt_0'),
-    '1' : document.querySelector('.txt_1'),
-    '2' : document.querySelector('.txt_2'),
-    '3' : document.querySelector('.txt_3'),
-    '4' : document.querySelector('.txt_4'),
-    '5' : document.querySelector('.txt_5'),
-    '6' : document.querySelector('.txt_6'),
-    '7' : document.querySelector('.txt_7'),
-    '8' : document.querySelector('.txt_8'),
-    '9' : document.querySelector('.txt_9'),
-    'A' : document.querySelector('.txt_A'),
-    'B' : document.querySelector('.txt_B'),
-    'C' : document.querySelector('.txt_C'),
-    'D' : document.querySelector('.txt_D'),
-    'E' : document.querySelector('.txt_E'),
-    'F' : document.querySelector('.txt_F')
-}
-
-
-
-export {factors, txt};
+export {factors, receptHex};

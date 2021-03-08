@@ -26,12 +26,12 @@ const finishSetting = () => {
 };
 
 // 한단어의 16진수를 처리하는 forEach 콜백함수 / 이름이 마땅히..생각이 안나네요
+
 const dealChar = async (value, idx, arr) => {
   await promiseDelay({
     value: { value, idx, arr },
     delay: idx === 0 ? 0 : 5000,
   }).then(({ value, idx, arr }) => {
-    console.log(value);
     const charArray = value.split('');
     asyncForEach(dealHex, charArray);
     if (isLastIdx(idx, arr)) finishSetting();

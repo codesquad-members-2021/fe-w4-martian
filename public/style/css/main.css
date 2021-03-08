@@ -159,13 +159,13 @@ html, body, button {
     transform: rotate(90deg); }
     .line__8 span {
       transform: rotate(-90deg); }
-  .line__txt {
+  .line__receptHex {
     display: block;
     position: absolute;
     font-size: 1.8rem; }
-    .line__txt:first-child {
+    .line__receptHex:first-child {
       left: 20px;
       top: 20px; }
-    .line__txt:last-child {
+    .line__receptHex:last-child {
       right: 20px;
       top: -50px; }

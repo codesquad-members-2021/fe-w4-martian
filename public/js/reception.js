@@ -1,4 +1,4 @@
-import {factors, txt} from "./common.js";
+import {factors, receptHex} from "./common.js";
 // const {sendInp, sendBtn, sendTr, receptInp, receptBtn,arrow} = factors;
 
 const rotateState = {
@@ -10,12 +10,12 @@ const rotateState = {
 const signalToReception = (ele,i) =>{
     const {receptInp,sendInp,sendBtn,receptBtn}=factors;
     const hexArray = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
-    const temp = new Promise ((res,rej)=>{
+    const pointArrow = new Promise ((response,reject)=>{
         setTimeout(()=>{
 
             ele = ele.toUpperCase();
             const index = hexArray.indexOf(ele);
-            const target = txt[ele];
+            const target = receptHex[ele];
             // console.log("index",index);
             // console.log("i",i,"******************************");
             // console.log("tar",target);
@@ -33,16 +33,16 @@ const signalToReception = (ele,i) =>{
             }
             // rotateState.currPoint = index;
             // console.log("여기서의ele",ele);
-            res(ele);
+            response(ele);
 
         },2000 *(i+1));
     });
     
 
-    temp.then((letter) => {
+    pointArrow.then((letter) => {
         setTimeout(() => {
             receptInp.value += letter;
-            LightOut(txt[letter]);
+            LightOut(receptHex[letter]);
         }, 2000);
     })  
 };

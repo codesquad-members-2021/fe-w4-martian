@@ -1,6 +1,7 @@
 const $ = document.querySelector.bind(document);
 
 const factors = {
+
     arrow : $("#arrow"),
     receptInp : $(".recept__inp"),
     receptBtn : $(".recept__btn"),
@@ -10,6 +11,8 @@ const factors = {
     sendInp : $(".send__inp"),
     sendBtn : $(".send__btn"),
     sendTr : $(".send__trans"),
+
+
 
 }
 
@@ -31,6 +34,7 @@ const receptHex ={
     'E' : $('.receptHex_E'),
     'F' : $('.receptHex_F')
 }
+
 
 
 

@@ -63,7 +63,16 @@ html, body, button{
 // .box-roulette .label .text{display:inline-block;font-size:20px;font-weight:bold;line-height:1;vertical-align:middle;}
 
 #arrow{
+<<<<<<< HEAD
     border:5px solid #bbb5c3;
+=======
+
+
+    border:5px solid #bbb5c3;
+    margin:0;
+    padding:0;
+
+>>>>>>> COMPLETE SCSS and ejs Structure
     display:block;
     position:absolute;
     left:50%;
@@ -76,10 +85,15 @@ html, body, button{
     border-radius:60px;
     z-index:9999;
     cursor:pointer;
+<<<<<<< HEAD
     font-size: 63px;
     text-align: center;
     transform: rotate(22.5deg);
 
+=======
+    font-size: 40px;
+    text-align: center;
+>>>>>>> COMPLETE SCSS and ejs Structure
 }
 
 .transmission {

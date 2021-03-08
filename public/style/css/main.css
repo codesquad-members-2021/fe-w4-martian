@@ -40,6 +40,11 @@ html, body, button {
 
 #arrow {
   border: 5px solid #bbb5c3;
+<<<<<<< HEAD
+=======
+  margin: 0;
+  padding: 0;
+>>>>>>> COMPLETE SCSS and ejs Structure
   display: block;
   position: absolute;
   left: 50%;
@@ -52,9 +57,14 @@ html, body, button {
   border-radius: 60px;
   z-index: 9999;
   cursor: pointer;
+<<<<<<< HEAD
   font-size: 63px;
   text-align: center;
   transform: rotate(22.5deg); }
+=======
+  font-size: 40px;
+  text-align: center; }
+>>>>>>> COMPLETE SCSS and ejs Structure
 
 .transmission {
   display: flex; }

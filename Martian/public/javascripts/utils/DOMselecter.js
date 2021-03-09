@@ -4,7 +4,10 @@ const DOM = {
   outgoing: _.$(".outgoing"),
   input: _.$(".outgoing_str"),
   arrow: _.$(".arrow"),
-  nums: _.$A(".code")
+  nums: _.$A(".code"),
+  message: _.$(".message"),
+  btn: _.$(".btn"),
+  mode: _.$(".mode")
 };
 
 export default DOM;

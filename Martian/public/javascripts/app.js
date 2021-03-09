@@ -1,53 +1,40 @@
 import _ from "./utils/utils.js";
 import dom from "./utils/DOMselecter.js";
 import MyPromise from "./utils/MyPromise.js";
-import { getCode, MakeCodeKey } from "./ASCcode.js";
+import { ParseCode, ForEachData } from "./dealData.js";
+import { getCode, codeToChar } from "./ASCcode.js";
 
-const Blink = () => {};
-
-const rotatingPlate = (code) => {
-  let transition = dom.arrow.style.transform.replace(/[a-z()]/g, "");
-  dom.arrow.style.transform = `rotate(${code}deg)`;
+const pipe = (...funcs) => (v) => {
+  return funcs.reduce((res, func) => {
+    return func(res);
+  }, v);
 };
 
-const codeSplit = (nums) => {
-    nums.forEach((v) => v.classList.add("font"));
-    return _.delay(500);
-}
+const init = () => {
+  dom.mode.innerHTML = `<span>지구 > 화성</span>`;
+  const intString = "hello";
+  pipe(getCode, ParseCode, ForEachData)(intString);
 
-const forEachPromise = (array) => {
-  (async () => {
-    for (let i = 0; i < array.length; i++) {
-      for (let element of array[i]) {
-        rotatingPlate(element);
-        const result = await _.delay(4000);
-      }
-      await codeSplit(dom.nums);
-      dom.nums.forEach((v) => v.classList.remove("font"));
-    }
-  })();
-};
-
-const activeBtnEvent = new MyPromise((resolve, reject) => {
-  _.on(dom.outgoing, "click", ({ target }) => {
+  _.on(dom.section, "click", ({ target }) => {
     if (target.className === "outgoing_btn" && dom.input.value) {
-      resolve(dom.input.value);
+      dom.message.innerHTML = "";
+      new Promise((res) => {
+        dom.mode.innerHTML = `<span>화성 > 지구</span>`;
+        res(dom.input.value);
+      })
+        .then(getCode) //
+        .then(ParseCode)
+        .then(ForEachData);
+    } else if (target.className === "btn") {
+      const code = dom.message.innerHTML
+        .split(" ")
+        .map((e) => codeToChar(e))
+        .join("");
+      dom.message.innerHTML = code;
+      dom.btn.disabled = true;
+      dom.input.value = "";
     }
   });
-});
-
-const ForEachData = (codes) => forEachPromise(codes);
-
-const ParseCode = (codes) => {
-  const codekey = MakeCodeKey(11.25);
-  let rotateList = [];
-  codes.forEach((code) => {
-    code.forEach((c) => rotateList.push(c.map((code) => codekey[code])));
-  });
-  return rotateList;
 };
 
-activeBtnEvent //
-  .then(getCode) //
-  .then(ParseCode)
-  .then(ForEachData);
+init();

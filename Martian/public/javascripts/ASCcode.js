@@ -4,6 +4,7 @@ const codeToChar = (code) => String.fromCharCode("0x" + code);
 
 const getCode = (str) => str.split("").map((e) => charToCode(e).split(",").map((e) => e.split("")));
 
+
 const MakeCodeKey = (deg) => {
   const codeKey = {};
   const keys = [
@@ -30,4 +31,8 @@ const MakeCodeKey = (deg) => {
   return codeKey;
 };
 
-export { codeToChar, charToCode, getCode, MakeCodeKey };
+
+const deg = 360 / 16;
+const CodeKey = MakeCodeKey(deg/2);
+
+export { codeToChar, charToCode, getCode, CodeKey };

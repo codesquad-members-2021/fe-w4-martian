@@ -1,5 +1,6 @@
 import { strToHex, hexToStr } from './converter.js';
 import { $contentsBox, $pathArr, $marsSendReceiveInfo, $marsInput, $marsSendBtn, $earthInput, $earthSendBtn, $hexCodeOfMessage_mars, $hexCodeOfMessage_earth } from './ref.js';
+import { rotateArrow, getFastWay } from './rotateArrow.js';
 const { log } = console;
 
 // const lightColor = "#fff58a";
@@ -17,9 +18,7 @@ $contentsBox.addEventListener('click', ({ target }) => {
   if(target.closest('.mars-send-btn')) {
     let sentHexMessage = $marsSendReceiveInfo.innerText;
     if(sentHexMessage) {
-      const hexMessageArr = sentHexMessage
-                              .split('')
-                              .filter(v => v !== ' ');
+      const hexMessageArr = sentHexMessage.split(' ');
       $marsInput.value = '';
       $marsSendReceiveInfo.innerText = '';
       $marsSendBtn.disabled = 'true';

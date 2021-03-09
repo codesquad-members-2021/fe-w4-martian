@@ -1,6 +1,8 @@
 import {hex2a,a2Hex} from "./notation.js"
 import {signalToReception,LightOn,turn} from "./reception.js";
-import {factors, txt} from "./common.js";
+
+import {factors, receptHex} from "./common.js";
+
 
 //입력받은 발신정보 16진수로 변환 
 const transmission = (factors) =>{
@@ -59,13 +61,17 @@ const response = (content, factors,charr) =>{
     //         i++;
     //     })
     // }
-    const now = new Promise((res,rej)=>{
+
+    const now = new Promise((response,rej)=>{
+
         content.split("").forEach(
             (ele, i) => {
 
                 signalToReception(ele, i)
                 const sendlen = charr.length;
-                res(sendlen);
+
+                response(sendlen);
+
     
             });
 
@@ -75,7 +81,9 @@ const response = (content, factors,charr) =>{
     now.then((i)=>{
         setTimeout(()=>{
             receptBtn.style = `background-color:#ffe082`
-        },2000*(i)+2000);
+
+        },2000*(i+1));
+
     });
     // now.then(()=>receptBtn.style = `background-color:red`);
 }

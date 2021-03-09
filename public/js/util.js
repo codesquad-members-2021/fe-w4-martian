@@ -3,4 +3,6 @@ const _ = {
   $All: (selector, base = document) => base.querySelectorAll(selector)
 }
 
-export { _ }
+const pipe = (...fns) => arg => fns.reduce((arg, fn) => fn(arg), arg);
+
+export { _, pipe }

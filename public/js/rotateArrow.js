@@ -1,4 +1,4 @@
-import { _ } from './util.js';
+import { _, pipe } from './util.js';
 import { $arrow } from './ref.js';
 
 let prevDec = 0;

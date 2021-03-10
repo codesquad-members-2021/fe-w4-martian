@@ -8,12 +8,12 @@ const getFastWay = prevDec => currDec => { // hexCharToDec의 리턴값 필요
   const diffAbs = Math.abs(diff);
   if (diff === 0) return 'samePosition';
   if(diffAbs < 8) {
-    if(diff > 0) return 'counterClockWise';
-    if(diff < 0) return 'clockWise';
-  }
-  if(diffAbs > 8) {
     if(diff > 0) return 'clockWise';
     if(diff < 0) return 'counterClockWise';
+  }
+  if(diffAbs > 8) {
+    if(diff > 0) return 'counterClockWise';
+    if(diff < 0) return 'clockWise';
   }
 }
 

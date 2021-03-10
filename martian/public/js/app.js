@@ -36,8 +36,10 @@ function analyzeWord(str) {
 }
 
 async function getHexOneByOne(hex){
+    let count = 1;
     for (let oneHex of hex) {
-        activateTranslator(oneHex);
+        activateTranslator(oneHex, count);
+        count++;
         await delay(2000);
     }
 }
@@ -48,22 +50,21 @@ async function getWordFromEarth(str) {
         getHexOneByOne(hex);
         await delay(5000);
     }
+    //해석하기 버튼 활성화
 }
 
-function fillUpTextBox(str) {
+function fillUpTextBox(str, count) {
     const viewBox = DOMREF.resultBox;
-    viewBox.innerText += str;
-    //매 두번쨰마다 template literal로  ' '도 같이 추가.
+    count % 2 === 0 ? str += ' ' : null;
+    viewBox.innerHTML += str;
 }
 
 //변환기 구동시키기 = text node를 가져오기/화살표 이동거리 계산하기/화살표 움직이기/해석하기 버튼 활성화/해석결과 보여주기
-function activateTranslator(letter){
-    fillUpTextBox(letter);
-    rotateArrow(letter);
+function activateTranslator(letter, count){
+    rotateArrow(letter, DOMREF.hexToStrBtn, DOMREF.arrow);
+    fillUpTextBox(letter, count);
 }
 
 (function init(){
     getWordFromEarth("howalive");
 })();
-
-export default DOMREF;

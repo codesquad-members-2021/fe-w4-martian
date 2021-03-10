@@ -1,17 +1,27 @@
-import DOMREF from "./app.js";
+import _ from "./utill.js";
 
-function rotateArrow(letter) {
-    const targetDegree = calculateDegree(letter);
-    const currentArc = getCurrentArc();
+function calculateDeg(letter) {
+    const degPerLetter = 360 / 16;
+    const startingPoint = degPerLetter / 2;
+    const decimal = parseInt(letter, 16);
+    let targetDeg = decimal * degPerLetter + startingPoint;
+    return targetDeg;
 }
 
-function calculateDegree(letter) {
-    const degreePerLetter = 360 / 16;
-    const startingPoint = degreePerLetter / 2;
-    return (parseInt(letter, 16) * degreePerLetter) + startingPoint;
+function getPrevArc(arrowNode) {
+    const style = window.getComputedStyle(arrowNode);
+    return style.getPropertyValue('transform');
 }
 
+function moveArrow(arrow, targetDeg, arrowLocation) {
+    console.log(arrowLocation)
+    arrow.style.transform = `rotate(${targetDeg}deg)`;
+}
 
-function getCurrentArc(){}
+function rotateArrow(letter, translateButton, arrow) {
+    const targetDeg = calculateDeg(letter);
+    const arrowLocation = getPrevArc(arrow);
+    moveArrow(arrow, targetDeg, arrowLocation);
+}
 
 export default rotateArrow;

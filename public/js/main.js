@@ -24,6 +24,20 @@ $contentsBox.addEventListener('click', ({ target }) => {
       $marsInput.value = '';
       $marsSendReceiveInfo.innerText = '';
       $marsSendBtn.disabled = 'true';
+
+      const test = async () => {
+        for(let elem of hexMessageArr) {
+          if(elem === ' ') {
+            await delay(2000);
+            continue;
+          }
+          log(elem)
+          $marsSendReceiveInfo.innerText = `${elem}`;
+          renderArrow(elem);
+          await delay(1000);
+        }
+      }
+      test();
     }
   }
 })

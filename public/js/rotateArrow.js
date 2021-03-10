@@ -22,11 +22,23 @@ const getAngle = currDec => fastWay => { // hexCharToDec, getFastWay의 리턴�
   const pieceAngle = 360 / 16;
   const currAngle = baseAngle + pieceAngle * currDec;
   if(fastWay === 'samePosition') return currAngle;
-  return (fastWay === 'clockWise' ? currAngle : 360 - currAngle);
+  return (fastWay === 'clockWise' ? currAngle : currAngle - 360);
 }
 
 const rotateArrow = (angle) => { // getAngle의 리턴값 필요
   $arrow.style.transform = `rotate(${angle}deg)`;
+}
+
+let prevDec = 0;
+const renderArrow = hexChar => {
+  const currDec = hexCharToDec(hexChar);
+  pipe(
+    hexCharToDec,
+    getFastWay(prevDec), 
+    getAngle(currDec), 
+    rotateArrow
+  )(hexChar)
+  prevDec = currDec;
 }
 
 const blinkLight = () => {}

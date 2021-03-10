@@ -51,7 +51,10 @@ button {
   top: 195px;
   left: 225px;
   transform: rotate(11.25deg);
+<<<<<<< HEAD
   transition-duration: 400ms;
+=======
+>>>>>>> f4534207
 }
 
 .mars-screen,
@@ -100,11 +103,14 @@ button {
     color: $dark-gray;
     border-radius: 10px;
   }
+<<<<<<< HEAD
   .mars-btn:disabled {
     background-color: $btn-disabled;
     color: $light-gray;
     cursor: default;
   }
+=======
+>>>>>>> f4534207
 
   .conversion-result {
     font-size: 28px;
@@ -138,4 +144,8 @@ button {
   background-color: $earth-btn;
   color: $dark-gray;
   border-radius: 10px;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f4534207
